@@ -1,0 +1,160 @@
+<wxs src="../../common.wxs" module="morejs" />
+<view class="top_contain">
+  <view class="search_box">
+    <image src="/images/search_black.png"></image>
+    <input bindinput="keyInput" bindconfirm="search" placeholder="输入您想搜索的内容"></input>
+  </view>
+  <view class="search" bindtap="search">搜索</view>
+</view>
+
+<view class="contain">
+  <block wx:if="{{list.length==0}}">
+    <block wx:if="{{!blank}}">
+      <view class="a">
+        <image src="/images/time.png"></image>
+        <view>搜索历史</view>
+      </view>
+      <block wx:if="{{hislist.length==0}}">
+        <view class="nosearch">您还没搜索过哟，赶快试试吧</view>
+      </block>
+      <block wx:if="{{hislist.length>0}}">
+        <block wx:for="{{hislist}}" wx:key="*this">
+          <view bindtap="choosekey" data-key="{{item}}" class="hisitem">{{index+1}}. {{item}}</view>
+        </block>
+      </block>
+    </block>
+    <block wx:if="{{(list.length==0&&clist.length==0&&llist.length==0)&&blank}}">
+      <view class="a">
+        <image src="/images/result.png"></image>
+        <view>搜索结果</view>
+      </view>
+      <!--无内容显示-->
+      <view class="nocontent">
+        <image src="/images/blank.png"></image>
+        <view class="blank_text">暂无{{key}}相关的信息哟~</view>
+      </view>
+    </block>
+    <view class="a">
+      <image src="/images/recommend.png"></image>
+      <view>更多推荐</view>
+    </view>
+    <block wx:if="{{newlist.length==0}}">
+      <view class="nosearch">暂无相关推荐</view>
+    </block>
+    <block wx:if="{{newlist.length>0}}">
+      <block wx:for="{{newlist}}" wx:key="_id">
+        <view class="list_box" bindtap="detail" data-id="{{item._id+'&func=old'}}">
+          <image class="list_poster" wx:if="{{item.img.length!=0}}" src="{{item.thumb}}"></image>
+          <image class="list_poster" wx:if="{{item.img.length==0}}" src="/images/no_photo.png"></image>
+          <view class="list_content">
+            <view class="list_word">
+              <view class="list_title text-cut">{{item.goodinfo.name}}
+              </view>
+              <view class="list_author text-cut">{{item.goodinfo.desc}}
+              </view>
+            </view>
+            <view class="list_between">
+              <view class="list_price">￥{{item.goodinfo.price}}
+                <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text>
+              </view>
+              <view class="list_time">{{morejs.timelog(item.creat )}}发布
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+  </block>
+  <block wx:if="{{list.length>0||clist.length>0||llist.length>0}}">
+    <view class="a">
+      <image src="/images/result.png"></image>
+      <view>搜索结果</view>
+    </view>
+    <!-- 二手商品 -->
+    <view wx:if="{{list.length!=0}}" class="a">
+      <view>二手商品</view>
+    </view>
+    <block wx:for="{{list}}" wx:key="_id">
+      <view class="list_box" bindtap="detail" data-id="{{item._id+'&func=old'}}">
+        <image class="list_poster" wx:if="{{item.img.length!=0}}" src="{{item.thumb}}"></image>
+        <image class="list_poster" wx:if="{{item.img.length==0}}" src="/images/no_photo.png"></image>
+        <view class="list_content">
+          <view class="list_word">
+            <view class="list_title text-cut">{{item.goodinfo.name}}
+            </view>
+            <view class="list_author text-cut">{{item.goodinfo.desc}}
+            </view>
+          </view>
+          <view class="list_between">
+            <view class="list_price">￥{{item.goodinfo.price}}
+              <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text>
+            </view>
+            <view class="list_time">{{morejs.timelog(item.creat )}}发布
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 课程评价 -->
+    <view wx:if="{{clist.length!=0}}" class="a">
+      <view>课程评价</view>
+    </view>
+    <block wx:for="{{clist}}" wx:key="_id">
+      <view class="list_box" bindtap="detail" data-id="{{item._id+'&func=ccomm'}}">
+        <view class="list_content">
+          <view class="list_word">
+            <view class="list_title text-cut">{{item.cinfo.name}}
+            </view>
+            <view class="list_author text-cut">{{item.cinfo.detail}}
+            </view>
+          </view>
+          <view class="list_between">
+            <view class="list_price">
+            </view>
+            <view class="list_time">{{morejs.timelog(item.creat )}}发布
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 失物招领 -->
+    <view wx:if="{{llist.length!=0}}" class="a">
+      <view>失物招领</view>
+    </view>
+    <block wx:for="{{llist}}" wx:key="_id">
+      <view class="list_box" bindtap="detail" data-id="{{item._id+'&func=losta'}}">
+        <image class="list_poster" wx:if="{{item.img.length!=0}}" src="{{item.thumb}}"></image>
+        <image class="list_poster" wx:if="{{item.img.length==0}}" src="/images/no_photo.png"></image>
+        <view class="list_content">
+          <view class="list_word">
+            <view class="list_title text-cut">{{item.lostinfo.name}}
+            </view>
+            <view class="list_author text-cut">{{item.lostinfo.place}}
+            </view>
+          </view>
+          <view class="list_between">
+            <view class="list_price">
+            </view>
+            <view class="list_time">{{morejs.timelog(item.creat )}}发布
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+</view>
+
+
+<view class="laji" wx:if="{{more}}">由于开发者太辣鸡了，每项最多只能显示20条搜索结果</view>
+
+
+
+<block wx:if="{{list.length>10}}">
+  <import src="/common.wxml" />
+  <template is="loadmore" data="{{nomore}}" />
+</block>
+<van-transition show="{{ scrollTop>500 }}" custom-class="block" duration="600">
+  <view class="totop" bindtap="gotop">
+    <image src="/images/top.png"></image>
+  </view>
+</van-transition>

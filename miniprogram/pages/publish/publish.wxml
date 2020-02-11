@@ -1,0 +1,295 @@
+<!--TAB容器-->
+<wxs src="../../common.wxs" module="morejs" />
+<view class="tab_contain">
+  <block wx:for="{{tab}}" wx:key="id">
+    <view class="tab_one" bindtap="changeTab" data-id="{{index}}">
+      <view class="{{tabid==item.id?'tab_on':''}}"><text class="tabtext">{{item.name}}</text></view>
+    </view>
+  </block>
+</view>
+<!--二手商品-->
+<van-transition show="{{show_ershow}}" name="fade-right" custom-class="block" duration="{{entime}}">
+  <view class="contain">
+    <view class="card shadow">
+      <view class="top">
+        <view class="top1">
+          <view class="title">
+            <image src="{{userinfo.avatarUrl}}"></image>
+            <view>{{userinfo.nickName}}</view>
+          </view>
+          <view class="date">{{morejs.timelog(item.creat)}}</view>
+        </view>
+      </view>
+      <view class="center">
+        <image wx:if="{{grids.length!=0}}" src="{{thumb}}" />
+        <image wx:if="{{grids.length==0}}" src="/images/no_photo.png" />
+        <view class="content">
+          <view class="book">
+            <view class="book_name text-cut">
+              <text wx:if="{{goodinfo.name.length==0}}">商品名称在此处预览</text>{{goodinfo.name}}
+            </view>
+            <view class="book_author text-cut">
+              <text wx:if="{{goodinfo.desc.length==0}}">商品简介在这里</text>{{goodinfo.desc}}
+            </view>
+          </view>
+          <view class="price">
+            <text class="b_rawprice">￥{{goodinfo.rawprice}}</text> ￥{{goodinfo.price}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-grids">
+    <block wx:for="{{grids}}" wx:for-index="bindex" wx:key="*this">
+      <view url="" class="weui-grid" hover-class="weui-grid_active" bindtap="selectPhoto" data-bindex='{{bindex}}'>
+        <image class="weui-grid__icon" src="{{item}}" />
+      </view>
+    </block>
+  </view>
+  <view class="b_ccontain">
+    <view class="b_card">
+      <view class="b_bar">
+        <view class="b_name1">商品名称</view>
+        <view wx:if="{{grids.length==0}}" class="b_addImg" bindtap="chooseImg">
+          <text class="b_addImg1">+ 添加图片</text>
+        </view>
+      </view>
+      <view class="b_bar">
+        <view class="b_plecebox">
+          <input maxlength="100" placeholder="输入商品名称" value="{{goodinfo.name}}" bindinput="bNameInput" />
+        </view>
+      </view>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="b_name">商品原价(元)</view>
+        <input class="b_digitinput" type="digit" placeholder="商品原价" value="{{goodinfo.rawprice}}" bindinput="rawPriceChange" />
+      </view>
+      <view class="b_bar">
+        <view class="b_name">出售价格(元)</view>
+        <input class="b_digitinput" type="digit" placeholder="出售价格" value="{{goodinfo.price}}" bindinput="priceChange" />
+      </view>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="name">取货方式</view>
+        <radio-group class="kind-group" bindchange="delChange">
+          <label class="b_radio" wx:for="{{delivery}}" wx:key="id">
+            <radio color="#1F90FF" value="{{item.id}}" checked="{{item.check}}" />{{item.name}}
+          </label>
+        </radio-group>
+      </view>
+      <block wx:if="{{chooseDelivery==0}}">
+        <view class="b_place">
+          <view class="b_plecebox">
+            <input maxlength="20" placeholder="输入您的详细地址" value="{{place}}" bindinput="placeInput" />
+          </view>
+        </view>
+      </block>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="b_name1">联系方式</view>
+      </view>
+      <view class="b_bar">
+        <view class="b_plecebox">
+          <input maxlength="11" placeholder="输入手机号" type="digit" value="{{phone}}" bindinput="phoneInput" />
+        </view>
+      </view>
+      <view class="b_bar">
+        <view class="b_plecebox">
+          <input maxlength="11" placeholder="输入QQ号" type="digit" value="{{qq}}" bindinput="qqInput" />
+        </view>
+      </view>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="name">详细信息</view>
+      </view>
+      <view class="b_notes">
+        <view class="b_text">
+          <textarea value="{{goodinfo.detail}}" bindinput="noteInput" maxlength="200" placeholder="详细介绍一下您的宝贝吧"></textarea>
+          <view class="b_less">{{note_counts}}/200</view>
+        </view>
+      </view>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="b_name1">闲鱼链接</view>
+        <view class="b_nobi">※ 非必填</view>
+      </view>
+      <view class="b_bar">
+        <view class="b_plecebox">
+          <input maxlength="200" placeholder="粘贴闲鱼链接" value="{{goodinfo.xianyulink}}" bindinput="linkInput" />
+        </view>
+      </view>
+      <view class="b_bar">
+        <view class="name">发布时长(天)</view>
+        <van-stepper bind:change="duraChange" value="{{dura}}" min="1" max="50" />
+      </view>
+      <view class="b_tips">
+        <text>* </text>此时长内您的发布信息将会展示给所有同学，超时后您只需去个人中心处擦亮即可再次展示</view>
+    </view>
+    <view class="b_publish" bindtap="check_pub">马上发布
+    </view>
+  </view>
+
+</van-transition>
+<!--发布成功-->
+<van-transition show="{{ show_c }}" name="fade-right" custom-class="block" duration="{{entime}}">
+
+  <view class="c_contain" style="height:{{systeminfo.windowHeight-66.8}}px">
+    <image class="c_success" src="/images/success.png"></image>
+    <view class="c_title">恭喜您 发布成功</view>
+    <view class="c_des">同学们将看到您的商品</view>
+    <view class="c_see" bindtap="detail">查看详情</view>
+    <view class="c_again shadow" bindtap="initial">再来一件</view>
+  </view>
+
+</van-transition>
+<!--课程评价-->
+<van-transition show="{{ show_course }}" name="fade-right" custom-class="block" duration="{{entime}}">
+
+  <view class="b_ccontain">
+    <view class="b_card">
+      <view class="b_bar">
+        <view class="b_name1">课程名称</view>
+      </view>
+      <view class="b_bar">
+        <view class="b_plecebox">
+          <input maxlength="100" placeholder="输入课程名称" value="{{cinfo.name}}" bindinput="cNameInput" />
+        </view>
+      </view>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="b_name">教师名称</view>
+        <input class="b_digitinput" placeholder="教师名称" value="{{cinfo.teacher}}" bindinput="teacherInput" />
+      </view>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="name">评价</view>
+      </view>
+      <view class="b_notes">
+        <view class="c_text">
+          <textarea value="{{cinfo.detail}}" bindinput="commentInput" maxlength="200" placeholder="详细介绍一下这门课程吧"></textarea>
+          <view class="b_less">{{cdetail_counts}}/200</view>
+        </view>
+      </view>
+    </view>
+    <view class="b_publish" bindtap="cpub">马上发布
+    </view>
+  </view>
+
+</van-transition>
+<!--发布成功-->
+<van-transition show="{{ show_cc }}" name="fade-right" custom-class="block" duration="{{entime}}">
+
+  <view class="c_contain" style="height:{{systeminfo.windowHeight-66.8}}px">
+    <image class="c_success" src="/images/success.png"></image>
+    <view class="c_title">恭喜您 发布成功</view>
+    <view class="c_des">同学们将看到您的评价</view>
+    <view class="c_see" bindtap="detailc">查看详情</view>
+    <view class="c_again shadow" bindtap="initialc">再来一评</view>
+  </view>
+
+</van-transition>
+<!--失物招领-->
+<van-transition show="{{ show_losta }}" name="fade-right" custom-class="block" duration="{{entime}}">
+
+  <view class="contain">
+    <view class="card shadow">
+      <view class="top">
+        <view class="top1">
+          <view class="title">
+            <image src="{{userinfo.avatarUrl}}"></image>
+            <view>{{userinfo.nickName}}</view>
+          </view>
+          <view class="date">{{morejs.timelog(item.creat)}}</view>
+        </view>
+      </view>
+      <view class="center">
+        <image wx:if="{{grids.length!=0}}" src="{{thumb}}" />
+        <image wx:if="{{grids.length==0}}" src="/images/no_photo.png" />
+        <view class="content">
+          <view class="book">
+            <view class="book_name text-cut">
+              <text wx:if="{{lostinfo.name.length==0}}">丢失物品名称在此处预览</text>{{goodinfo.name}}
+            </view>
+            <view class="book_author text-cut">
+              <text wx:if="{{lostinfo.place.length==0}}">丢失地点将在此处显示</text>{{lostinfo.place}}
+            </view>
+          </view>
+          <view class="book_author text-cut">
+            <view class="b_author text-cut">📍{{lostinfo.campus}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-grids">
+    <block wx:for="{{grids}}" wx:for-index="bindex" wx:key="*this">
+      <view url="" class="weui-grid" hover-class="weui-grid_active" bindtap="selectPhoto" data-bindex='{{bindex}}'>
+        <image class="weui-grid__icon" src="{{item}}" />
+      </view>
+    </block>
+  </view>
+  <view class="b_ccontain">
+    <view class="b_card">
+      <view class="b_bar">
+        <view class="b_name1">丢失物品名称</view>
+        <view wx:if="{{grids.length==0}}" class="b_addImg" bindtap="chooseImg">
+          <text class="b_addImg1">+ 添加图片</text>
+        </view>
+      </view>
+      <view class="b_bar">
+        <view class="b_plecebox">
+          <input maxlength="100" placeholder="输入丢失物品名称" value="{{lostinfo.name}}" bindinput="lNameInput" />
+        </view>
+      </view>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="name">丢失地点</view>
+      </view>
+      <block>
+        <view class="b_place">
+          <view class="b_plecebox">
+            <input maxlength="20" placeholder="输入您丢失的详细地址" value="{{lostinfo.place}}" bindinput="lPlaceInput" />
+          </view>
+        </view>
+      </block>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="b_name1">联系方式</view>
+      </view>
+      <view class="b_bar">
+        <view class="b_plecebox">
+          <input maxlength="11" placeholder="输入手机号" type="digit" value="{{lostinfo.phone}}" bindinput="lPhoneInput" />
+        </view>
+      </view>
+      <view class="b_bar">
+        <view class="b_plecebox">
+          <input maxlength="11" placeholder="输入QQ号" type="digit" value="{{lostinfo.qq}}" bindinput="lqqInput" />
+        </view>
+      </view>
+      <view class="b_border"></view>
+      <view class="b_bar">
+        <view class="name">详细信息</view>
+      </view>
+      <view class="b_notes">
+        <view class="b_text">
+          <textarea value="{{lostinfo.detail}}" bindinput="lNoteInput" maxlength="200" placeholder="详细介绍你丢失的物品"></textarea>
+          <view class="b_less">{{note_counts}}/200</view>
+        </view>
+      </view>
+    </view>
+    <view class="b_publish" bindtap="lpub">马上发布
+    </view>
+  </view>
+
+</van-transition>
+<!--发布成功-->
+<van-transition show="{{ show_cl }}" name="fade-right" custom-class="block" duration="{{entime}}">
+
+  <view class="c_contain" style="height:{{systeminfo.windowHeight-66.8}}px">
+    <image class="c_success" src="/images/success.png"></image>
+    <view class="c_title">恭喜您 发布成功</view>
+    <view class="c_des"></view>
+    <view class="c_again shadow" bindtap="detaill">查看详情</view>
+  </view>
+
+</van-transition>

@@ -1,0 +1,113 @@
+<wxs src="../../common.wxs" module="morejs" />
+
+
+
+<view class="contain">
+  <view class="card shadow">
+    <view class="top_contain">
+      <swiper wx:if="{{publishinfo.img.length!=0&&showC==false}}" class="banner" indicator-dots autoplay indicator-active-color="#1F90FF" circular bindtap="preview">
+        <block wx:for="{{publishinfo.img}}" wx:key="id">
+          <swiper-item>
+            <image lazy-load src="{{item}}" class="banner_image" mode="widthFix" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view wx:if="{{publishinfo.img.length==0&&showC==false}}" class="banner">
+        <image class="banner_image" src="/images/no_photo.png" mode="widthFix" />
+      </view>
+      <view class="title text-cut">
+      {{publishinfo.goodinfo.name}}{{publishinfo.cinfo.name}}{{publishinfo.lostinfo.name}}
+      </view>
+      <view class="author  text-cut">{{publishinfo.goodinfo.desc}}{{publishinfo.cinfo.detail}}{{publishinfo.lostinfo.place}}</view>
+      <view class="flex:1; price_box {{showBuy?'show':'hide'}}">
+        <view class="pre_price">￥{{publishinfo.goodinfo.rawprice}}</view>
+        <view class="now_price">￥{{publishinfo.goodinfo.price}}</view>
+      </view>
+      
+    </view>
+
+  </view>
+</view>
+
+
+
+<!--发布信息-->
+
+<view class="contain">
+  <view class="card shadow">
+    <view hidden="{{!first_title}}">
+      <view class="user_box">
+        <image lazy-load src="{{userinfo.avatarUrl}}"></image>
+        <view class="des_box">
+          <view class="user_name">{{userinfo.nickName}}</view>
+          <view class="local_box {{showBuy||showFound?'show':'hide'}}">
+            <image src="/images/local.png"></image>
+            <view>{{publishinfo.goodinfo.campus}}{{publishinfo.lostinfo.campus}}</view>
+          </view>
+        </view>
+        <view class="sex">
+          <image lazy-load src="{{userinfo.gender==0?'/images/none.png':(userinfo.gender==1?'/images/boy.png':'/images/girl.png')}}"></image>
+        </view>
+      </view>
+      <view class="time_box">
+        <view class="time">发布于{{morejs.timelog(publishinfo.creat)}}</view>
+      </view>
+      <view class="deliver_box">
+        <view class="deliver_first {{showBuy?'show':'hide'}}">
+          <view class="deliver_title">取货方式：</view>
+          <view class="deliver_kind">{{publishinfo.deliveryid==0?'自提':'帮送'}}</view>
+        </view>
+        <view class="deliver_first {{showFound?'show':'hide'}}">
+          <view class="deliver_title">丢失地址：</view>
+        </view>
+        <view class="deliver_first {{showC?'show':'hide'}}">
+          <view class="deliver_title">教师：</view>
+        </view>
+        <view class="deliver_place">
+          {{publishinfo.place}}{{publishinfo.lostinfo.place}}{{publishinfo.cinfo.teacher}}</view>
+      </view>
+      <view class="notes_box " wx:if="{{publishinfo.goodinfo.detail!=''||publishinfo.lostinfo.detail!=''}}">
+        <view class="notes">
+          <view class="notes_text">详细信息:</view>
+          <view class="notes_text">{{publishinfo.goodinfo.detail}}{{publishinfo.lostinfo.detail}}{{publishinfo.cinfo.detail}}</view>
+        </view>
+      </view>
+      <view class="notes_box {{showBuy?'show':'hide'}}" wx:if="{{publishinfo.goodinfo.xianyulink.length!=0}}">
+        <view class="notes">
+          <view class="notes_text">闲鱼链接:</view>
+          <view class="notes_text">{{publishinfo.goodinfo.xianyulink}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view style="height: 110rpx;"></view>
+
+
+
+<!--底部导航-->
+<view class="tabbar">
+  <view class="t_card">
+    <image src="/images/tabbar/home.png"></image>
+    <text>首页</text>
+    <button class="t_button" bindtap="home"></button>
+  </view>
+  <view class="t_card">
+    <image src="/images/contact.png"></image>
+    <text>反馈</text>
+    <button class="t_button" bindtap="go" data-go="/pages/kefu/kefu"></button>
+  </view>
+  <view class="t_card">
+    <image src="/images/share.png"></image>
+    <text>分享</text>
+    <button class="t_button" open-type="share"></button>
+  </view>
+  <view class="t_card" bindtap="creatPoster">
+    <image src="/images/pyq.png"></image>
+    <text>海报</text>
+  </view>
+  <view class="buy_box" wx:if="{{showC==false}}">
+    <view class="buy shadow" wx:if="{{showBuy==true}}" bindtap="buy">{{publishinfo.status==0?'我想要':'已经卖出去了了'}}</view>
+    <view class="buy shadow" wx:if="{{showFound==true}}" bindtap="found">{{publishinfo.status==0?'我是失主':'已找到失主'}}</view>
+  </view>
+</view>
