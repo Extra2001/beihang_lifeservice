@@ -298,6 +298,7 @@
   align-items: center;
   box-sizing: border-box;
   z-index: 8;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .t_card {
@@ -401,6 +402,14 @@
   box-sizing: border-box;
   flex-direction: column;
   padding-bottom: 0rpx;
+}
+.contain1 {
+  width: 100%;
+  padding: 24rpx;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 120rpx);
 }
 
 .card {

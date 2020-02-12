@@ -33,7 +33,7 @@
 
 <!--发布信息-->
 
-<view class="contain">
+<view class="contain1">
   <view class="card shadow">
     <view hidden="{{!first_title}}">
       <view class="user_box">
