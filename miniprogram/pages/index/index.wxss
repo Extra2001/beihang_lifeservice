@@ -23,7 +23,7 @@
   color: #fff;
   background-color: #acacac;
   border-radius: 12rpx;
-padding: 7rpx 20rpx;
+  padding: 7rpx 20rpx;
   margin: 10rpx 0px auto auto;
 }
 .foundit1{
@@ -33,7 +33,7 @@ padding: 7rpx 20rpx;
 .local_box text {
   padding-left: 5rpx;
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   color: rgb(150, 150, 150);
 }
 
@@ -62,7 +62,7 @@ padding: 7rpx 20rpx;
 .search_text {
   padding-left: 10rpx;
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   color: rgb(167, 167, 167);
 }
 
@@ -133,7 +133,7 @@ padding: 7rpx 20rpx;
   align-items: center;
   font-size: 30rpx;
   color: #fff;
-  letter-spacing: 2rpx;
+  
   border-radius: 15rpx;
 }
 
@@ -156,7 +156,7 @@ padding: 7rpx 20rpx;
   align-items: center;
   font-size: 30rpx;
   color: #fff;
-  letter-spacing: 2rpx;
+  
   border-radius: 15rpx;
   margin: 10rpx;
   padding-left: 44rpx;
@@ -255,7 +255,7 @@ padding: 7rpx 20rpx;
 .blank_text {
   padding-top: 40rpx;
   font-size: 32rpx;
-  letter-spacing: 2rpx;
+  
   color: #c6c6c8;
 }
 
@@ -314,7 +314,7 @@ padding: 7rpx 20rpx;
 .date {
   font-size: 28rpx;
   color: #b2b2b2;
-  letter-spacing: 2rpx;
+  
 }
 
 .title {
@@ -397,7 +397,7 @@ padding: 7rpx 20rpx;
 
 .book_name {
   font-size: 30rpx;
-  letter-spacing: 2rpx;
+  
 }
 
 .book_author {

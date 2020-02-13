@@ -32,7 +32,7 @@
   padding-top: 30rpx;
   font-size: 32rpx;
   font-weight: 600;
-  letter-spacing: 2rpx;
+  
   flex-direction: row;
 }
 
@@ -40,7 +40,7 @@
   padding-top: 10rpx;
   font-size: 26rpx;
   color: rgb(172, 171, 171);
-  letter-spacing: 2rpx;
+  
 }
 
 .price_box {
@@ -84,7 +84,7 @@
   width: 140rpx;
   height: 100%;
   display: flex;
-  letter-spacing: 2rpx;
+  
   align-items: center;
   justify-content: center;
 }
@@ -123,7 +123,7 @@
 
 .user_name {
   font-size: 32rpx;
-  letter-spacing: 2rpx;
+  
 }
 
 .local_box {
@@ -139,7 +139,7 @@
 .local_box view {
   padding-left: 5rpx;
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   color: rgb(150, 150, 150);
 }
 
@@ -191,12 +191,12 @@
 
 .kind {
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
 }
 
 .time {
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   color: #8c9aa8;
 }
 
@@ -215,18 +215,18 @@
 
 .deliver_title {
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
 }
 
 .deliver_kind {
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   color: #a5a5a5;
 }
 
 .deliver_place {
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
 }
 
 .palceInput_box {
@@ -244,7 +244,7 @@
   border-radius: 10rpx;
   font-size: 26rpx;
   padding: 0 20rpx;
-  letter-spacing: 2rpx;
+  
 }
 
 .detail_contain {
@@ -270,14 +270,14 @@
 .detail_title {
   width: 20%;
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   line-height: 45rpx;
 }
 
 .detail_content {
   width: 78%;
   font-size: 27rpx;
-  letter-spacing: 2rpx;
+  
   line-height: 44rpx;
   color: #616161;
 }
@@ -298,7 +298,7 @@
   align-items: center;
   box-sizing: border-box;
   z-index: 8;
-  padding-bottom: env(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
 }
 
 .t_card {
@@ -391,7 +391,7 @@
 
 .contact_box view {
   font-size: 26rpx;
-  letter-spacing: 2rpx;
+  
   margin-top: 10rpx;
 }
 

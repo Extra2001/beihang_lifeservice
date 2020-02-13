@@ -16,21 +16,21 @@
 
 .b_author {
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   color: #000;
 }
 
 .b_price {
   font-size: 30rpx;
   color: rgb(255, 0, 0);
-  letter-spacing: 2rpx;
+  
   white-space: nowrap;
 }
 
 .b_rawprice {
   font-size: 25rpx;
   color: #aaaaab;
-  letter-spacing: 2rpx;
+  
   white-space: nowrap;
   text-decoration: line-through;
 }
@@ -88,12 +88,12 @@
 
 .b_name {
   font-size: 30rpx;
-  letter-spacing: 2rpx;
+  
 }
 
 .b_name1 {
   font-size: 30rpx;
-  letter-spacing: 2rpx;
+  
   width: 40%;
 }
 
@@ -154,7 +154,7 @@
   display: flex;
   justify-content: flex-end;
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   color: #8c9aa8;
 }
 
@@ -190,7 +190,7 @@
 .b_plecebox input {
   width: 100%;
   font-size: 28rpx;
-  letter-spacing: 2rpx;
+  
   color: #8c9aa8;
 }
 
@@ -333,7 +333,7 @@
   align-items: center;
   font-size: 30rpx;
   color: #fff;
-  letter-spacing: 2rpx;
+  
   border-radius: 15rpx;
   margin: 10rpx;
 }
@@ -414,7 +414,7 @@
 .date {
   font-size: 28rpx;
   color: #b2b2b2;
-  letter-spacing: 2rpx;
+  
 }
 
 .title {
@@ -496,7 +496,7 @@
 
 .book_name {
   font-size: 30rpx;
-  letter-spacing: 2rpx;
+  
 }
 
 .book_author {
