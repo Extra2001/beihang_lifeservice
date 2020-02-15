@@ -1,4 +1,4 @@
-<view class="top-bg" style="background-image: url('/images/login_bg.png')"></view>
+<view class="top-bg" style="background-image: url('/images/login_bg.jpg')"></view>
 <view class="contain">
   <view class="card">
     <view class="title">验证学生/教师身份</view>
