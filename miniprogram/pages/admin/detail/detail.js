@@ -6,17 +6,22 @@ Page({
   data: {
     first_title: true,
     cshow: false,
-    commentValue:'',
-    
+    commentValue: '',
+
   },
   onPullDownRefresh() {
     this.getPublish(this.data.id);
   },
   onLoad(e) {
-     let that = this
+    if (getApp().openid.length == 0) {
+      wx.switchTab({
+        url: '/pages/start/start',
+      })
+    }
+    let that = this
     wx.getSystemInfo({
       success: function(res) {
-        if(res.system.indexOf('Android')!=-1){
+        if (res.system.indexOf('Android') != -1) {
           that.setData({
             isAndroid: true
           })
@@ -251,23 +256,23 @@ Page({
       urls: this.data.publishinfo.img // 需要预览的图片http链接列表
     })
   },
-  showComment(){
+  showComment() {
     this.setData({
       cshow: true
     })
   },
-  closeComment(){
+  closeComment() {
     this.setData({
-      cshow:false
+      cshow: false
     })
   },
-  commentInput(e){
+  commentInput(e) {
     this.setData({
       commentValue: e.detail.value
     })
   },
-  commentPub(){
-    if(this.data.commentValue.length==0){
+  commentPub() {
+    if (this.data.commentValue.length == 0) {
       wx.showToast({
         title: '输入的内容不能为空',
       });
@@ -278,109 +283,105 @@ Page({
       title: '正在发布',
     })
     let dbn = '';
-    if (this.data.func=='old'){
-      dbn='oldgood'
-    }
-    else if (this.data.func=='ccomm'){
-      dbn='ccomment'
-    }
-    else if (this.data.func=='losta'){
-      dbn='lostfound'
+    if (this.data.func == 'old') {
+      dbn = 'oldgood'
+    } else if (this.data.func == 'ccomm') {
+      dbn = 'ccomment'
+    } else if (this.data.func == 'losta') {
+      dbn = 'lostfound'
     }
     wx.cloud.callFunction({
-      name:"commentPublish",
-      data:{
+      name: "commentPublish",
+      data: {
         dbn: dbn,
-        comment:{
+        comment: {
           creat: new Date().getTime(),
-          userinfo:app.userinfo,
-          value:that.data.commentValue
+          userinfo: app.userinfo,
+          value: that.data.commentValue
         },
-        id:that.data.id
+        id: that.data.id
       },
-      success: function (res){
+      success: function(res) {
         wx.hideLoading();
         wx.showToast({
           title: '发布成功',
         })
         that.setData({
-          cshow:false,
-          commentValue:''
+          cshow: false,
+          commentValue: ''
         })
-        
+
         that.getPublish(that.data.id);
       },
-      fail: function (res){
+      fail: function(res) {
         console.log(res);
         wx.hideLoading();
         wx.showToast({
           title: '发布失败',
-          icon:'none'
+          icon: 'none'
         })
       }
     })
   },
-  deleteit(e){
+  deleteit(e) {
     let that = this
     wx.showModal({
       title: '提示',
       content: '确实要删除这条评论吗？',
-      success(res){
-        if(res.confirm){
+      success(res) {
+        if (res.confirm) {
           wx.showLoading({
             title: '正在删除',
           })
           let flag = -1;
-          for(let i = 0; i< that.data.publishinfo.comment.length;i++){
-            if(e.currentTarget.dataset.ord.creat==that.data.publishinfo.comment[i].creat){
+          for (let i = 0; i < that.data.publishinfo.comment.length; i++) {
+            if (e.currentTarget.dataset.ord.creat == that.data.publishinfo.comment[i].creat) {
               flag = i;
               break;
             }
           }
-          if(flag == -1){
+          if (flag == -1) {
             console.log(flag)
             wx.hideLoading();
             wx.showToast({
               title: '删除失败',
-              icon:'none'
+              icon: 'none'
             })
             return;
           }
-          let arr = that.data.publishinfo.comment.splice(flag,1);
+          let arr = that.data.publishinfo.comment.splice(flag, 1);
           let dbn = 0;
           if (that.data.func == 'old') {
             dbn = 0
-          }
-          else if (that.data.func == 'ccomm') {
+          } else if (that.data.func == 'ccomm') {
             dbn = 1
-          }
-          else if (that.data.func == 'losta') {
+          } else if (that.data.func == 'losta') {
             dbn = 2
           }
           wx.cloud.callFunction({
-            name:"edititem",
-            data:{
-              _id:that.data.id,
-              ndata:{
-                comment:arr
+            name: "edititem",
+            data: {
+              _id: that.data.id,
+              ndata: {
+                comment: arr
               },
-              tabid:dbn,
+              tabid: dbn,
               operateid: 0
             },
-            success(res){
+            success(res) {
               wx.hideLoading();
               wx.showToast({
                 title: '删除成功'
               })
               that.setData({
-                "publishinfo.comment":arr
+                "publishinfo.comment": arr
               })
             },
-            fail(res){
+            fail(res) {
               wx.hideLoading();
               wx.showToast({
                 title: '删除失败',
-                icon:'none'
+                icon: 'none'
               })
             }
 
@@ -388,6 +389,6 @@ Page({
         }
       }
     })
-    
+
   }
 })

@@ -122,6 +122,11 @@ Page({
     this.updateErshow()
   },
   onLoad() {
+    if (getApp().openid.length == 0) {
+      wx.switchTab({
+        url: '/pages/start/start',
+      })
+    }
     this.setData({
       userinfo: app.userinfo
     })

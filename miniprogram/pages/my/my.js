@@ -5,6 +5,13 @@ Page({
     showShare: false,
     poster: JSON.parse(config.data).share_poster,
   },
+  onLoad() {
+    if (getApp().openid.length == 0) {
+      wx.switchTab({
+        url: '/pages/start/start',
+      })
+    }
+  },
   //切换校区
   changeCampus(e) {
     let that = this
@@ -60,7 +67,7 @@ Page({
     this.setData({
       userinfo: app.userinfo,
       currcampus: app.campus.name,
-      openid:app.openid
+      openid: app.openid
     })
   },
   //跳转方法

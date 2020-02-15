@@ -31,7 +31,7 @@ Page({
   //导航栏切换
   changeTab(e) {
     let that = this;
-    if (e.currentTarget.dataset.id == 3){
+    if (e.currentTarget.dataset.id == 3) {
       that.getUser();
       return;
     }
@@ -90,12 +90,17 @@ Page({
       dbn = 'ccomm'
     } else if (this.data.tabid == 2) {
       dbn = 'losta'
-    } 
+    }
     wx.navigateTo({
       url: '/pages/admin/detail/detail?scene=' + e.currentTarget.dataset.id + '&func=' + dbn,
     })
   },
   onLoad() {
+    if (getApp().openid.length == 0) {
+      wx.switchTab({
+        url: '/pages/start/start',
+      })
+    }
     let that = this
     this.setData({
       showPrice: true,
@@ -138,8 +143,7 @@ Page({
       getUser();
       return;
     }
-    db.collection(dbn).where({
-    }).orderBy('creat', 'desc').limit(20).get({
+    db.collection(dbn).where({}).orderBy('creat', 'desc').limit(20).get({
       success(re) {
         wx.stopPullDownRefresh(); //暂停刷新动作
         if (re.data.length == 20) {
@@ -162,7 +166,7 @@ Page({
       }
     })
   },
-  getUser(){
+  getUser() {
     wx.navigateTo({
       url: '/pages/admin/user/user',
     })

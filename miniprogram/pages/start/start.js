@@ -16,6 +16,7 @@ Page({
           name: "login",
           success: function(res) {
             if (res.result.data.length == 0) {
+              wx.hideLoading();
               wx.navigateTo({
                 url: '/pages/login/login',
               })
@@ -23,12 +24,12 @@ Page({
               app.userinfo = res.result.data[0].info;
               app.openid = res.result.data[0]._openid;
               app.campus = res.result.data[0].campus;
+              wx.hideLoading()
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
             }
           }
-        })
-        wx.hideLoading()
-        wx.switchTab({
-          url: '/pages/index/index',
         })
       },
       fail: function(res) {
@@ -46,10 +47,14 @@ Page({
         duration: 2000
       });
     } else {
+      wx.showLoading({
+        title: '登陆中',
+      })
       wx.cloud.callFunction({
         name: "login",
         success: function(res) {
           if (res.result.data.length == 0) {
+            wx.hideLoading();
             wx.navigateTo({
               url: '/pages/login/login',
             })
@@ -57,6 +62,7 @@ Page({
             app.userinfo = res.result.data[0].info;
             app.openid = res.result.data[0]._openid;
             app.campus = res.result.data[0].campus;
+            wx.hideLoading();
             wx.showToast({
               title: '登录成功',
             })
@@ -66,7 +72,6 @@ Page({
           }
         }
       })
-
     }
   }
 })

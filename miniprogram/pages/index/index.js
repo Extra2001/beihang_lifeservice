@@ -9,12 +9,17 @@ Page({
     tabon: 0,
     showImg: true,
     showPrice: true,
-    showC:false,
+    showC: false,
     scrollTop: 0,
     nomore: false,
     list: [],
   },
   onLoad() {
+    if (getApp().openid.length == 0) {
+      wx.switchTab({
+        url: '/pages/start/start',
+      })
+    }
     this.getbanner();
     this.getList();
   },
@@ -237,7 +242,7 @@ Page({
       list: [],
       showImg: false,
       showPrice: false,
-      showC:true
+      showC: true
     })
     let that = this;
     wx.getStorage({
@@ -258,7 +263,7 @@ Page({
       tabon: 0,
       showImg: true,
       showPrice: true,
-      showC:false,
+      showC: false,
     })
     let that = this;
     wx.getStorage({
@@ -279,7 +284,7 @@ Page({
       tabon: 2,
       showImg: true,
       showPrice: false,
-      showC:false,
+      showC: false,
     })
     let that = this;
     wx.getStorage({
@@ -345,13 +350,9 @@ Page({
   goweb(e) {
     if (e.currentTarget.dataset.web.url.length == 0) {
       return
-    } else if (e.currentTarget.dataset.web.url.indexOf('/') == 0) {
+    } else {
       wx.switchTab({
         url: e.currentTarget.dataset.web.url,
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/web/web?url=' + e.currentTarget.dataset.web.url,
       })
     }
   },

@@ -88,6 +88,11 @@ Page({
     })
   },
   onLoad() {
+    if (getApp().openid.length == 0) {
+      wx.switchTab({
+        url: '/pages/start/start',
+      })
+    }
     let that = this
     this.setData({
       showPrice: true,

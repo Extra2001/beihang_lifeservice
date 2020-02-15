@@ -11,7 +11,7 @@
             },
             {
                   "action": "allow",
-                  "page": "/pages/start/start"
+                  "page": "/pages/index/index"
             },
             {
                   "action": "allow",

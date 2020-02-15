@@ -17,6 +17,11 @@ Page({
     lnomore: true,
   },
   onLoad: function(options) {
+    if (getApp().openid.length == 0) {
+      wx.switchTab({
+        url: '/pages/start/start',
+      })
+    }
     this.gethis();
     this.getnew();
   },
@@ -71,7 +76,7 @@ Page({
   //搜索结果
   search(n) {
     this.setData({
-      blank:true
+      blank: true
     })
     let that = this;
     let key = that.data.key;

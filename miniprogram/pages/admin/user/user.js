@@ -7,10 +7,9 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-  },
-getUser(){
-  let that = this
+  data: {},
+  getUser() {
+    let that = this
     wx.cloud.database().collection('user').orderBy('stamp', 'desc').limit(20).get({
       success(res) {
         if (res.data.length == 20) {
@@ -28,7 +27,7 @@ getUser(){
         }
         wx.stopPullDownRefresh();
       },
-      fail(res){
+      fail(res) {
         console.log('fail', res)
       }
     })
@@ -37,12 +36,17 @@ getUser(){
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+    if (getApp().openid.length == 0) {
+      wx.switchTab({
+        url: '/pages/start/start',
+      })
+    }
     this.getUser();
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     this.getUser();
   },
 
@@ -53,7 +57,7 @@ getUser(){
     })
   },
   //监测屏幕滚动
-  onPageScroll: function (e) {
+  onPageScroll: function(e) {
     this.setData({
       scrollTop: parseInt((e.scrollTop) * wx.getSystemInfoSync().pixelRatio)
     })
@@ -69,7 +73,7 @@ getUser(){
     }
     let page = that.data.page + 1;
     wx.database().collection('user').orderBy('stamp', 'desc').skip(page * 20).limit(20).get({
-      success: function (res) {
+      success: function(res) {
         if (res.data.length == 0) {
           that.setData({
             nomore: true
@@ -94,27 +98,27 @@ getUser(){
       }
     })
   },
-  deleteit(e){
+  deleteit(e) {
     let that = this
     let id = e.currentTarget.dataset.ord._id
     wx.showModal({
       title: '提示',
       content: '您确实要删除该用户吗？',
-      success(res){
-        if(res.confirm){
+      success(res) {
+        if (res.confirm) {
           wx.cloud.callFunction({
-            name:'deleteUser',
-            data:{
+            name: 'deleteUser',
+            data: {
               id: id
             },
-            success(res){
+            success(res) {
               wx.hideLoading();
               wx.showToast({
                 title: '已删除',
               })
               that.getUser();
             },
-            fail(res){
+            fail(res) {
               wx.hideLoading()
               wx.showToast({
                 title: '删除失败',

@@ -109,7 +109,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(#fae74e, #ff9a2f);
+      background: #1F90FF;
       border-radius: 60rpx;
       color: #fff;
       font-size: 40rpx;
