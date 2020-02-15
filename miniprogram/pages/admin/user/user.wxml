@@ -1,0 +1,31 @@
+<wxs src="../../../common.wxs" module="morejs" />
+<view class="contain">
+  <block wx:for="{{list}}" wx:key="_id">
+    <view class="card shadow">
+      <view class="center">
+        <image lazy-load src="{{item.info.avatarUrl}}"></image>
+        <view class="content">
+          <view class="book">
+            <view class="book_name text-cut">{{item.info.nickName}}</view>
+            <view class="book_author text-cut">校园卡号：{{item.studentcard}}</view>
+            <view class="book_author text-cut">{{item.campus.name}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="bottom">
+        <view class="book_author text-cut">注册于{{morejs.timelog(item.stamp)}}</view>
+        <view class="c3 bg-red" catchtap="deleteit" data-ord="{{item}}">删除</view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<block wx:if="{{list.length>0}}">
+  <import src="/common.wxml" />
+  <template is="loadmore" data="{{nomore}}" />
+</block>
+<van-transition show="{{ scrollTop>500 }}" custom-class="block" duration="600">
+  <view class="totop" bindtap="gotop">
+    <image src="/images/top.png"></image>
+  </view>
+</van-transition>

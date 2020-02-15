@@ -18,7 +18,7 @@ Page({
         id: 1,
       },
       {
-        name: '失物招领',
+        name: '拾物/寻物',
         id: 2,
       }
     ],
@@ -519,7 +519,7 @@ Page({
   lpub() {
     if (this.data.lostinfo.name.length == 0) {
       wx.showToast({
-        title: '请输入丢失物品名称',
+        title: '请输入拾到/丢失物品名称',
         icon: 'none',
       });
       return false;

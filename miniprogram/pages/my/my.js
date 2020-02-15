@@ -60,6 +60,7 @@ Page({
     this.setData({
       userinfo: app.userinfo,
       currcampus: app.campus.name,
+      openid:app.openid
     })
   },
   //跳转方法

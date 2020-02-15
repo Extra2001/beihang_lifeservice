@@ -76,7 +76,7 @@ Page({
         info: that.data.userInfo,
         useful: true,
         parse: 0,
-        studentcard: stucard
+        studentcard: stucard,
       },
       success: function(res) {
         if (res.result == 1) {

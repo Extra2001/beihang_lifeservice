@@ -12,7 +12,7 @@
         <view class="{{1==tabon?'tab_on':''}}"><text class="tabtext">课程评价</text></view>
       </view>
       <view class="tab_one" bindtap="lostfound">
-        <view class="{{2==tabon?'tab_on':''}}"><text class="tabtext">失物招领</text></view>
+        <view class="{{2==tabon?'tab_on':''}}"><text class="tabtext">拾物/寻物</text></view>
       </view>
       <view class="tab_two" bindtap="search">
         <image class="search_ico" src="/images/search.png"></image>
@@ -54,7 +54,7 @@
                 <view class="book_name text-cut">{{item.goodinfo.name}}{{item.lostinfo.name}}{{item.cinfo.name}}</view>
                 <view class="book_author text-cut">{{item.goodinfo.desc}}{{item.lostinfo.place}}{{item.cinfo.detail}}</view>
                 <view class="foundit" wx:if="{{tabon==2&&item.status==1}}">
-                <text class="foundit1">已找到失主</text></view>
+                <text class="foundit1">已找到失主/物品</text></view>
               </view>
               <view wx:if="{{showPrice}}" class="price">
                 <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text> ￥{{item.goodinfo.price}}</view>

@@ -12,10 +12,9 @@ Page({
     key: '',
     blank: false,
     hislist: [],
-    nomore: false,
-    cnomore: false,
-    lnomore: false,
-    more:false,
+    nomore: true,
+    cnomore: true,
+    lnomore: true,
   },
   onLoad: function(options) {
     this.gethis();
@@ -115,7 +114,6 @@ Page({
         that.setData({
           page: 0,
           list: e.data,
-          more: true
         })
       }
     })
@@ -148,7 +146,6 @@ Page({
         that.setData({
           page: 0,
           clist: e.data,
-          more: true
         })
       }
     })
@@ -181,7 +178,6 @@ Page({
         that.setData({
           page: 0,
           llist: e.data,
-          more:true
         })
       }
     })

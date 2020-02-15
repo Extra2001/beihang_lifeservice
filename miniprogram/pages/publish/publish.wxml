@@ -210,10 +210,10 @@
         <view class="content">
           <view class="book">
             <view class="book_name text-cut">
-              <text wx:if="{{lostinfo.name.length==0}}">丢失物品名称在此处预览</text>{{goodinfo.name}}
+              <text wx:if="{{lostinfo.name.length==0}}">拾到/丢失物品名称在此处预览</text>{{goodinfo.name}}
             </view>
             <view class="book_author text-cut">
-              <text wx:if="{{lostinfo.place.length==0}}">丢失地点将在此处显示</text>{{lostinfo.place}}
+              <text wx:if="{{lostinfo.place.length==0}}">拾到/丢失地点将在此处显示</text>{{lostinfo.place}}
             </view>
           </view>
           <view class="book_author text-cut">
@@ -233,14 +233,14 @@
   <view class="b_ccontain">
     <view class="b_card">
       <view class="b_bar">
-        <view class="b_name1">丢失物品名称</view>
+        <view class="b_name1">拾到/丢失物品名称</view>
         <view wx:if="{{grids.length==0}}" class="b_addImg" bindtap="chooseImg">
           <text class="b_addImg1">+ 添加图片</text>
         </view>
       </view>
       <view class="b_bar">
         <view class="b_plecebox">
-          <input maxlength="100" placeholder="输入丢失物品名称" value="{{lostinfo.name}}" bindinput="lNameInput" />
+          <input maxlength="100" placeholder="输入拾到/丢失物品名称" value="{{lostinfo.name}}" bindinput="lNameInput" />
         </view>
       </view>
       <view class="b_border"></view>
@@ -250,7 +250,7 @@
       <block>
         <view class="b_place">
           <view class="b_plecebox">
-            <input maxlength="20" placeholder="输入您丢失的详细地址" value="{{lostinfo.place}}" bindinput="lPlaceInput" />
+            <input maxlength="20" placeholder="输入您拾到/丢失物品的详细地址" value="{{lostinfo.place}}" bindinput="lPlaceInput" />
           </view>
         </view>
       </block>
@@ -274,7 +274,7 @@
       </view>
       <view class="b_notes">
         <view class="b_text">
-          <textarea value="{{lostinfo.detail}}" bindinput="lNoteInput" maxlength="200" placeholder="详细介绍你丢失的物品"></textarea>
+          <textarea value="{{lostinfo.detail}}" bindinput="lNoteInput" maxlength="200" placeholder="详细介绍你拾到/丢失的物品"></textarea>
           <view class="b_less">{{note_counts}}/200</view>
         </view>
       </view>

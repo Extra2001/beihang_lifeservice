@@ -12,7 +12,10 @@
             "pages/about/about",
             "pages/search/search",
             "pages/web/web",
-            "pages/poster/poster"
+            "pages/poster/poster",
+            "pages/admin/admin/admin",
+            "pages/admin/detail/detail",
+            "pages/admin/user/user"
       ],
       "window": {
             "backgroundColor": "#f4f4f4",

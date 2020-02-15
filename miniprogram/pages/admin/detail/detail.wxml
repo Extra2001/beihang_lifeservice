@@ -1,4 +1,4 @@
-<wxs src="../../common.wxs" module="morejs" />
+<wxs src="../../../common.wxs" module="morejs" />
 
 
 
@@ -103,7 +103,7 @@
             </view>
         </view>
       </view>
-      <view class="bottom"  wx:if="{{item._openid==thisopenid||publishinfo._openid==thisopenid}}">
+      <view class="bottom">
         <view class="c3 bg-red" catchtap="deleteit" data-ord="{{item}}">删除</view>
       </view>
       

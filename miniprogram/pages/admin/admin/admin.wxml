@@ -1,4 +1,4 @@
-<wxs src="../../common.wxs" module="morejs" />
+<wxs src="../../../common.wxs" module="morejs" />
 <view class="tab_contain">
   <block wx:for="{{tab}}" wx:key="id">
     <view class="tab_one" bindtap="changeTab" data-id="{{index}}">
@@ -12,17 +12,9 @@
     <view class="card shadow" bindtap="godetail" data-id="{{item._id}}">
       <view class="top">
         <view class="top1">
-          <view wx:if="{{showImg&&showPrice}}" class="title">
-            <image src="/images/onsell.png"></image>
-            <view>{{item.status==0?'出售中':(item.status==1?'已售出':'已下架')}}</view>
-          </view>
-          <view wx:if="{{showImg==true&&showPrice==false}}" class="title {{item.status==0?'text-red':''}}">
-            <image src="/images/icon-search.png"></image>
-            <view>{{item.status==0?'未找到':'已找到'}}</view>
-          </view>
-          <view wx:if="{{showImg==false&&showPrice==false}}" class="title {{item.status==1?'text-red':''}}">
-            <image src="/images/icon-list.png"></image>
-            <view>已发布的评价</view>
+          <view class="title">
+            <image src="{{item.userinfo.avatarUrl}}"></image>
+            <view>{{item.userinfo.nickName}}</view>
           </view>
           <view class="date">{{morejs.timelog(item.creat)}}</view>
         </view>

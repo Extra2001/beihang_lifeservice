@@ -6,7 +6,7 @@
         <view wx:if="{{userinfo}}" class="top_1_1">
           <open-data type="userNickName"></open-data>
         </view>
-        <view class="top_1_2" wx:if="{{!userinfo}}">非法进入小程序将导致不可预料的错误</view>
+        <view class="top_1_2" wx:if="{{!userinfo}}">您可以尝试重新打开页面</view>
         <view class="top_1_2" wx:if="{{userinfo}}" data-status="1">
           <text class="top_1_2" bindtap="changeCampus">目前所在校区：{{currcampus}}▼</text>
         </view>
@@ -64,6 +64,14 @@
         <image src="/images/go.png"></image>
       </view>
       <view class="border1"></view>
+      <view class="bottom_card" bindtap="go" data-go="/pages/admin/admin/admin" wx:if="{{openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}">
+        <view class="bottom_1">
+          <image src="/images/manage.png"></image>
+          <view>后台管理</view>
+        </view>
+        <image src="/images/go.png"></image>
+      </view>
+      <view class="border1" wx:if="{{openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}"></view>
       <view class="bottom_card" bindtap="go" data-go="/pages/about/about">
         <view class="bottom_1">
           <image src="/images/guanyu.png"></image>

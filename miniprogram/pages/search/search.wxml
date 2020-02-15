@@ -34,37 +34,50 @@
         <view class="blank_text">暂无{{key}}相关的信息哟~</view>
       </view>
     </block>
-    <view class="a">
-      <image src="/images/recommend.png"></image>
-      <view>更多推荐</view>
-    </view>
-    <block wx:if="{{newlist.length==0}}">
-      <view class="nosearch">暂无相关推荐</view>
-    </block>
-    <block wx:if="{{newlist.length>0}}">
-      <block wx:for="{{newlist}}" wx:key="_id">
-        <view class="list_box" bindtap="detail" data-id="{{item._id+'&func=old'}}">
-          <image class="list_poster" wx:if="{{item.img.length!=0}}" src="{{item.thumb}}"></image>
-          <image class="list_poster" wx:if="{{item.img.length==0}}" src="/images/no_photo.png"></image>
-          <view class="list_content">
-            <view class="list_word">
-              <view class="list_title text-cut">{{item.goodinfo.name}}
+    <block wx:if="{{!blank}}">
+      <view class="a">
+        <image src="/images/recommend.png"></image>
+        <view>更多推荐</view>
+      </view>
+      <block wx:if="{{newlist.length==0}}">
+        <view class="nosearch">暂无相关推荐</view>
+      </block>
+      <block wx:if="{{newlist.length>0}}">
+        <view class="contain1">
+          <block wx:for="{{newlist}}" wx:key="_id">
+            <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=old'}}">
+              <view class="top">
+                <view class="top1">
+                  <view class="title">
+                    <image src="{{item.userinfo.avatarUrl}}"></image>
+                    <view>{{item.userinfo.nickName}}</view>
+                    <view class="local_box">
+                      <image class="img1" src="/images/local.png"></image>
+                      <text>{{item.goodinfo.campus}}</text>
+                    </view>
+                  </view>
+                  <view class="date">{{morejs.timelog(item.creat)}}</view>
+                </view>
               </view>
-              <view class="list_author text-cut">{{item.goodinfo.desc}}
+              <view class="center">
+                <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
+                <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
+                <view class="content">
+                  <view class="book">
+                    <view class="book_name text-cut">{{item.goodinfo.name}}</view>
+                    <view class="book_author text-cut">{{item.goodinfo.desc}}</view>
+                    <view class="price">
+                      <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text> ￥{{item.goodinfo.price}}</view>
+                  </view>
+                </view>
               </view>
             </view>
-            <view class="list_between">
-              <view class="list_price">￥{{item.goodinfo.price}}
-                <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text>
-              </view>
-              <view class="list_time">{{morejs.timelog(item.creat )}}发布
-              </view>
-            </view>
-          </view>
+          </block>
         </view>
       </block>
     </block>
   </block>
+
   <block wx:if="{{list.length>0||clist.length>0||llist.length>0}}">
     <view class="a">
       <image src="/images/result.png"></image>
@@ -75,21 +88,29 @@
       <view>二手商品</view>
     </view>
     <block wx:for="{{list}}" wx:key="_id">
-      <view class="list_box" bindtap="detail" data-id="{{item._id+'&func=old'}}">
-        <image class="list_poster" wx:if="{{item.img.length!=0}}" src="{{item.thumb}}"></image>
-        <image class="list_poster" wx:if="{{item.img.length==0}}" src="/images/no_photo.png"></image>
-        <view class="list_content">
-          <view class="list_word">
-            <view class="list_title text-cut">{{item.goodinfo.name}}
+      <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=old'}}">
+        <view class="top">
+          <view class="top1">
+            <view class="title">
+              <image src="{{item.userinfo.avatarUrl}}"></image>
+              <view>{{item.userinfo.nickName}}</view>
+              <view class="local_box">
+                <image class="img1" src="/images/local.png"></image>
+                <text>{{item.goodinfo.campus}}</text>
+              </view>
             </view>
-            <view class="list_author text-cut">{{item.goodinfo.desc}}
-            </view>
+            <view class="date">{{morejs.timelog(item.creat)}}</view>
           </view>
-          <view class="list_between">
-            <view class="list_price">￥{{item.goodinfo.price}}
-              <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text>
-            </view>
-            <view class="list_time">{{morejs.timelog(item.creat )}}发布
+        </view>
+        <view class="center">
+          <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
+          <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
+          <view class="content">
+            <view class="book">
+              <view class="book_name text-cut">{{item.goodinfo.name}}</view>
+              <view class="book_author text-cut">{{item.goodinfo.desc}}</view>
+              <view class="price">
+                <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text> ￥{{item.goodinfo.price}}</view>
             </view>
           </view>
         </view>
@@ -100,18 +121,22 @@
       <view>课程评价</view>
     </view>
     <block wx:for="{{clist}}" wx:key="_id">
-      <view class="list_box" bindtap="detail" data-id="{{item._id+'&func=ccomm'}}">
-        <view class="list_content">
-          <view class="list_word">
-            <view class="list_title text-cut">{{item.cinfo.name}}
+
+      <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=ccomm'}}">
+        <view class="top">
+          <view class="top1">
+            <view class="title">
+              <image src="{{item.userinfo.avatarUrl}}"></image>
+              <view>{{item.userinfo.nickName}}</view>
             </view>
-            <view class="list_author text-cut">{{item.cinfo.detail}}
-            </view>
+            <view class="date">{{morejs.timelog(item.creat)}}</view>
           </view>
-          <view class="list_between">
-            <view class="list_price">
-            </view>
-            <view class="list_time">{{morejs.timelog(item.creat )}}发布
+        </view>
+        <view class="center">
+          <view class="content_full">
+            <view class="book">
+              <view class="book_name text-cut">{{item.cinfo.name}}</view>
+              <view class="book_author text-cut">{{item.cinfo.detail}}</view>
             </view>
           </view>
         </view>
@@ -122,20 +147,30 @@
       <view>失物招领</view>
     </view>
     <block wx:for="{{llist}}" wx:key="_id">
-      <view class="list_box" bindtap="detail" data-id="{{item._id+'&func=losta'}}">
-        <image class="list_poster" wx:if="{{item.img.length!=0}}" src="{{item.thumb}}"></image>
-        <image class="list_poster" wx:if="{{item.img.length==0}}" src="/images/no_photo.png"></image>
-        <view class="list_content">
-          <view class="list_word">
-            <view class="list_title text-cut">{{item.lostinfo.name}}
+      <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=losta'}}">
+        <view class="top">
+          <view class="top1">
+            <view class="title">
+              <image src="{{item.userinfo.avatarUrl}}"></image>
+              <view>{{item.userinfo.nickName}}</view>
+              <view class="local_box">
+                <image class="img1" src="/images/local.png"></image>
+                <text>{{item.lostinfo.campus}}</text>
+              </view>
             </view>
-            <view class="list_author text-cut">{{item.lostinfo.place}}
-            </view>
+            <view class="date">{{morejs.timelog(item.creat)}}</view>
           </view>
-          <view class="list_between">
-            <view class="list_price">
-            </view>
-            <view class="list_time">{{morejs.timelog(item.creat )}}发布
+        </view>
+        <view class="center">
+          <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
+          <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
+          <view class="content">
+            <view class="book">
+              <view class="book_name text-cut">{{item.lostinfo.name}}</view>
+              <view class="book_author text-cut">{{item.lostinfo.place}}</view>
+              <view class="foundit" wx:if="{{item.status==1}}">
+                <text class="foundit1">已找到失主/物品</text>
+              </view>
             </view>
           </view>
         </view>
@@ -145,7 +180,7 @@
 </view>
 
 
-<view class="laji" wx:if="{{more}}">由于开发者太辣鸡了，每项最多只能显示20条搜索结果</view>
+<view class="laji" wx:if="{{!(nomore&&lnomore&&cnomore)}}">由于开发者太辣鸡了，每项最多只能显示20条搜索结果</view>
 
 
 

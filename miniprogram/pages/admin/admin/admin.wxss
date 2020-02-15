@@ -10,6 +10,7 @@
   box-shadow: 0px 5px 5px #888;
 }
 
+
 .tab_one {
   flex: 1;
   height: 100%;
@@ -29,12 +30,14 @@
   align-items: center;
   font-size: 30rpx;
   color:#fff;
+  
   border-radius: 15rpx;
   margin: 10rpx;
 
 }
 .tab_one text {
   margin: auto;
+
 }
 
 .tab_on {
@@ -145,20 +148,21 @@
 }
 
 .title {
-      display: flex;
-      align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .title image {
-      width: 36rpx;
-      height: 36rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
 }
 
 .title view {
-      padding-left: 10rpx;
-      letter-spacing: 3rpx;
-      font-size: 30rpx;
-      font-weight: 600;
+  padding-left: 10rpx;
+  letter-spacing: 3rpx;
+  font-size: 30rpx;
+  padding-top: 2rpx;
 }
 
 .del {
