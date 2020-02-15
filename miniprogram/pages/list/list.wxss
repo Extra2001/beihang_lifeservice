@@ -205,10 +205,10 @@
       box-sizing: border-box;
       justify-content: space-between;
 }
-.content_fill {
+.content_full {
       width: 100%;
       padding: 0 20rpx;
-      height: 130rpx;
+      height: 80rpx;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
