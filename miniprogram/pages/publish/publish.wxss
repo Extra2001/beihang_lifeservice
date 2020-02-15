@@ -16,21 +16,18 @@
 
 .b_author {
   font-size: 28rpx;
-  
   color: #000;
 }
 
 .b_price {
   font-size: 30rpx;
   color: rgb(255, 0, 0);
-  
   white-space: nowrap;
 }
 
 .b_rawprice {
   font-size: 25rpx;
   color: #aaaaab;
-  
   white-space: nowrap;
   text-decoration: line-through;
 }
@@ -88,13 +85,11 @@
 
 .b_name {
   font-size: 30rpx;
-  
 }
 
 .b_name1 {
   font-size: 30rpx;
-  
-  width: 40%;
+  width: 60%;
 }
 
 .right {
@@ -154,7 +149,6 @@
   display: flex;
   justify-content: flex-end;
   font-size: 28rpx;
-  
   color: #8c9aa8;
 }
 
@@ -190,7 +184,6 @@
 .b_plecebox input {
   width: 100%;
   font-size: 28rpx;
-  
   color: #8c9aa8;
 }
 
@@ -214,7 +207,7 @@
   font-size: 28rpx;
   color: #fff;
   width: 27%;
-  background-color: #BFBFBF;
+  background-color: #bfbfbf;
   display: flex;
   align-items: right;
   border-radius: 15rpx;
@@ -225,7 +218,7 @@
 
 .b_addImg:active {
   color: #9caab8;
-  background-color: #AFAFAF;
+  background-color: #afafaf;
 }
 
 .b_addImg1 {
@@ -333,12 +326,11 @@
   align-items: center;
   font-size: 30rpx;
   color: #fff;
-  
   border-radius: 15rpx;
   margin: 10rpx;
 }
 
-.tabtext{
+.tabtext {
   margin: auto;
 }
 
@@ -495,7 +487,6 @@
 
 .book_name {
   font-size: 30rpx;
-  
 }
 
 .book_author {
