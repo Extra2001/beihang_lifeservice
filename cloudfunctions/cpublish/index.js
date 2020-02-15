@@ -8,12 +8,12 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   let userinfo = event.userinfo
   let cinfo = event.cinfo
-  return (await cloud.database().collection('ccomment').doc((await cloud.database().collection('ccomment').add({
+  return (await cloud.database().collection('ccomment').add({
     data: {
       userinfo:userinfo,
       cinfo:cinfo,
       creat: new Date().getTime(),
       _openid:wxContext.OPENID
     }
-  }))._id).get()).data
+  }))
 }

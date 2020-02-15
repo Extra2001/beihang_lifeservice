@@ -16,7 +16,7 @@
       ],
       "window": {
             "backgroundColor": "#f4f4f4",
-            "backgroundTextStyle": "light",
+            "backgroundTextStyle": "dark",
             "navigationBarBackgroundColor": "#1F90FF",
             "navigationBarTitleText": "北航生活服务",
             "navigationBarTextStyle": "white"

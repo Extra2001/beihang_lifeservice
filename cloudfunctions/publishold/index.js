@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
   let userinfo =event.userinfo
   let phone= event.phone
   let qq = event.qq
-  return (await cloud.database().collection('oldgood').doc((await cloud.database().collection('oldgood').add({
+  return (await cloud.database().collection('oldgood').add({
     data:{
       img: img,
       thumb: thumb,
@@ -32,5 +32,5 @@ exports.main = async (event, context) => {
       qq: qq,
       _openid: wxContext.OPENID
     }
-  }))._id).get()).data
+  }))
 }

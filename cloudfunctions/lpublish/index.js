@@ -7,7 +7,7 @@ cloud.init()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
-  return (await cloud.database().collection('lostfound').doc((await cloud.database().collection('lostfound').add({
+  return (await cloud.database().collection('lostfound').add({
     data: {
       img: event.img,
       thumb: event.thumb,
@@ -17,5 +17,5 @@ exports.main = async (event, context) => {
       userinfo: event.userinfo,
       _openid:wxContext.OPENID
     }
-  }))._id).get()).data
+  }))
 }

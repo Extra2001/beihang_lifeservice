@@ -33,7 +33,7 @@
 
 <!--发布信息-->
 
-<view class="contain1">
+<view class="contain">
   <view class="card shadow">
     <view hidden="{{!first_title}}">
       <view class="user_box">
@@ -81,7 +81,36 @@
     </view>
   </view>
 </view>
-
+<view class="{{isAndroid?'contain2':'contain1'}}">
+<block wx:for="{{publishinfo.comment}}" wx:key="_id">
+<view class="contain">
+    <view class="card shadow">
+    <!-- <view class="title12" wx:if="{{publishinfo.comment.length==0||publishinfo.comment==undefined}}">暂无评论</view> -->
+    
+      <view class="top">
+        <view class="top1">
+          <view class="title12">
+            <image src="{{item.userinfo.avatarUrl}}"></image>
+            <view>{{item.userinfo.nickName}}</view>
+          </view>
+          <view class="date">发布于{{morejs.timelog(item.creat)}}</view>
+        </view>
+      </view>
+      <view class="center">
+        <view class="content_full">
+            <view class="book_name text-cut">
+              {{item.value}}
+            </view>
+        </view>
+      </view>
+      <view class="bottom"  wx:if="{{item._openid==thisopenid||publishinfo._openid==thisopenid}}">
+        <view class="c3 bg-red" catchtap="deleteit" data-ord="{{item}}">删除</view>
+      </view>
+      
+    </view>
+  </view>
+  </block>
+</view>
 
 
 <!--底部导航-->
@@ -93,8 +122,8 @@
   </view>
   <view class="t_card">
     <image src="/images/contact.png"></image>
-    <text>反馈</text>
-    <button class="t_button" bindtap="go" data-go="/pages/kefu/kefu"></button>
+    <text>评论</text>
+    <button class="t_button" bindtap="showComment"></button>
   </view>
   <view class="t_card">
     <image src="/images/share.png"></image>
@@ -110,3 +139,16 @@
     <view class="buy shadow" wx:if="{{showFound==true}}" bindtap="found">{{publishinfo.status==0?'我是失主':'已找到失主'}}</view>
   </view>
 </view>
+
+
+
+<!-- 评论弹出层 -->
+<van-popup show="{{cshow}}" closeable round position="bottom" bind:close="closeComment">
+<view class="commentAdd">
+<view class="palceInput_box">
+    <input bindinput="commentInput" placeholder="在这里添加您的评论..."></input>
+    
+</view>
+<view class="b_publish" bindtap="commentPub">发布</view>
+</view>
+</van-popup>

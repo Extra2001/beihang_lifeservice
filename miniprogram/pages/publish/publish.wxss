@@ -414,7 +414,6 @@
 .date {
   font-size: 28rpx;
   color: #b2b2b2;
-  
 }
 
 .title {

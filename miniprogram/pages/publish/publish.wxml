@@ -3,7 +3,9 @@
 <view class="tab_contain">
   <block wx:for="{{tab}}" wx:key="id">
     <view class="tab_one" bindtap="changeTab" data-id="{{index}}">
-      <view class="{{tabid==item.id?'tab_on':''}}"><text class="tabtext">{{item.name}}</text></view>
+      <view class="{{tabid==item.id?'tab_on':''}}">
+        <text class="tabtext">{{item.name}}</text>
+      </view>
     </view>
   </block>
 </view>
