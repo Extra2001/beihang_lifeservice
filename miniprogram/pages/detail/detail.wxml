@@ -16,14 +16,14 @@
         <image class="banner_image" src="/images/no_photo.png" mode="widthFix" />
       </view>
       <view class="title text-cut">
-      {{publishinfo.goodinfo.name}}{{publishinfo.cinfo.name}}{{publishinfo.lostinfo.name}}
+        {{publishinfo.goodinfo.name}}{{publishinfo.cinfo.name}}{{publishinfo.lostinfo.name}}
       </view>
       <view class="author  text-cut">{{publishinfo.goodinfo.desc}}{{publishinfo.cinfo.detail}}{{publishinfo.lostinfo.place}}</view>
       <view class="flex:1; price_box {{showBuy?'show':'hide'}}">
         <view class="pre_price">￥{{publishinfo.goodinfo.rawprice}}</view>
         <view class="now_price">￥{{publishinfo.goodinfo.price}}</view>
       </view>
-      
+
     </view>
 
   </view>
@@ -82,33 +82,33 @@
   </view>
 </view>
 <view class="{{isAndroid?'contain2':'contain1'}}">
-<block wx:for="{{publishinfo.comment}}" wx:key="_id">
-<view class="contain">
-    <view class="card shadow">
-    <!-- <view class="title12" wx:if="{{publishinfo.comment.length==0||publishinfo.comment==undefined}}">暂无评论</view> -->
-    
-      <view class="top">
-        <view class="top1">
-          <view class="title12">
-            <image src="{{item.userinfo.avatarUrl}}"></image>
-            <view>{{item.userinfo.nickName}}</view>
+  <block wx:for="{{publishinfo.comment}}" wx:key="_id">
+    <view class="contain">
+      <view class="card shadow">
+        <!-- <view class="title12" wx:if="{{publishinfo.comment.length==0||publishinfo.comment==undefined}}">暂无评论</view> -->
+
+        <view class="top">
+          <view class="top1">
+            <view class="title12">
+              <image src="{{item.userinfo.avatarUrl}}"></image>
+              <view>{{item.userinfo.nickName}}</view>
+            </view>
+            <view class="date">发布于{{morejs.timelog(item.creat)}}</view>
           </view>
-          <view class="date">发布于{{morejs.timelog(item.creat)}}</view>
         </view>
-      </view>
-      <view class="center">
-        <view class="content_full">
+        <view class="center">
+          <view class="content_full">
             <view class="book_name text-cut">
               {{item.value}}
             </view>
+          </view>
         </view>
+        <view class="bottom" wx:if="{{item._openid==thisopenid||publishinfo._openid==thisopenid}}">
+          <view class="c3 bg-red" catchtap="deleteit" data-ord="{{item}}">删除</view>
+        </view>
+
       </view>
-      <view class="bottom"  wx:if="{{item._openid==thisopenid||publishinfo._openid==thisopenid}}">
-        <view class="c3 bg-red" catchtap="deleteit" data-ord="{{item}}">删除</view>
-      </view>
-      
     </view>
-  </view>
   </block>
 </view>
 
@@ -140,11 +140,11 @@
 
 <!-- 评论弹出层 -->
 <van-popup show="{{cshow}}" closeable round position="bottom" bind:close="closeComment">
-<view class="commentAdd">
-<view class="palceInput_box">
-    <input bindinput="commentInput" placeholder="在这里添加您的评论..."></input>
-    
-</view>
-<view class="b_publish" bindtap="commentPub">发布</view>
-</view>
+  <view class="commentAdd">
+  
+    <view class="palceInput_box">
+      <input bindinput="commentInput" placeholder="在这里添加您的评论..."></input>
+<view class="b_publish" bindtap="commentPub">发布</view>  
+    </view>
+  </view>
 </van-popup>

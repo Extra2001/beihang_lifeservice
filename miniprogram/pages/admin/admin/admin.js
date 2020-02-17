@@ -146,11 +146,25 @@ Page({
     db.collection(dbn).where({}).orderBy('creat', 'desc').limit(20).get({
       success(re) {
         wx.stopPullDownRefresh(); //暂停刷新动作
-        if (re.data.length == 20) {
+        if (re.data.length == 0) {
+          that.setData({
+            nomore: true,
+            page: 0,
+            list: re.data
+          })
+          wx.removeStorage({
+            key: 'admin' + dbn,
+            success: function(res) {},
+          })
+        } else if (re.data.length == 20) {
           that.setData({
             nomore: false,
             page: 0,
             list: re.data
+          })
+          wx.setStorage({
+            key: 'admin' + dbn,
+            data: re.data,
           })
         } else if (re.data.length < 20) {
           that.setData({
@@ -188,12 +202,11 @@ Page({
           wx.showLoading({
             title: '正在删除',
           })
-          wx.cloud.deleteFile({
-            fileList: detail.img,
-            success: res => {
-              // handle success
-            },
-            fail: console.error
+          wx.cloud.callFunction({
+            name: "delPhoto",
+            data: {
+              fileID: detail.img
+            }
           })
           wx.cloud.callFunction({
             name: "edititem",

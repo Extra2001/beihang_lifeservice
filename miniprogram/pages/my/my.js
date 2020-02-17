@@ -167,5 +167,41 @@ Page({
         }
       }
     })
+  },
+  clearAcc(){
+    wx.showModal({
+      title: '提示',
+      content: '您真的想要清除账号内容并退出吗？该操作不可逆。',
+      success(res){
+        if(res.confirm){
+          wx.showModal({
+            title: '再次确认',
+            content: '确实要删除账号吗？',
+            success(e){
+              if(e.confirm){
+                wx.showLoading({
+                  title: '正在删除',
+                })
+                wx.cloud.callFunction({
+                  name:"clearUser",
+                  data:{
+                    openid:app.openid
+                  },
+                  success(res){
+                    wx.hideLoading()
+                    wx.showToast({
+                      title: '已清除数据',
+                    }),
+                    wx.switchTab({
+                      url: '/pages/start/start',
+                    })
+                  }
+                })
+              }
+            }
+          })
+        }
+      }
+    })
   }
 })

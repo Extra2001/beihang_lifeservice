@@ -6,16 +6,22 @@ cloud.init()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-
-  return (await cloud.database().collection('lostfound').add({
-    data: {
-      img: event.img,
-      thumb: event.thumb,
-      creat: event.creat,
-      status: event.status,
-      lostinfo: event.lostinfo,
-      userinfo: event.userinfo,
-      _openid:wxContext.OPENID
-    }
-  }))
+  if ((await cloud.openapi.security.msgSecCheck({
+    content: event.lostinfo.detail + ' ' + event.lostinfo.name + ' ' + event.lostinfo.place
+  })).errCode == 0) {
+    return (await cloud.database().collection('lostfound').add({
+      data: {
+        img: event.img,
+        thumb: event.thumb,
+        creat: event.creat,
+        status: event.status,
+        lostinfo: event.lostinfo,
+        userinfo: event.userinfo,
+        _openid: wxContext.OPENID
+      }
+    }))
+  }
+  else {
+    return "risky"
+  }
 }

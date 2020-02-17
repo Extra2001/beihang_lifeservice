@@ -3,10 +3,46 @@ const db = wx.cloud.database();
 const config = require("../../config.js");
 const _ = db.command;
 Page({
+  data: {
+    flag: false
+  },
   onLoad: function(option) {
+    var flag = false;
+    if (option.scene != undefined) {
+      flag = true;
+      this.setData({
+        id: e.scene,
+        func: e.func,
+        flag: true
+      })
+    }
     let that = this
     wx.showLoading({
       title: '加载中',
+    })
+    wx.removeStorage({
+      key: 'oldgood',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'myoldgood',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'ccomment',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'myccomment',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'lostfound',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'mylostfound',
+      success: function(res) {},
     })
     wx.getUserInfo({
       withCredentials: true,
@@ -25,9 +61,15 @@ Page({
               app.openid = res.result.data[0]._openid;
               app.campus = res.result.data[0].campus;
               wx.hideLoading()
-              wx.switchTab({
-                url: '/pages/index/index',
-              })
+              if (flag) {
+                wx.switchTab({
+                  url: '/pages/detail/detail?scene=' + that.data.id + '&func' + that.data.func,
+                })
+              } else {
+                wx.switchTab({
+                  url: '/pages/index/index',
+                })
+              }
             }
           }
         })
@@ -66,9 +108,15 @@ Page({
             wx.showToast({
               title: '登录成功',
             })
-            wx.switchTab({
-              url: '/pages/index/index',
-            })
+            if (that.data.flag) {
+              wx.switchTab({
+                url: '/pages/detail/detail?scene=' + that.data.id + '&func' + that.data.func,
+              })
+            } else {
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
+            }
           }
         }
       })

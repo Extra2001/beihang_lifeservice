@@ -15,7 +15,7 @@ Page({
   onLoad(e) {
     if (getApp().openid.length == 0) {
       wx.switchTab({
-        url: '/pages/start/start',
+        url: '/pages/start/start?scene=' + e.scene + '&func=' + e.func,
       })
     }
     let that = this
@@ -233,28 +233,9 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: '这本《' + this.data.bookinfo.title + '》只要￥' + this.data.publishinfo.price + '元，快来看看吧',
-      path: '/pages/detail/detail?scene=' + this.data.publishinfo._id,
+      title: '北航生活服务——详情页',
+      path: '/pages/detail/detail?scene=' + this.data.publishinfo._id + '&func=' + this.data.func,
     }
-  },
-  //生成海报
-  creatPoster() {
-    let that = this;
-    let pubInfo = {
-      id: that.data.publishinfo._id,
-      name: that.data.publishinfo.bookinfo.title,
-      pic: that.data.publishinfo.bookinfo.pic.replace('http', 'https'),
-      origin: that.data.publishinfo.bookinfo.price,
-      now: that.data.publishinfo.price,
-    }
-    wx.navigateTo({
-      url: "/pages/poster/poster?bookinfo=" + JSON.stringify(pubInfo)
-    })
-  },
-  preview() {
-    wx.previewImage({
-      urls: this.data.publishinfo.img // 需要预览的图片http链接列表
-    })
   },
   showComment() {
     this.setData({
@@ -275,6 +256,7 @@ Page({
     if (this.data.commentValue.length == 0) {
       wx.showToast({
         title: '输入的内容不能为空',
+        icon: 'none'
       });
       return;
     }
@@ -314,12 +296,19 @@ Page({
         that.getPublish(that.data.id);
       },
       fail: function(res) {
-        console.log(res);
         wx.hideLoading();
-        wx.showToast({
-          title: '发布失败',
-          icon: 'none'
-        })
+        if (("" + res).indexOf("errCode: 87014") != -1) {
+          wx.showToast({
+            title: '含有违法信息',
+            icon: 'none'
+          })
+          return;
+        } else {
+          wx.showToast({
+            title: '发布失败',
+            icon: 'none'
+          })
+        }
       }
     })
   },
@@ -341,7 +330,6 @@ Page({
             }
           }
           if (flag == -1) {
-            console.log(flag)
             wx.hideLoading();
             wx.showToast({
               title: '删除失败',
@@ -390,5 +378,10 @@ Page({
       }
     })
 
+  },
+  commentCancel() {
+    this.setData({
+      cshow: false
+    })
   }
 })

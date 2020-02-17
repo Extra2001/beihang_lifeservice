@@ -302,9 +302,33 @@ Page({
     })
     let thumbid = -1
     let files = []
+    let flag = true;
     let promiseArr = []
     for (let i = 0; i < this.data.grids.length; i++) {
       let filePath = that.data.grids[i]
+      wx.getFileSystemManager().readFile({
+        filePath: filePath,
+        success(res) {
+          wx.cloud.callFunction({
+            name: "checkImg",
+            data: {
+              buffer: res.data
+            },
+            success(e) {
+              if (e.result == "ok") {}
+            },
+            fail(e) {
+              wx.hideLoading()
+              wx.showToast({
+                title: '图片违法',
+                icon: 'none'
+              })
+              flag = false;
+              return;
+            }
+          })
+        }
+      })
       //在每次上传的时候，就往promiseArr里存一个promise，只有当所有的都返回结果时，才可以继续往下执行
       promiseArr.push(new Promise((reslove, reject) => {
         wx.cloud.uploadFile({
@@ -322,7 +346,13 @@ Page({
       }))
     }
     Promise.all(promiseArr).then(res => {
-      that.updateDatabase(files, thumbid)
+      if (flag) {
+        that.updateDatabase(files, thumbid)
+      } else {
+        wx.cloud.deleteFile({
+          fileList: files
+        })
+      }
     })
   },
   updateDatabase(files, thumbid) {
@@ -349,11 +379,34 @@ Page({
           show_c: true,
           detail_id: res.result._id,
         })
+        wx.removeStorage({
+          key: 'oldgood',
+          success: function(res) {},
+        })
+        wx.removeStorage({
+          key: 'myoldgood',
+          success: function(res) {},
+        })
         wx.pageScrollTo({
           scrollTop: 0,
         })
         wx.hideLoading()
         //滚动到顶部
+      },
+      fail(res) {
+        wx.hideLoading()
+        if (("" + res).indexOf("errCode: 87014") != -1) {
+          wx.showToast({
+            title: '含有违法信息',
+            icon: 'none'
+          })
+          return;
+        } else {
+          wx.showToast({
+            title: '发布失败',
+            icon: 'none'
+          })
+        }
       }
     })
   },
@@ -391,14 +444,13 @@ Page({
         name: '',
         teacher: '',
         detail: '',
-        show_cc: false,
-        show_course: true,
-        show_ershow: false,
-        show_c: false,
-        show_losta: false,
-        show_cl: false,
-
       },
+      show_cc: false,
+      show_course: true,
+      show_ershow: false,
+      show_c: false,
+      show_losta: false,
+      show_cl: false,
       cdetail_counts: 0,
     })
   },
@@ -462,10 +514,33 @@ Page({
           show_course: false,
           detail_id: res.result._id,
         })
+        wx.removeStorage({
+          key: 'ccomment',
+          success: function(res) {},
+        })
+        wx.removeStorage({
+          key: 'myccomment',
+          success: function(res) {},
+        })
         wx.pageScrollTo({
           scrollTop: 0,
         })
         wx.hideLoading()
+      },
+      fail(res) {
+        wx.hideLoading()
+        if (("" + res).indexOf("errCode: 87014") != -1) {
+          wx.showToast({
+            title: '含有违法信息',
+            icon: 'none'
+          })
+          return;
+        } else {
+          wx.showToast({
+            title: '发布失败',
+            icon: 'none'
+          })
+        }
       }
     })
   },
@@ -550,9 +625,33 @@ Page({
     })
     let thumbid = -1
     let files = []
+    let flag = true;
     let promiseArr = []
     for (let i = 0; i < this.data.grids.length; i++) {
       let filePath = that.data.grids[i]
+      wx.getFileSystemManager().readFile({
+        filePath: filePath,
+        success(res) {
+          wx.cloud.callFunction({
+            name: "checkImg",
+            data: {
+              buffer: res.data
+            },
+            success(e) {
+              if (e.result == "ok") {}
+            },
+            fail(e) {
+              wx.hideLoading()
+              wx.showToast({
+                title: '图片违法',
+                icon:'none'
+              })
+              flag = false;
+              return;
+            }
+          })
+        }
+      })
       //在每次上传的时候，就往promiseArr里存一个promise，只有当所有的都返回结果时，才可以继续往下执行
       promiseArr.push(new Promise((reslove, reject) => {
         wx.cloud.uploadFile({
@@ -570,28 +669,58 @@ Page({
       }))
     }
     Promise.all(promiseArr).then(res => {
-      wx.cloud.callFunction({
-        name: "lpublish",
-        data: {
-          img: files,
-          thumb: files[thumbid],
-          creat: new Date().getTime(),
-          status: 0, //0未找到；1已找到
-          lostinfo: that.data.lostinfo,
-          userinfo: app.userinfo,
-        },
-        success: function(res) {
-          that.setData({
-            show_losta: false,
-            show_cl: true,
-            detail_id: res.result._id,
-          })
-          wx.pageScrollTo({
-            scrollTop: 0,
-          })
-          wx.hideLoading()
-        }
-      })
+      if (flag) {
+        wx.cloud.callFunction({
+          name: "lpublish",
+          data: {
+            img: files,
+            thumb: files[thumbid],
+            creat: new Date().getTime(),
+            status: 0, //0未找到；1已找到
+            lostinfo: that.data.lostinfo,
+            userinfo: app.userinfo,
+          },
+          success: function (res) {
+            that.setData({
+              show_losta: false,
+              show_cl: true,
+              detail_id: res.result._id,
+            })
+            wx.removeStorage({
+              key: 'lostfound',
+              success: function (res) { },
+            })
+            wx.removeStorage({
+              key: 'mylostfound',
+              success: function (res) { },
+            })
+            wx.pageScrollTo({
+              scrollTop: 0,
+            })
+            wx.hideLoading()
+          },
+          fail(res) {
+            wx.hideLoading()
+            if (("" + res).indexOf("errCode: 87014") != -1) {
+              wx.showToast({
+                title: '含有违法信息',
+                icon: 'none'
+              })
+              return;
+            } else {
+              wx.showToast({
+                title: '发布失败',
+                icon: 'none'
+              })
+            }
+          }
+        })
+      } else {
+        wx.cloud.deleteFile({
+          fileList: files
+        })
+      }
+      
     })
   }
 })

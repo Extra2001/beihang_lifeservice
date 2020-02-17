@@ -108,7 +108,7 @@ Page({
           options: 'i',
         })
       }
-    ])).orderBy('creat', 'desc').limit(5).get({
+    ])).orderBy('creat', 'desc').limit(20).get({
       success(e) {
         wx.hideLoading();
         if (e.data.length < 20) {
@@ -140,7 +140,7 @@ Page({
           options: 'i',
         })
       }
-    ])).orderBy('creat', 'desc').limit(5).get({
+    ])).orderBy('creat', 'desc').limit(20).get({
       success(e) {
         wx.hideLoading();
         if (e.data.length < 20) {
@@ -172,7 +172,7 @@ Page({
           options: 'i',
         })
       }
-    ])).orderBy('creat', 'desc').limit(5).get({
+    ])).orderBy('creat', 'desc').limit(20).get({
       success(e) {
         wx.hideLoading();
         if (e.data.length < 20) {
@@ -198,6 +198,11 @@ Page({
       success(res) {
         let oldarr = JSON.parse(res.data); //字符串转数组
         let newa = [key]; //对象转为数组
+        for (var i = 0; i < oldarr.length; i++) { //判断是否存在
+          if (oldarr[i] == key) {
+            return;
+          }
+        }
         let newarr = JSON.stringify(newa.concat(oldarr)); //连接数组\转字符串
         wx.setStorage({
           key: 'history',

@@ -49,6 +49,10 @@ Page({
               nomore: true,
               list: [],
             })
+            wx.removeStorage({
+              key: 'oldgood',
+              success: function(res) {},
+            })
             return false;
           }
           if (res.data.length < 20) {
@@ -61,6 +65,7 @@ Page({
               key: 'oldgood',
               data: res.data,
             })
+
           } else {
             that.setData({
               page: 0,
@@ -82,6 +87,10 @@ Page({
             that.setData({
               nomore: true,
               list: [],
+            })
+            wx.removeStorage({
+              key: 'ccomment',
+              success: function(res) {},
             })
             return false;
           }
@@ -106,6 +115,7 @@ Page({
               key: 'ccomment',
               data: res.data,
             })
+
           }
         }
       })
@@ -117,6 +127,10 @@ Page({
             that.setData({
               nomore: true,
               list: [],
+            })
+            wx.removeStorage({
+              key: 'lostfound',
+              success: function(res) {},
             })
             return false;
           }
@@ -363,5 +377,4 @@ Page({
       path: '/pages/start/start'
     }
   },
-
 })

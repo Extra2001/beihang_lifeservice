@@ -137,11 +137,25 @@ Page({
     }).orderBy('creat', 'desc').limit(20).get({
       success(re) {
         wx.stopPullDownRefresh(); //暂停刷新动作
-        if (re.data.length == 20) {
+        if (re.data.length == 0) {
+          that.setData({
+            nomore: true,
+            page: 0,
+            list: re.data
+          })
+          wx.removeStorage({
+            key: 'my' + dbn,
+            success: function(res) {},
+          })
+        } else if (re.data.length == 20) {
           that.setData({
             nomore: false,
             page: 0,
             list: re.data
+          })
+          wx.setStorage({
+            key: 'my' + dbn,
+            data: re.data,
           })
         } else if (re.data.length < 20) {
           that.setData({
