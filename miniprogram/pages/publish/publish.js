@@ -400,11 +400,16 @@ Page({
             title: '含有违法信息',
             icon: 'none'
           })
-          return;
+          wx.cloud.deleteFile({
+            fileList: files
+          })
         } else {
           wx.showToast({
             title: '发布失败',
             icon: 'none'
+          })
+          wx.cloud.deleteFile({
+            fileList: files
           })
         }
       }
@@ -706,11 +711,17 @@ Page({
                 title: '含有违法信息',
                 icon: 'none'
               })
+              wx.cloud.deleteFile({
+                fileList: files
+              })
               return;
             } else {
               wx.showToast({
                 title: '发布失败',
                 icon: 'none'
+              })
+              wx.cloud.deleteFile({
+                fileList: files
               })
             }
           }
