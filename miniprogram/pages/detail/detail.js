@@ -9,13 +9,6 @@ Page({
     commentValue: '',
 
   },
-  onPageScroll: function(e) {
-    if (e.scrollTop < 0) {
-      wx.pageScrollTo({
-        scrollTop: 0
-      })
-    }
-  },
   onPullDownRefresh() {
     this.getPublish(this.data.id);
   },
@@ -344,7 +337,8 @@ Page({
             })
             return;
           }
-          let arr = that.data.publishinfo.comment.splice(flag, 1);
+          let arr = that.data.publishinfo.comment
+          arr.splice(flag, 1);
           let dbn = 0;
           if (that.data.func == 'old') {
             dbn = 0
