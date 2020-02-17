@@ -208,6 +208,20 @@ Page({
               wx.showToast({
                 title: '已删除',
               })
+              let dbn = ''
+              if (that.data.tabid == 0) {
+                dbn = 'oldgood'
+              }
+              else if (that.data.tabid == 1) {
+                dbn = 'ccomment'
+              }
+              else if (that.data.tabid == 2) {
+                dbn = 'lostfound'
+              }
+              wx.removeStorage({
+                key: dbn,
+                success: function(res) {},
+              })
             },
             fail(res) {
               console.log(res)
