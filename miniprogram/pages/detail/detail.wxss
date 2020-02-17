@@ -323,8 +323,9 @@
   border: 1rpx solid #eee;
   border-radius: 10rpx;
   font-size: 26rpx;
-  margin: 0 5px 0 5px;
-  flex:4
+  margin: 0 10rpx 0 10rpx;
+  flex:4;
+  padding-left: 10rpx;
 }
 
 .detail_contain {

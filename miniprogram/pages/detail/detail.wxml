@@ -5,10 +5,10 @@
 <view class="contain">
   <view class="card shadow">
     <view class="top_contain">
-      <swiper wx:if="{{publishinfo.img.length!=0&&showC==false}}" class="banner" indicator-dots autoplay indicator-active-color="#1F90FF" circular bindtap="preview">
+      <swiper wx:if="{{publishinfo.img.length!=0&&showC==false}}" class="banner" indicator-dots autoplay indicator-active-color="#1F90FF" circular>
         <block wx:for="{{publishinfo.img}}" wx:key="id">
           <swiper-item>
-            <image lazy-load src="{{item}}" class="banner_image" mode="widthFix" />
+            <image lazy-load src="{{item}}" class="banner_image" mode="widthFix" bindtap="preview" data-img="{{item}}" />
           </swiper-item>
         </block>
       </swiper>

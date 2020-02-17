@@ -9,6 +9,13 @@ Page({
     commentValue: '',
 
   },
+  onPageScroll: function(e) {
+    if (e.scrollTop < 0) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    }
+  },
   onPullDownRefresh() {
     this.getPublish(this.data.id);
   },
@@ -382,6 +389,13 @@ Page({
   commentCancel() {
     this.setData({
       cshow: false
+    })
+  },
+  preview(e) {
+    let that = this
+    wx.previewImage({
+      urls: that.data.publishinfo.img,
+      current: e.currentTarget.dataset.img
     })
   }
 })

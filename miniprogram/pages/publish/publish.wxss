@@ -457,6 +457,7 @@
 .center image {
   width: 130rpx;
   height: 130rpx;
+  border-radius: 15rpx;
 }
 
 .content {

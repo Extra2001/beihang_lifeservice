@@ -4,7 +4,6 @@ const config = require("../../config.js");
 Page({
   data: {
     systeminfo: app.systeminfo,
-    setInter: '',
     entime: {
       enter: 600,
       leave: 300
@@ -27,6 +26,9 @@ Page({
   //切换标签页
   changeTab(e) {
     let that = this;
+    if (this.data.tabid == e.currentTarget.dataset.id) {
+      return;
+    }
     that.setData({
       tabid: e.currentTarget.dataset.id
     })
@@ -42,7 +44,6 @@ Page({
         show_cc: false,
         show_cl: false
       })
-      this.updateErshow()
     } else if (e.currentTarget.dataset.id == 1) {
       that.setData({
         show_course: true,
@@ -52,7 +53,6 @@ Page({
         show_cc: false,
         show_cl: false
       })
-      this.endSetInter()
     } else if (e.currentTarget.dataset.id == 2) {
       that.setData({
         show_losta: true,
@@ -62,23 +62,7 @@ Page({
         show_cc: false,
         show_cl: false
       })
-      this.endSetInter()
-      this.updateLosta()
-      this.linitial()
     }
-  },
-  onShow: function() {
-
-    if (this.data.tabid == 0) {
-      this.updateErshow()
-    } else if (this.data.tabid == 1) {
-
-    } else if (this.data.tabid == 2) {
-      this.updateLosta()
-    }
-  },
-  onHide: function() {
-    this.endSetInter()
   },
   //恢复初始态
   initial() {
@@ -119,11 +103,10 @@ Page({
         campus: app.campus.name
       }
     })
-    this.updateErshow()
   },
   onLoad() {
     if (getApp().openid.length == 0) {
-      wx.switchTab({
+      wx.redirectTo({
         url: '/pages/start/start',
       })
     }
@@ -133,32 +116,46 @@ Page({
     this.initial();
   },
   bNameInput(e) {
-    this.data.goodinfo.name = e.detail.value
+    this.setData({
+      "goodinfo.name": e.detail.value
+    })
   },
   //价格输入改变
   rawPriceChange(e) {
-    this.data.goodinfo.rawprice = e.detail.value
+    this.setData({
+      "goodinfo.rawprice": e.detail.value
+    })
   },
   //价格输入改变
   priceChange(e) {
-    this.data.goodinfo.price = e.detail.value
+    this.setData({
+      "goodinfo.price": e.detail.value
+    })
   },
   //发布时长输入改变
   duraChange(e) {
-    this.data.dura = e.detail;
+    this.setData({
+      dura: e.detail
+    })
   },
   //地址输入
   placeInput(e) {
-    this.data.place = e.detail.value
+    this.setData({
+      place: e.detail.value
+    })
   },
   //手机号输入
   phoneInput(e) {
-    this.data.phone = e.detail.value
-  },
-  qqInput(e) {
-    this.data.qq = e.detail.value
+    this.setData({
+      phone: e.detail.value
+    })
   },
   //QQ号输入
+  qqInput(e) {
+    this.setData({
+      qq: e.detail.value
+    })
+  },
   //取货方式改变
   delChange(e) {
     let that = this;
@@ -182,18 +179,26 @@ Page({
   },
   //输入备注
   noteInput(e) {
-    this.data.goodinfo.detail = e.detail.value
+    this.setData({
+      "goodinfo.detail": e.detail.value
+    })
     if (this.data.note_counts > 45) {
-      this.data.goodinfo.desc = this.data.goodinfo.detail.substring(0, 44) + "..."
+      this.setData({
+        "goodinfo.desc": this.data.goodinfo.detail.substring(0, 44) + "..."
+      })
     } else {
-      this.data.goodinfo.desc = this.data.goodinfo.detail
+      this.setData({
+        "goodinfo.desc": this.data.goodinfo.detail
+      })
     }
     this.setData({
       note_counts: e.detail.cursor,
     })
   },
   linkInput(e) {
-    this.data.goodinfo.xianyulink = e.detail.value
+    this.setData({
+      "goodinfo.xianyulink": e.detail.value
+    })
   },
   chooseImg() {
     let that = this
@@ -221,7 +226,6 @@ Page({
   },
   async selectPhoto(e) {
     let that = this
-
     let selectedindex = e.currentTarget.dataset.bindex
     await wx.showActionSheet({
       itemList: ['作为缩略图', '删除图片'],
@@ -238,9 +242,10 @@ Page({
     })
   },
   delPhoto(index) {
-    this.data.grids.splice(index, 1)
-    wx.showLoading({
-      title: '正在删除',
+    let tmp = this.data.grids
+    tmp.splice(index, 1)
+    this.setData({
+      grids: tmp
     })
   },
   thumbPhoto(index) {
@@ -296,7 +301,6 @@ Page({
   //正式发布
   publish() {
     let that = this;
-    this.endSetInter()
     wx.showLoading({
       title: '正在发布',
     })
@@ -421,28 +425,7 @@ Page({
       url: '/pages/detail/detail?scene=' + that.data.detail_id + '&func=old',
     })
   },
-  //二手商品页面数据更新
-  updateErshow: function() {
-    var that = this;
-    //将计时器赋值给setInter
-    that.data.setInter = setInterval(
-      function() {
-        wx.hideLoading()
-        that.setData({
-          dura: that.data.dura,
-          place: that.data.place,
-          chooseDelivery: that.data.chooseDelivery,
-          note_counts: that.data.note_counts,
-          goodinfo: that.data.goodinfo,
-          grids: that.data.grids
-        })
-      }, 3000);
-  },
-  //结束更新
-  endSetInter: function() {
-    var that = this;
-    clearInterval(that.data.setInter)
-  },
+
   initialc() {
     this.setData({
       cinfo: {
@@ -460,15 +443,15 @@ Page({
     })
   },
   cNameInput(e) {
-    this.data.cinfo.name = e.detail.value
+    this.setData({"cinfo.name" : e.detail.value})
   },
   teacherInput(e) {
-    this.data.cinfo.teacher = e.detail.value
+    this.setData({"cinfo.teacher": e.detail.value})
   },
   commentInput(e) {
-    this.data.cinfo.detail = e.detail.value
     this.setData({
-      cdetail_counts: e.detail.value.length
+      cdetail_counts: e.detail.value.length,
+      "cinfo.detail" : e.detail.value
     })
   },
   detailc() {
@@ -570,36 +553,22 @@ Page({
     })
   },
   lNameInput(e) {
-    this.data.lostinfo.name = e.detail.value
+    this.setData({"lostinfo.name" : e.detail.value})
   },
   lPlaceInput(e) {
-    this.data.lostinfo.place = e.detail.value
+    this.setData({"lostinfo.place" : e.detail.value})
   },
   lPhoneInput(e) {
-    this.data.lostinfo.phone = e.detail.value
+    this.setData({"lostinfo.phone" : e.detail.value})
   },
   lqqInput(e) {
-    this.data.lostinfo.qq = e.detail.value
+    this.setData({"lostinfo.qq" : e.detail.value})
   },
   lNoteInput(e) {
-    this.data.lostinfo.detail = e.detail.value
     this.setData({
       note_counts: e.detail.cursor,
+      "lostinfo.detail" :e.detail.value
     })
-  },
-  updateLosta() {
-    var that = this;
-    //将计时器赋值给setInter
-    that.data.setInter = setInterval(
-      function() {
-        wx.hideLoading()
-        that.setData({
-          note_counts: that.data.note_counts,
-          lostinfo: that.data.lostinfo,
-          grids: that.data.grids,
-          thumb: that.data.thumb
-        })
-      }, 3000);
   },
   lpub() {
     if (this.data.lostinfo.name.length == 0) {
@@ -624,7 +593,6 @@ Page({
       return false;
     }
     let that = this;
-    this.endSetInter()
     wx.showLoading({
       title: '正在发布',
     })
@@ -649,7 +617,7 @@ Page({
               wx.hideLoading()
               wx.showToast({
                 title: '图片违法',
-                icon:'none'
+                icon: 'none'
               })
               flag = false;
               return;
@@ -685,7 +653,7 @@ Page({
             lostinfo: that.data.lostinfo,
             userinfo: app.userinfo,
           },
-          success: function (res) {
+          success: function(res) {
             that.setData({
               show_losta: false,
               show_cl: true,
@@ -693,11 +661,11 @@ Page({
             })
             wx.removeStorage({
               key: 'lostfound',
-              success: function (res) { },
+              success: function(res) {},
             })
             wx.removeStorage({
               key: 'mylostfound',
-              success: function (res) { },
+              success: function(res) {},
             })
             wx.pageScrollTo({
               scrollTop: 0,
@@ -731,7 +699,7 @@ Page({
           fileList: files
         })
       }
-      
+
     })
   }
 })

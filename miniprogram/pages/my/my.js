@@ -7,7 +7,7 @@ Page({
   },
   onLoad() {
     if (getApp().openid.length == 0) {
-      wx.switchTab({
+      wx.redirectTo({
         url: '/pages/start/start',
       })
     }
@@ -188,13 +188,20 @@ Page({
                     openid:app.openid
                   },
                   success(res){
+                    console.log(res)
                     wx.hideLoading()
                     wx.showToast({
                       title: '已清除数据',
                     }),
-                    wx.switchTab({
+                    app.campus =''
+                    app.userinfo=''
+                    app.openid=''
+                    wx.redirectTo({
                       url: '/pages/start/start',
                     })
+                  },
+                  fail(res){
+                    console.log(res)
                   }
                 })
               }

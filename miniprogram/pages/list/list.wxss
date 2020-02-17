@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  background-color: #1F90FF;
+  background-color: #1f90ff;
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
   box-shadow: 0px 5px 5px #888;
@@ -23,16 +23,16 @@
 
 .tab_one view {
   height: 100%;
-  width:100%;
+  width: 100%;
   display: flex;
   text-align: center;
   align-items: center;
   font-size: 30rpx;
-  color:#fff;
+  color: #fff;
   border-radius: 15rpx;
   margin: 10rpx;
-
 }
+
 .tab_one text {
   margin: auto;
 }
@@ -40,260 +40,259 @@
 .tab_on {
   font-size: 32rpx;
   font-weight: 600;
-  background-color: #0f80ef
+  background-color: #0f80ef;
 }
 
-
 .list_rawprice {
-        font-size: 27rpx;
-      color: #aaaaab;
-      text-decoration:line-through;
+  font-size: 27rpx;
+  color: #aaaaab;
+  text-decoration: line-through;
 }
 
 .c1 {
-      width: 220rpx;
-      height: 50rpx;
-      border-radius: 10rpx;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 26rpx;
-      
-      margin-left: 20rpx;
+  width: 220rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  margin-left: 20rpx;
 }
 
 .c3 {
-      width: 120rpx;
-      height: 50rpx;
-      border-radius: 10rpx;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 26rpx;
-      
-      margin-left: 20rpx;
+  width: 120rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  margin-left: 20rpx;
 }
 
 .bg-grey {
-      background: #eee;
+  background: #eee;
 }
 
 .bg-yellow {
-      background: #1F90FF;
-      color: #fff;
+  background: #1f90ff;
+  color: #fff;
 }
+
 .bg-red {
-      background: red;
-      color: #fff;
+  background: red;
+  color: #fff;
 }
+
 .c2 {
-      width: 200rpx;
-      height:53rpx;
-      border-radius: 10rpx;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 26rpx;
-      letter-spacing: 4rpx;
-      margin-left: 20rpx;
-      background: #ff0000;
-      color: #fff;
+  width: 200rpx;
+  height: 53rpx;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  letter-spacing: 4rpx;
+  margin-left: 20rpx;
+  background: #f00;
+  color: #fff;
 }
 
 .contain {
-      width: 100%;
-      padding: 24rpx;
-      display: flex;
-      box-sizing: border-box;
-      flex-direction: column;
-      
+  width: 100%;
+  padding: 24rpx;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
 }
 
 .card {
-      width: 100%;
-      padding: 30rpx;
-      display: flex;
-      box-sizing: border-box;
-      border-radius: 15rpx;
-      margin-bottom: 30rpx;
-      flex-direction: column;
-      background-color: #fff;
+  width: 100%;
+  padding: 30rpx;
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+  flex-direction: column;
+  background-color: #fff;
 }
 
 .top {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 20rpx;
-      border-bottom: 1rpx solid #eee;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
 }
-.text-red{
-      color: #f80202;
+
+.text-red {
+  color: #f80202;
 }
+
 .top1 {
-      display: flex;
-      width: 100%;
-      align-items: center;
-      justify-content: space-between;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .date {
-      font-size: 28rpx;
-      color: #b2b2b2;
-      
+  font-size: 28rpx;
+  color: #b2b2b2;
 }
 
 .title {
-      display: flex;
-      align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .title image {
-      width: 36rpx;
-      height: 36rpx;
+  width: 36rpx;
+  height: 36rpx;
 }
 
 .title view {
-      padding-left: 10rpx;
-      letter-spacing: 3rpx;
-      font-size: 30rpx;
-      font-weight: 600;
+  padding-left: 10rpx;
+  letter-spacing: 3rpx;
+  font-size: 30rpx;
+  font-weight: 600;
 }
 
 .del {
-      display: flex;
-      align-items: center;
-      border: 1rpx solid #c2c2c2;
-      border-radius: 20rpx;
-      padding: 0 10rpx;
-      box-sizing: border-box;
-      height: 40rpx;
+  display: flex;
+  align-items: center;
+  border: 1rpx solid #c2c2c2;
+  border-radius: 20rpx;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  height: 40rpx;
 }
 
 .del image {
-      width: 28rpx;
-      height: 28rpx;
+  width: 28rpx;
+  height: 28rpx;
 }
 
 .del view {
-      font-size: 26rpx;
-      color: #c2c2c2;
-      letter-spacing: 3rpx;
+  font-size: 26rpx;
+  color: #c2c2c2;
+  letter-spacing: 3rpx;
 }
 
 .center {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 20rpx 0;
-      border-bottom: 1rpx solid #eee;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
 }
 
 .center image {
-      width: 130rpx;
-      height: 130rpx;
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 15rpx;
 }
 
 .content {
-      width: calc(100% - 130rpx);
-      padding: 0 20rpx;
-      height: 130rpx;
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-      justify-content: space-between;
+  width: calc(100% - 130rpx);
+  padding: 0 20rpx;
+  height: 130rpx;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: space-between;
 }
+
 .content_full {
-      width: 100%;
-      padding: 0 20rpx;
-      height: 80rpx;
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-      justify-content: space-between;
+  width: 100%;
+  padding: 0 20rpx;
+  height: 80rpx;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: space-between;
 }
 
 .book {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .book_name {
-      font-size: 30rpx;
-      
+  font-size: 30rpx;
 }
 
 .book_author {
-      padding-top: 10rpx;
-      font-size: 26rpx;
-      letter-spacing: 3rpx;
-      color: #c2c2c2;
+  padding-top: 10rpx;
+  font-size: 26rpx;
+  letter-spacing: 3rpx;
+  color: #c2c2c2;
 }
 
 .price {
-      display: flex;
-      justify-content: flex-end;
-      font-size: 32rpx;
-      color: #f80202;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 32rpx;
+  color: #f80202;
 }
 
 .bottom {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      padding: 20rpx 0 0 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20rpx 0 0 0;
 }
 
 .cancel {
-      width: 110rpx;
-      font-size: 26rpx;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 20rpx;
-      height: 50rpx;
-      border-radius: 25rpx;
-      color: #c2c2c2;
-      border: 1rpx solid #c2c2c2;
-      margin-left: 20rpx;
+  width: 110rpx;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+  color: #c2c2c2;
+  border: 1rpx solid #c2c2c2;
+  margin-left: 20rpx;
 }
 
 .confirm {
-      width: 110rpx;
-      font-size: 26rpx;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 20rpx;
-      height: 50rpx;
-      border-radius: 25rpx;
-      color: #1F90FF;
-      border: 1rpx solid #1F90FF;
-      margin-left: 20rpx;
+  width: 110rpx;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+  color: #1f90ff;
+  border: 1rpx solid #1f90ff;
+  margin-left: 20rpx;
 }
 
 .nocontent {
-      width: 100%;
-      height: calc(100% - 90rpx);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      box-sizing: border-box;
+  width: 100%;
+  height: calc(100% - 90rpx);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .nocontent image {
-      padding-left: 80rpx;
-      width: 340rpx;
-      height: 272rpx;
+  padding-left: 80rpx;
+  width: 340rpx;
+  height: 272rpx;
 }
 
 .blank_text {
-      padding-top: 40rpx;
-      font-size: 32rpx;
-      
-      color: #c6c6c8;
+  padding-top: 40rpx;
+  font-size: 32rpx;
+  color: #c6c6c8;
 }

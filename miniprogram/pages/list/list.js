@@ -89,7 +89,7 @@ Page({
   },
   onLoad() {
     if (getApp().openid.length == 0) {
-      wx.switchTab({
+      wx.redirectTo({
         url: '/pages/start/start',
       })
     }

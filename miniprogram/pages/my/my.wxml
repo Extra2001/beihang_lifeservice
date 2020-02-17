@@ -79,8 +79,8 @@
         </view>
         <image src="/images/go.png"></image>
       </view>
-      <view class="border1" wx:if="{{!openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}"></view>
-      <view class="bottom_card" bindtap="clearAcc" wx:if="{{!openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}">
+      <view class="border1" wx:if="{{!(openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c')}}"></view>
+      <view class="bottom_card" bindtap="clearAcc" wx:if="{{!(openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c')}}">
         <view class="bottom_1">
           <image src="/images/trash.png"></image>
           <view class="bg_red">清空账号数据并退出</view>
