@@ -289,10 +289,9 @@ Page({
           title: '发布成功',
         })
         that.setData({
+          commentValue: '',
           cshow: false,
-          commentValue: ''
         })
-
         that.getPublish(that.data.id);
       },
       fail: function(res) {

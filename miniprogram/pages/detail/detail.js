@@ -284,15 +284,14 @@ Page({
         id: that.data.id
       },
       success: function(res) {
-        wx.hideLoading();
-        wx.showToast({
-          title: '发布成功',
-        })
         that.setData({
           cshow: false,
           commentValue: ''
         })
-
+        wx.hideLoading();
+        wx.showToast({
+          title: '发布成功',
+        })
         that.getPublish(that.data.id);
       },
       fail: function(res) {
