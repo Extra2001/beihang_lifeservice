@@ -46,7 +46,7 @@
 }
 
 .top_1_2 {
-  margin: 25rpx 0px 0px 0px;
+  margin: 21rpx 0px 0px 0px;
   font-size: 30rpx;
   color: #919191;
   line-height: 42rpx;

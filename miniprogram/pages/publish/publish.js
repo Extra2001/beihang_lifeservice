@@ -204,7 +204,7 @@ Page({
     let that = this
     wx.showModal({
       title: '提示',
-      content: '由于云存储空间的限制，最多允许上传6张照片，请一次选择全部照片',
+      content: '由于云存储空间的限制，最多允许上传6张照片，请一次选择全部照片，并尽量保证图片长宽比相同',
       showCancel: false,
       success(res) {
         wx.chooseImage({

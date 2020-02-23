@@ -7,7 +7,7 @@ Page({
     first_title: true,
     cshow: false,
     commentValue: '',
-
+    isFocus: false,
   },
   onPullDownRefresh() {
     this.getPublish(this.data.id);
@@ -18,6 +18,7 @@ Page({
         url: '/pages/start/start?scene=' + e.scene + '&func=' + e.func,
       })
     }
+    
     let that = this
     wx.getSystemInfo({
       success: function(res) {
@@ -54,6 +55,7 @@ Page({
       id: e.scene
     })
     this.getPublish(e.scene);
+    
     this.setData({
       thisopenid: getApp().openid,
     })
@@ -68,6 +70,9 @@ Page({
             publishinfo: res.data,
             userinfo: res.data.userinfo
           })
+          if(res.data.img.length!=0){
+            that.setSwiperHeight(res.data.img[0])
+          }
         }
       })
     } else if (this.data.func == 'ccomm') {
@@ -86,6 +91,9 @@ Page({
             publishinfo: res.data,
             userinfo: res.data.userinfo
           })
+          if (res.data.img.length != 0) {
+            this.setSwiperHeight(res.data.img[0])
+          }
         }
       })
     }
@@ -239,7 +247,8 @@ Page({
   },
   showComment() {
     this.setData({
-      cshow: true
+      cshow: true,
+      isFocus: true,
     })
   },
   closeComment() {
@@ -389,6 +398,22 @@ Page({
     wx.previewImage({
       urls: that.data.publishinfo.img,
       current: e.currentTarget.dataset.img
+    })
+  },
+  swiperchange(e) {
+    this.setSwiperHeight(this.data.publishinfo.img[e.detail.current])
+  },
+  setSwiperHeight(e) {
+    let that = this
+    wx.getImageInfo({
+      src: e,
+      success(res) {
+        console.log(res)
+        let swiperH = res.height / res.width * 650
+        that.setData({
+          swiperHeight: swiperH
+        })
+      }
     })
   }
 })
