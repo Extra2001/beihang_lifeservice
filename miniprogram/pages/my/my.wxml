@@ -1,116 +1,117 @@
 <view class="contain">
-  <view class="card">
-    <view class="top_box">
-      <view class="top_1">
-        <view wx:if="{{!userinfo}}" class="top_1_1" bindtap="go" data-go="/pages/login/login">非法进入APP</view>
-        <view wx:if="{{userinfo}}" class="top_1_1">
-          <open-data type="userNickName"></open-data>
+    <view class="card">
+        <view class="top_box">
+            <view class="top_1">
+                <view wx:if="{{!userinfo}}" class="top_1_1" bindtap="go" data-go="/pages/login/login">
+                    您尚未登录
+                </view>
+                <view wx:if="{{userinfo}}" class="top_1_1">
+                    <open-data type="userNickName"></open-data>
+                </view>
+                <view class="top_1_2" wx:if="{{!userinfo}}">登录后可使用全部功能</view>
+                <view class="top_1_2" wx:if="{{userinfo}}" data-status="1">
+                    <text class="top_1_2" bindtap="changeCampus">目前所在校区：{{currcampus}}▼</text>
+                </view>
+            </view>
+            <view class="top_2">
+                <view class="avator">
+                    <open-data wx:if="{{userinfo}}" type="userAvatarUrl"></open-data>
+                    <image wx:if="{{!userinfo}}" src="/images/avator.png"></image>
+                </view>
+            </view>
         </view>
-        <view class="top_1_2" wx:if="{{!userinfo}}">您可以尝试重新打开页面</view>
-        <view class="top_1_2" wx:if="{{userinfo}}" data-status="1">
-          <text class="top_1_2" bindtap="changeCampus">目前所在校区：{{currcampus}}▼</text>
+        <view class="center_box">
+            <view class="center_1" hover-class="center_1-hover" bindtap="go" data-go="/pages/list/list" data-status="1">
+                <image src="/images/history.png"></image>
+                <view>我的发布</view>
+            </view>
+            <view class="center_1" hover-class="center_1-hover" bindtap="go" data-go="/pages/help/help">
+                <image src="/images/help.png"></image>
+                <view>帮助中心</view>
+            </view>
         </view>
-      </view>
-      <view class="top_2">
-        <view class="avator">
-          <open-data wx:if="{{userinfo}}" type="userAvatarUrl"></open-data>
-          <image wx:if="{{!userinfo}}" src="/images/avator.png"></image>
-        </view>
-      </view>
     </view>
-    <view class="center_box">
-      <view class="center_1" bindtap="go" data-go="/pages/list/list" data-status="1">
-        <image src="/images/history.png"></image>
-        <view>我的发布</view>
-      </view>
-      <view class="center_1" bindtap="go" data-go="/pages/help/help">
-        <image src="/images/help.png"></image>
-        <view>帮助中心</view>
-      </view>
-    </view>
-  </view>
-  <view class="card">
-    <view class="bottom_box">
-      <view class="bottom_card" bindtap="go" data-go="/pages/kefu/kefu" data-status="1">
-        <view class="bottom_1">
-          <image src="/images/kefu.png"></image>
-          <view>联系开发团队</view>
-        </view>
-        <image src="/images/go.png"></image>
-      </view>
-      <view class="border1"></view>
-      <view class="bottom_card">
-        <view class="bottom_1">
-          <image src="/images/contact.png"></image>
-          <view>问题反馈</view>
-        </view>
-        <image src="/images/go.png"></image>
-        <button open-type="feedback"></button>
-      </view>
-      <view class="border1"></view>
-      <view class="bottom_card" bindtap="showShare">
-        <view class="bottom_1">
-          <image src="/images/share.png"></image>
-          <view>好用分享</view>
-        </view>
-        <image src="/images/go.png"></image>
-      </view>
-      <view class="border1"></view>
-      <view class="bottom_card" bindtap="cleartmp">
-        <view class="bottom_1">
-          <image src="/images/time.png"></image>
-          <view>清空缓存数据</view>
-        </view>
-        <image src="/images/go.png"></image>
-      </view>
-      <view class="border1"></view>
-      <view class="bottom_card" bindtap="go" data-go="/pages/admin/admin/admin" wx:if="{{openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}">
-        <view class="bottom_1">
-          <image src="/images/manage.png"></image>
-          <view>后台管理</view>
-        </view>
-        <image src="/images/go.png"></image>
-      </view>
-      <view class="border1" wx:if="{{openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}"></view>
-      <view class="bottom_card" bindtap="go" data-go="/pages/about/about">
-        <view class="bottom_1">
-          <image src="/images/guanyu.png"></image>
-          <view>关于程序</view>
-        </view>
-        <image src="/images/go.png"></image>
-      </view>
-      <view class="border1" wx:if="{{!(openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c')}}"></view>
-      <view class="bottom_card" bindtap="clearAcc" wx:if="{{!(openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c')}}">
-        <view class="bottom_1">
-          <image src="/images/trash.png"></image>
-          <view class="bg_red">清空账号数据并退出</view>
-        </view>
-        <image src="/images/go.png"></image>
-      </view>
-      <!-- <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="card">
+        <view class="bottom_box">
+            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="go" data-go="/pages/kefu/kefu" data-status="1">
+                <view class="bottom_1">
+                    <image src="/images/kefu.png"></image>
+                    <view>联系开发团队</view>
+                </view>
+                <image src="/images/go.png"></image>
+            </view>
+            <view class="border1"></view>
+            <view class="bottom_card" hover-class="bottom_card-hover">
+                <view class="bottom_1">
+                    <image src="/images/contact.png"></image>
+                    <view>问题反馈</view>
+                </view>
+                <image src="/images/go.png"></image>
+                <button open-type="feedback"></button>
+            </view>
+            <view class="border1"></view>
+            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="switchPop">
+                <view class="bottom_1">
+                    <image src="/images/share.png"></image>
+                    <view>好用分享</view>
+                </view>
+                <image src="/images/go.png"></image>
+            </view>
+            <view class="border1"></view>
+            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="cleartmp">
+                <view class="bottom_1">
+                    <image src="/images/time.png"></image>
+                    <view>清空缓存数据</view>
+                </view>
+                <image src="/images/go.png"></image>
+            </view>
+            <view class="border1"></view>
+            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="go" data-go="/pages/admin/admin/admin" wx:if="{{openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}">
+                <view class="bottom_1">
+                    <image src="/images/manage.png"></image>
+                    <view>后台管理</view>
+                </view>
+                <image src="/images/go.png"></image>
+            </view>
+            <view class="border1" wx:if="{{openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}"></view>
+            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="go" data-go="/pages/about/about">
+                <view class="bottom_1">
+                    <image src="/images/guanyu.png"></image>
+                    <view>关于程序</view>
+                </view>
+                <image src="/images/go.png"></image>
+            </view>
+            <view class="border1" wx:if="{{!(openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c')}}"></view>
+            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="clearAcc" wx:if="{{!(openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c')}}">
+                <view class="bottom_1">
+                    <image src="/images/trash.png"></image>
+                    <view class="bg_red">清空账号数据并退出</view>
+                </view>
+                <image src="/images/go.png"></image>
+            </view>
+            <!-- <view class="weui-footer weui-footer_fixed-bottom">
             <view class="weui-footer__text">Copyright © 2020 北京航空航天大学2019级本科生</view>
 </view> -->
+        </view>
     </view>
-  </view>
 </view>
-
-<!--分享弹出层-->
-<van-popup show="{{ showShare }}" bind:close="closePop">
-  <view class="share_contain">
-    <view class="share_border"></view>
-    <view class="share_title">分享到</view>
-    <view class="share_box">
-      <view class="share_one">
-        <image src="/images/weixin.png"></image>
-        <view>微信好友</view>
-        <button class="share_button" open-type="share"></button>
-      </view>
-      <view class="share_bor"></view>
-      <view class="share_one">
-        <image src="/images/pyq.png"></image>
-        <view>朋友圈</view>
-        <button class="share_button" bindtap="preview" data-link="{{poster}}"></button>
-      </view>
+<!-- 分享弹出层 -->
+<van-popup show="{{ showShare }}" bind:close="switchPop">
+    <view class="share_contain">
+        <view class="share_border"></view>
+        <view class="share_title">分享到</view>
+        <view class="share_box">
+            <view class="share_one">
+                <image src="/images/weixin.png"></image>
+                <view>微信好友</view>
+                <button class="share_button" open-type="share"></button>
+            </view>
+            <view class="share_bor"></view>
+            <view class="share_one">
+                <image src="/images/pyq.png"></image>
+                <view>朋友圈</view>
+                <button class="share_button" bindtap="preview" data-link="{{poster}}"></button>
+            </view>
+        </view>
     </view>
-  </view>
 </van-popup>

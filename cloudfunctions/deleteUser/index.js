@@ -7,5 +7,5 @@ cloud.init()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
-  return cloud.database().collection('user').doc(event.id).remove()
+  return await cloud.database().collection('user').doc(wxContext.OPENID).remove();
 }

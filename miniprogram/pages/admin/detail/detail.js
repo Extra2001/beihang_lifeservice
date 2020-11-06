@@ -13,11 +13,6 @@ Page({
     this.getPublish(this.data.id);
   },
   onLoad(e) {
-    if (getApp().openid.length == 0) {
-      wx.switchTab({
-        url: '/pages/start/start?scene=' + e.scene + '&func=' + e.func,
-      })
-    }
     let that = this
     wx.getSystemInfo({
       success: function(res) {

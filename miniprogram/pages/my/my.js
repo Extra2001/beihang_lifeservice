@@ -1,214 +1,103 @@
 const app = getApp();
 const config = require("../../config.js");
+const server = {
+    account: require("../../server/account.js"),
+    data: require("../../server/data.js"),
+    notice: require("../../server/notice.js")
+};
+const util = {
+    cache: require("../../util/cache.js"),
+    common: require("../../util/common.js")
+};
 Page({
-  data: {
-    showShare: false,
-    poster: JSON.parse(config.data).share_poster,
-  },
-  onLoad() {
-    if (getApp().openid.length == 0) {
-      wx.redirectTo({
-        url: '/pages/start/start',
-      })
-    }
-  },
-  //切换校区
-  changeCampus(e) {
-    let that = this
-    wx.showActionSheet({
-      itemList: [
-        "学院路校区",
-        "沙河校区"
-      ],
-      success(res) {
-        if (res.tapIndex == 0) { //学院路校区
-          wx.cloud.callFunction({
-            name: "changecampus",
-            data: {
-              campus: {
-                "id": 0,
-                "name": "学院路校区"
-              }
-            },
-            success(res) {
-              app.campus = {
-                "id": 0,
-                "name": "学院路校区"
-              };
-              that.setData({
-                currcampus: "学院路校区"
-              })
+    data: {
+        showShare: false,
+        poster: JSON.parse(config.data).share_poster,
+    },
+    onShow: function () {
+        this.setData({
+            userinfo: app.globalData.userinfo.info,
+            currcampus: app.globalData.userinfo.campus.name,
+            openid: app.globalData.userinfo._openid
+        });
+    },
+    //切换校区
+    changeCampus: function (e) {
+        let that = this
+        wx.showActionSheet({
+            itemList: ["学院路校区", "沙河校区"],
+            success: function (res) {
+                if (res.tapIndex !== app.globalData.userinfo.campus.id) {
+                    let names = ["学院路校区", "沙河校区"];
+                    let campus = {
+                        id: res.tapIndex,
+                        name: names[res.tapIndex]
+                    }
+                    app.globalData.userinfo.campus = campus;
+                    that.setData({ currcampus: campus.name });
+                    server.account.changeCampus(campus).catch(util.common.catchFunc);
+                }
             }
-          })
-        } else {
-          wx.cloud.callFunction({
-            name: "changecampus",
-            data: {
-              campus: {
-                "id": 1,
-                "name": "沙河校区"
-              }
-            },
-            success(res) {
-              app.campus = {
-                "id": 1,
-                "name": "沙河校区"
-              };
-              that.setData({
-                currcampus: "沙河校区"
-              })
-            }
-          })
+        });
+    },
+    // 跳转页面方法
+    go: function (e) {
+        util.common.goUrl(e.currentTarget.dataset.go);
+    },
+    //展示分享弹窗
+    switchPop: function () {
+        this.setData({ showShare: !this.data.showShare });
+    },
+    //预览图片
+    preview(e) {
+        wx.previewImage({
+            urls: e.currentTarget.dataset.link.split(",")
+        });
+    },
+    onShareAppMessage: function () {
+        return {
+            title: JSON.parse(config.data).share_title,
+            imageUrl: JSON.parse(config.data).share_img,
+            path: '/pages/start/start'
         }
-      }
-    })
-  },
-  onShow() {
-    this.setData({
-      userinfo: app.userinfo,
-      currcampus: app.campus.name,
-      openid: app.openid
-    })
-  },
-  //跳转方法
-  go(e) {
-    if (e.currentTarget.dataset.status == '1') {
-      if (!app.openid) {
+    },
+    cleartmp: function () {
         wx.showModal({
-          title: '温馨提示',
-          content: '该功能需要注册方可使用，是否马上去注册',
-          success(res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
+            title: '提示',
+            content: '您确实要清空缓存数据吗？',
+            success(res) {
+                if (res.confirm) {
+                    wx.showLoading({ title: '正在清理' });
+                    util.cache.clearCache();
+                    wx.hideLoading();
+                    wx.showToast({ title: '清除完成' });
+                }
             }
-          }
-        })
-        return false
-      }
-    }
-    wx.navigateTo({
-      url: e.currentTarget.dataset.go
-    })
-  },
-
-  //展示分享弹窗
-  showShare() {
-    this.setData({
-      showShare: true
-    });
-  },
-  //关闭弹窗
-  closePop() {
-    this.setData({
-      showShare: false,
-    });
-  },
-  //预览图片
-  preview(e) {
-    wx.previewImage({
-      urls: e.currentTarget.dataset.link.split(",")
-    });
-  },
-  onShareAppMessage() {
-    return {
-      title: JSON.parse(config.data).share_title,
-      imageUrl: JSON.parse(config.data).share_img,
-      path: '/pages/start/start'
-    }
-
-  },
-  cleartmp() {
-    wx.showModal({
-      title: '提示',
-      content: '您确实要清空缓存数据吗？',
-      success(res) {
-        if (res.confirm) {
-          wx.showLoading({
-            title: '正在清理',
-          })
-          wx.removeStorage({
-            key: 'iscard',
-            success: function(res) {},
-          })
-          wx.removeStorage({
-            key: 'oldgood',
-            success: function(res) {},
-          })
-          wx.removeStorage({
-            key: 'ccomment',
-            success: function(res) {},
-          })
-          wx.removeStorage({
-            key: 'lostfound',
-            success: function(res) {},
-          })
-          wx.removeStorage({
-            key: 'myoldgood',
-            success: function(res) {},
-          })
-          wx.removeStorage({
-            key: 'myccomment',
-            success: function(res) {},
-          })
-          wx.removeStorage({
-            key: 'mylostfound',
-            success: function(res) {},
-          })
-          wx.removeStorage({
-            key: 'history',
-            success: function(res) {},
-          })
-          wx.hideLoading()
-          wx.showToast({
-            title: '清除完成',
-          })
-        }
-      }
-    })
-  },
-  clearAcc(){
-    wx.showModal({
-      title: '提示',
-      content: '您真的想要清除账号内容并退出吗？该操作不可逆。',
-      success(res){
-        if(res.confirm){
-          wx.showModal({
-            title: '再次确认',
-            content: '确实要删除账号吗？',
-            success(e){
-              if(e.confirm){
-                wx.showLoading({
-                  title: '正在删除',
-                })
-                wx.cloud.callFunction({
-                  name:"clearUser",
-                  data:{
-                    openid:app.openid
-                  },
-                  success(res){
-                    console.log(res)
-                    wx.hideLoading()
-                    wx.showToast({
-                      title: '已清除数据',
-                    }),
-                    app.campus =''
-                    app.userinfo=''
-                    app.openid=''
-                    wx.redirectTo({
-                      url: '/pages/start/start',
+        });
+    },
+    clearAcc: function () {
+        wx.showModal({
+            title: '提示',
+            content: '您真的想要清除账号内容并退出吗？该操作不可逆。',
+            success: function (res) {
+                if (res.confirm) {
+                    wx.showModal({
+                        title: '再次确认',
+                        content: '确实要删除账号吗？',
+                        success: function (e) {
+                            if (e.confirm) {
+                                wx.showLoading({ title: '正在删除' });
+                                server.account.deleteUser().then(() => {
+                                    wx.hideLoading();
+                                    wx.showToast({ title: '已清除数据' });
+                                    app.initailizeLoginStatus();
+                                    wx.reLaunch({ url: "/pages/index/index" });
+                                })
+                            }
+                        }
                     })
-                  },
-                  fail(res){
-                    console.log(res)
-                  }
-                })
-              }
+                }
             }
-          })
-        }
-      }
-    })
-  }
+        })
+    }
 })

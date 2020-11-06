@@ -1,195 +1,199 @@
 <wxs src="../../common.wxs" module="morejs" />
 <view class="top_contain">
-  <view class="search_box">
-    <image src="/images/search_black.png"></image>
-    <input bindinput="keyInput" bindconfirm="search" placeholder="输入您想搜索的内容"></input>
-  </view>
-  <view class="search" bindtap="search">搜索</view>
+    <view class="search_box">
+        <image src="/images/search_black.png"></image>
+        <input bindinput="keyInput" bindconfirm="search" placeholder="输入您想搜索的内容"></input>
+    </view>
+    <view class="search" bindtap="search">搜索</view>
 </view>
-
 <view class="contain">
-  <block wx:if="{{list.length==0}}">
-    <block wx:if="{{!blank}}">
-      <view class="a">
-        <image src="/images/time.png"></image>
-        <view>搜索历史</view>
-      </view>
-      <block wx:if="{{hislist.length==0}}">
-        <view class="nosearch">您还没搜索过哟，赶快试试吧</view>
-      </block>
-      <block wx:if="{{hislist.length>0}}">
-        <block wx:for="{{hislist}}" wx:key="*this">
-          <view bindtap="choosekey" data-key="{{item}}" class="hisitem">{{index+1}}. {{item}}</view>
-        </block>
-      </block>
-    </block>
-    <block wx:if="{{(list.length==0&&clist.length==0&&llist.length==0)&&blank}}">
-      <view class="a">
-        <image src="/images/result.png"></image>
-        <view>搜索结果</view>
-      </view>
-      <!--无内容显示-->
-      <view class="nocontent">
-        <image src="/images/blank.png"></image>
-        <view class="blank_text">暂无{{key}}相关的信息哟~</view>
-      </view>
-    </block>
-    <block wx:if="{{!blank}}">
-      <view class="a">
-        <image src="/images/recommend.png"></image>
-        <view>更多推荐</view>
-      </view>
-      <block wx:if="{{newlist.length==0}}">
-        <view class="nosearch">暂无相关推荐</view>
-      </block>
-      <block wx:if="{{newlist.length>0}}">
-        <view class="contain1">
-          <block wx:for="{{newlist}}" wx:key="_id">
-            <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=old'}}">
-              <view class="top">
-                <view class="top1">
-                  <view class="title">
-                    <image src="{{item.userinfo.avatarUrl}}"></image>
-                    <view>{{item.userinfo.nickName}}</view>
-                    <view class="local_box">
-                      <image class="img1" src="/images/local.png"></image>
-                      <text>{{item.goodinfo.campus}}</text>
+    <block wx:if="{{list.length==0}}">
+        <block wx:if="{{!blank}}">
+            <view class="a">
+                <image src="/images/time.png"></image>
+                <view>搜索历史</view>
+            </view>
+            <block wx:if="{{hislist.length==0}}">
+                <view class="nosearch">您还没搜索过哟，赶快试试吧</view>
+            </block>
+            <block wx:if="{{hislist.length>0}}">
+                <block wx:for="{{hislist}}" wx:key="*this">
+                    <view bindtap="choosekey" data-key="{{item}}" class="hisitem">
+                        {{index+1}}. {{item}}
                     </view>
-                  </view>
-                  <view class="date">{{morejs.timelog(item.creat)}}</view>
+                </block>
+            </block>
+        </block>
+        <block wx:if="{{(list.length==0&&clist.length==0&&llist.length==0)&&blank}}">
+            <view class="a">
+                <image src="/images/result.png"></image>
+                <view>搜索结果</view>
+            </view>
+            <!-- 无内容显示 -->
+            <view class="nocontent">
+                <image src="/images/blank.png"></image>
+                <view class="blank_text">暂无{{key}}相关的信息哟~</view>
+            </view>
+        </block>
+        <block wx:if="{{!blank}}">
+            <view class="a">
+                <image src="/images/recommend.png"></image>
+                <view>更多推荐</view>
+            </view>
+            <block wx:if="{{newlist.length==0}}">
+                <view class="nosearch">暂无相关推荐</view>
+            </block>
+            <block wx:if="{{newlist.length>0}}">
+                <view class="contain1">
+                    <block wx:for="{{newlist}}" wx:key="_id">
+                        <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=old'}}">
+                            <view class="top">
+                                <view class="top1">
+                                    <view class="title">
+                                        <image src="{{item.userinfo.avatarUrl}}"></image>
+                                        <view>{{item.userinfo.nickName}}</view>
+                                        <view class="local_box">
+                                            <image class="img1" src="/images/local.png"></image>
+                                            <text>{{item.goodinfo.campus}}</text>
+                                        </view>
+                                    </view>
+                                    <view class="date">{{morejs.timelog(item.creat)}}</view>
+                                </view>
+                            </view>
+                            <view class="center">
+                                <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
+                                <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
+                                <view class="content">
+                                    <view class="book">
+                                        <view class="book_name text-cut">
+                                            {{item.goodinfo.name}}
+                                        </view>
+                                        <view class="book_author text-cut">
+                                            {{item.goodinfo.desc}}
+                                        </view>
+                                        <view class="price">
+                                            <text class="list_rawprice">
+                                                ￥{{item.goodinfo.rawprice}}
+                                            </text>
+                                            ￥{{item.goodinfo.price}}
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
                 </view>
-              </view>
-              <view class="center">
-                <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
-                <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
-                <view class="content">
-                  <view class="book">
-                    <view class="book_name text-cut">{{item.goodinfo.name}}</view>
-                    <view class="book_author text-cut">{{item.goodinfo.desc}}</view>
-                    <view class="price">
-                      <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text> ￥{{item.goodinfo.price}}</view>
-                  </view>
+            </block>
+        </block>
+    </block>
+    <block wx:if="{{list.length>0||clist.length>0||llist.length>0}}">
+        <view class="a">
+            <image src="/images/result.png"></image>
+            <view>搜索结果</view>
+        </view>
+        <!-- 二手商品 -->
+        <view wx:if="{{list.length!=0}}" class="a">
+            <view>二手商品</view>
+        </view>
+        <block wx:for="{{list}}" wx:key="_id">
+            <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=old'}}">
+                <view class="top">
+                    <view class="top1">
+                        <view class="title">
+                            <image src="{{item.userinfo.avatarUrl}}"></image>
+                            <view>{{item.userinfo.nickName}}</view>
+                            <view class="local_box">
+                                <image class="img1" src="/images/local.png"></image>
+                                <text>{{item.goodinfo.campus}}</text>
+                            </view>
+                        </view>
+                        <view class="date">{{morejs.timelog(item.creat)}}</view>
+                    </view>
                 </view>
-              </view>
+                <view class="center">
+                    <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
+                    <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
+                    <view class="content">
+                        <view class="book">
+                            <view class="book_name text-cut">{{item.goodinfo.name}}</view>
+                            <view class="book_author text-cut">{{item.goodinfo.desc}}</view>
+                            <view class="price">
+                                <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text>
+                                ￥{{item.goodinfo.price}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
             </view>
-          </block>
+        </block>
+        <!-- 课程评价 -->
+        <view wx:if="{{clist.length!=0}}" class="a">
+            <view>课程评价</view>
         </view>
-      </block>
+        <block wx:for="{{clist}}" wx:key="_id">
+            <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=ccomm'}}">
+                <view class="top">
+                    <view class="top1">
+                        <view class="title">
+                            <image src="{{item.userinfo.avatarUrl}}"></image>
+                            <view>{{item.userinfo.nickName}}</view>
+                        </view>
+                        <view class="date">{{morejs.timelog(item.creat)}}</view>
+                    </view>
+                </view>
+                <view class="center">
+                    <view class="content_full">
+                        <view class="book">
+                            <view class="book_name text-cut">{{item.cinfo.name}}</view>
+                            <view class="book_author text-cut">{{item.cinfo.detail}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <!-- 失物招领 -->
+        <view wx:if="{{llist.length!=0}}" class="a">
+            <view>失物招领</view>
+        </view>
+        <block wx:for="{{llist}}" wx:key="_id">
+            <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=losta'}}">
+                <view class="top">
+                    <view class="top1">
+                        <view class="title">
+                            <image src="{{item.userinfo.avatarUrl}}"></image>
+                            <view>{{item.userinfo.nickName}}</view>
+                            <view class="local_box">
+                                <image class="img1" src="/images/local.png"></image>
+                                <text>{{item.lostinfo.campus}}</text>
+                            </view>
+                        </view>
+                        <view class="date">{{morejs.timelog(item.creat)}}</view>
+                    </view>
+                </view>
+                <view class="center">
+                    <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
+                    <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
+                    <view class="content">
+                        <view class="book">
+                            <view class="book_name text-cut">{{item.lostinfo.name}}</view>
+                            <view class="book_author text-cut">{{item.lostinfo.place}}</view>
+                            <view class="foundit" wx:if="{{item.status==1}}">
+                                <text class="foundit1">已找到失主/物品</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
     </block>
-  </block>
-
-  <block wx:if="{{list.length>0||clist.length>0||llist.length>0}}">
-    <view class="a">
-      <image src="/images/result.png"></image>
-      <view>搜索结果</view>
-    </view>
-    <!-- 二手商品 -->
-    <view wx:if="{{list.length!=0}}" class="a">
-      <view>二手商品</view>
-    </view>
-    <block wx:for="{{list}}" wx:key="_id">
-      <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=old'}}">
-        <view class="top">
-          <view class="top1">
-            <view class="title">
-              <image src="{{item.userinfo.avatarUrl}}"></image>
-              <view>{{item.userinfo.nickName}}</view>
-              <view class="local_box">
-                <image class="img1" src="/images/local.png"></image>
-                <text>{{item.goodinfo.campus}}</text>
-              </view>
-            </view>
-            <view class="date">{{morejs.timelog(item.creat)}}</view>
-          </view>
-        </view>
-        <view class="center">
-          <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
-          <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
-          <view class="content">
-            <view class="book">
-              <view class="book_name text-cut">{{item.goodinfo.name}}</view>
-              <view class="book_author text-cut">{{item.goodinfo.desc}}</view>
-              <view class="price">
-                <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text> ￥{{item.goodinfo.price}}</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </block>
-    <!-- 课程评价 -->
-    <view wx:if="{{clist.length!=0}}" class="a">
-      <view>课程评价</view>
-    </view>
-    <block wx:for="{{clist}}" wx:key="_id">
-
-      <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=ccomm'}}">
-        <view class="top">
-          <view class="top1">
-            <view class="title">
-              <image src="{{item.userinfo.avatarUrl}}"></image>
-              <view>{{item.userinfo.nickName}}</view>
-            </view>
-            <view class="date">{{morejs.timelog(item.creat)}}</view>
-          </view>
-        </view>
-        <view class="center">
-          <view class="content_full">
-            <view class="book">
-              <view class="book_name text-cut">{{item.cinfo.name}}</view>
-              <view class="book_author text-cut">{{item.cinfo.detail}}</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </block>
-    <!-- 失物招领 -->
-    <view wx:if="{{llist.length!=0}}" class="a">
-      <view>失物招领</view>
-    </view>
-    <block wx:for="{{llist}}" wx:key="_id">
-      <view class="card shadow" bindtap="detail" data-id="{{item._id+'&func=losta'}}">
-        <view class="top">
-          <view class="top1">
-            <view class="title">
-              <image src="{{item.userinfo.avatarUrl}}"></image>
-              <view>{{item.userinfo.nickName}}</view>
-              <view class="local_box">
-                <image class="img1" src="/images/local.png"></image>
-                <text>{{item.lostinfo.campus}}</text>
-              </view>
-            </view>
-            <view class="date">{{morejs.timelog(item.creat)}}</view>
-          </view>
-        </view>
-        <view class="center">
-          <image lazy-load wx:if="{{item.img.length!=0}}" class="list_poster" src="{{item.thumb}}"></image>
-          <image lazy-load wx:if="{{item.img.length==0}}" class="list_poster" src="/images/no_photo.png"></image>
-          <view class="content">
-            <view class="book">
-              <view class="book_name text-cut">{{item.lostinfo.name}}</view>
-              <view class="book_author text-cut">{{item.lostinfo.place}}</view>
-              <view class="foundit" wx:if="{{item.status==1}}">
-                <text class="foundit1">已找到失主/物品</text>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </block>
-  </block>
 </view>
-
-
 <view class="laji" wx:if="{{!(nomore&&lnomore&&cnomore)}}">由于开发者太辣鸡了，每项最多只能显示20条搜索结果</view>
-
-
-
 <block wx:if="{{list.length>10}}">
-  <import src="/common.wxml" />
-  <template is="loadmore" data="{{nomore}}" />
+    <import src="/common.wxml" />
+    <template is="loadmore" data="{{nomore}}" />
 </block>
 <van-transition show="{{ scrollTop>500 }}" custom-class="block" duration="600">
-  <view class="totop" bindtap="gotop">
-    <image src="/images/top.png"></image>
-  </view>
+    <view class="totop" bindtap="gotop">
+        <image src="/images/top.png"></image>
+    </view>
 </van-transition>

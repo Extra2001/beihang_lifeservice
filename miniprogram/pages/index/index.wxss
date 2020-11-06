@@ -26,14 +26,15 @@
   padding: 7rpx 20rpx;
   margin: 10rpx 0px auto auto;
 }
-.foundit1{
-  margin:auto;
+
+.foundit1 {
+  margin: auto;
 }
 
 .local_box text {
   padding-left: 5rpx;
   font-size: 28rpx;
-  
+
   color: rgb(150, 150, 150);
 }
 
@@ -62,7 +63,7 @@
 .search_text {
   padding-left: 10rpx;
   font-size: 28rpx;
-  
+
   color: rgb(167, 167, 167);
 }
 
@@ -133,7 +134,7 @@
   align-items: center;
   font-size: 30rpx;
   color: #fff;
-  
+
   border-radius: 15rpx;
 }
 
@@ -156,7 +157,7 @@
   align-items: center;
   font-size: 30rpx;
   color: #fff;
-  
+
   border-radius: 15rpx;
   margin: 10rpx;
   padding-left: 44rpx;
@@ -255,7 +256,7 @@
 .blank_text {
   padding-top: 40rpx;
   font-size: 32rpx;
-  
+
   color: #c6c6c8;
 }
 
@@ -284,12 +285,12 @@
   border-radius: 15rpx;
   flex-direction: column;
   background-color: #fff;
-  margin: 15rpx 0rpx;
+  margin: 10rpx 0rpx;
   padding-bottom: 0rpx;
 }
 
-.card:active {
-  background-color: #f1f1f1;
+.card-hover {
+  background-color: #f7f7f7;
 }
 
 .top {
@@ -314,7 +315,7 @@
 .date {
   font-size: 28rpx;
   color: #b2b2b2;
-  
+
 }
 
 .title {
@@ -397,7 +398,7 @@
 
 .book_name {
   font-size: 30rpx;
-  
+
 }
 
 .book_author {

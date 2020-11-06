@@ -18,7 +18,7 @@
 }
 
 .card {
-  padding: 20rpx 0rpx;
+  padding: 16rpx 0rpx;
   display: flex;
   box-sizing: border-box;
   border-radius: 15rpx;
@@ -26,10 +26,13 @@
   background-color: #fff;
   margin: 15rpx 0rpx;
   padding-bottom: 0rpx;
+  overflow: hidden;
 }
-.bg_red{
-  color:red;
+
+.bg_red {
+  color: red;
 }
+
 .top_1 {
   display: flex;
   flex-direction: column;
@@ -102,8 +105,8 @@
   height: 60rpx;
 }
 
-.center_1:active {
-  background-color: #f1f1f1;
+.center_1-hover {
+  background-color: #f7f7f7;
 }
 
 .blank {
@@ -127,7 +130,6 @@
   align-items: center;
   justify-content: space-between;
   background: #fff;
-  border-radius: 15rpx;
   padding: 0px 30rpx;
 }
 
@@ -145,7 +147,7 @@
   height: 25rpx;
 }
 
-.bottom_card:active {
+.bottom_card-hover {
   background: #f1f1f1;
 }
 
