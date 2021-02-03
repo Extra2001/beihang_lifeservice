@@ -1,0 +1,141 @@
+.contain {
+  width: 100%;
+  padding: 24rpx;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.card {
+  width: 100%;
+  padding: 30rpx;
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.card-active {  
+  background-color: #cdcdcd;
+}
+.thumb-box{
+  overflow: hidden;
+  border-radius: 15rpx;
+  height: 160rpx;
+}
+.top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.top1 {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date {
+  font-size: 28rpx;
+  color: #b2b2b2;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.title image {
+  width: 42rpx;
+  height: 42rpx;
+}
+
+.title view {
+  padding-left: 10rpx;
+  letter-spacing: 3rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+
+.center {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: 20rpx;
+}
+
+.center image {
+  width: 160rpx;
+  border-radius: 15rpx;
+}
+
+.content {
+  width: calc(100% - 160rpx);
+  padding: 0 20rpx;
+  height: 140rpx;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.book_name {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.book_author {
+  padding-top: 10rpx;
+  font-size: 26rpx;
+  letter-spacing: 3rpx;
+  color: #a2a2a2;
+}
+
+.price-icon {
+  font-size: 22rpx;
+}
+
+.price {
+  display: flex;
+  font-weight: 600;
+  font-size: 28rpx;
+  justify-content: flex-end;
+  color: #f80202;
+  align-items: center;
+}
+
+.nocontent {
+  width: 100%;
+  height: calc(100% - 90rpx);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.nocontent image {
+  padding-left: 80rpx;
+  width: 340rpx;
+  height: 272rpx;
+}
+
+.blank_text {
+  padding-top: 40rpx;
+  font-size: 32rpx;
+  color: #c6c6c8;
+}

@@ -1,4 +1,5 @@
 <!-- TAB容器 -->
+<canvas canvas-id="photo_canvas" hidden></canvas>
 <wxs src="../../common.wxs" module="morejs" />
 <view class="tab_contain">
     <block wx:for="{{tab}}" wx:key="id">
@@ -16,8 +17,8 @@
             <view class="top">
                 <view class="top1">
                     <view class="title">
-                        <image src="{{userinfo.avatarUrl}}"></image>
-                        <view>{{userinfo.nickName}}</view>
+                        <open-data class="title-image" type="userAvatarUrl"></open-data>
+                        <view><open-data type="userNickName"></open-data></view>
                     </view>
                     <view class="date">{{morejs.timelog(item.creat)}}</view>
                 </view>

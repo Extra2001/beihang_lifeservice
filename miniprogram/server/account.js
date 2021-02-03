@@ -1,144 +1,177 @@
+const urlbase = "https://bhls.buaaer.top/api/";
+let loginToken = "";
+wx.getStorage({
+    key: 'loginToken',
+    success: function (res) {
+        loginToken = res.data;
+    }
+});
+
+function saveToken(token) {
+    loginToken = token;
+    wx.setStorage({
+        key: 'loginToken',
+        data: token
+    });
+}
+
+function request(options) {
+    return new Promise((resolve, reject) => {
+        if (!options.data)
+            options.data = {}
+        if (!options.resolve)
+            options.resolve = resolve;
+        if (!options.reject)
+            options.reject = reject;
+        options.data.client = 0;
+        wx.request({
+            url: urlbase + options.url,
+            method: "POST",
+            header: { Authorization: `Bearer ${loginToken}` },
+            data: options.data,
+            success: function (res) {
+                if (res.statusCode === 200)
+                    options.resolve(res.data);
+                else
+                    options.reject(res.data);
+                resolve(res.data);
+            },
+            fail: function () {
+                if (!options.retryTimes)
+                    options.retryTimes = 1;
+                else if (options.retryTimes > 3) {
+                    options.reject({
+                        errCode: 8,
+                        errMsg: "网络错误"
+                    });
+                    resolve(res.data);
+                    return;
+                }
+                else
+                    options.retryTimes++;
+                request(options);
+            }
+        });
+    });
+}
+
 function login() {
     return new Promise((resolve, reject) => {
         wx.getSetting({
             success: (result) => {
                 if (result.authSetting["scope.userInfo"]) {
-                    // 登录处理程序
-                    wx.cloud.callFunction({
-                        name: "login",
-                        success: function (res) {
-                            if (res.result.data.length == 0) {
-                                reject({
-                                    errCode: 2,
-                                    errMsg: "找不到用户信息"
-                                });
-                            } else {
-                                resolve({ data: res.result.data[0] });
-                            }
-                        },
-                        fail: function (res) {
-                            reject({
-                                errCode: 1,
-                                errMsg: "云函数调用失败",
-                                errData: res
-                            })
+                    wx.getUserInfo({
+                        success: function (re) {
+                            wx.login({
+                                success: function (res) {
+                                    wx.request({
+                                        url: urlbase + "account/login",
+                                        method: "POST",
+                                        data: JSON.stringify({
+                                            code: res.code,
+                                            userInfo: re.userInfo,
+                                            client: 0
+                                        }),
+                                        success: function (e) {
+                                            if (e.statusCode !== 200) {
+                                                reject(e.data);
+                                            }
+                                            else {
+                                                saveToken(e.data.loginToken);
+                                                resolve(e.data);
+                                            }
+                                        },
+                                        fail: function (e) {
+                                            reject(e);
+                                        }
+                                    });
+                                }
+                            });
                         }
-                    })
+                    });
                 } else {
                     reject({
-                        errCode: 3,
+                        errCode: 7,
                         errMsg: "用户未授权"
-                    })
+                    });
                 }
-            },
+            }
         });
-    })
+    });
 }
 
-function changeCampus(campus) {
-    return new Promise((resolve, reject) => {
-        wx.cloud.callFunction({
-            name: "changecampus",
-            data: {
-                campus: campus
-            },
-            success: function (res) {
-                resolve(res);
-            },
-            fail: function (e) {
-                reject({
-                    errCode: 1,
-                    errMsg: "调用云函数失败",
-                    errData: e
-                })
-            }
-        })
-    })
+function changeCampus(options) {
+    return request({
+        url: "account/campus",
+        data: options
+    });
 }
 
 function deleteUser() {
-    return new Promise((resolve, reject) => {
-        wx.cloud.callFunction({
-            name: "clearUser",
-            success: function (res) {
-                resolve();
-            },
-            fail: function (e) {
-                reject({
-                    errCode: 1,
-                    errMsg: "调用云函数失败",
-                    errData: e
-                });
-            }
-        });
-    })
+    return;
 }
 
 function register(data) {
     return new Promise((resolve, reject) => {
-        wx.cloud.callFunction({
-            name: "register",
-            data: {
-                campus: data.campus,
-                stamp: new Date().getTime(),
-                info: data.userInfo,
-                useful: true,
-                parse: 0,
-                studentcard: data.studentcard,
-            },
-            success: function (res) {
-                if (res.result == 1) {
-                    reject({
-                        errCode: 2,
-                        errMsg: "该微信已经注册"
-                    });
-                    getApp().login().then(() => {
-                        wx.reLaunch({
-                          url: '/pages/index/index',
-                        })
-                    }).catch((e) => {
-                        reject({
-                            errCode: 1,
-                            errMsg: "登录过程出错",
-                            errData: e
+        wx.getUserInfo({
+            success: function (re) {
+                wx.login({
+                    success: function (res) {
+                        wx.request({
+                            url: urlbase + "account/register",
+                            method: "POST",
+                            data: {
+                                code: res.code,
+                                userInfo: re.userInfo,
+                                client: 0,
+                                campus: data.campus,
+                                email: data.email,
+                                clientID: data.clientID,
+                                verificationCode: data.verificationCode
+                            },
+                            success: function (e) {
+                                if (e.statusCode !== 200) {
+                                    reject(e.data);
+                                }
+                                else {
+                                    saveToken(e.data.loginToken);
+                                    resolve(e.data);
+                                }
+                            }
                         });
-                    })
-                } else if (res.result == 2) {
-                    reject({
-                        errCode: 3,
-                        errMsg: "该校园卡已被注册"
-                    });
-                } else if (res.result == 5) {
-                    reject({
-                        errCode: 5,
-                        errMsg: "系统出错，请稍后再试"
-                    });
-                } else {
-                    getApp().login().then(() => {
-                        resolve();
-                    }).catch((e) => {
-                        reject({
-                            errCode: 1,
-                            errMsg: "登录过程出错",
-                            errData: e
-                        });
-                    })
-                }
-            },
-            fail: function () {
-                reject({
-                    errCode: 1,
-                    errMsg: "云函数调用失败",
-                    errData: e
+                    }
                 });
             }
-        })
-    })
+        });
+    });
+}
+
+function getEmailCode(options) {
+    return request({
+        url: "account/getverificationcode",
+        data: options
+    });
+}
+
+function verifyEmailCode(options) {
+    return request({
+        url: "account/verifycode",
+        data: options
+    });
 }
 
 module.exports = {
+    // No Parmaters
     login: login,
+    // { campus: Number }
     changeCampus: changeCampus,
     deleteUser: deleteUser,
-    register: register
+    // { campus: Number, studentCard: String }
+    register: register,
+    // { url:String, data: any, resolve: function, reject: function }
+    request: request,
+    // { email: Stirng }
+    getEmailCode: getEmailCode,
+    // { clientID: String, code: String, email: String }
+    verifyEmailCode: verifyEmailCode
 }

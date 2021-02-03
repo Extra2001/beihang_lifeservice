@@ -1,0 +1,94 @@
+.side-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-line {
+  display: flex;
+  flex-direction: column;
+}
+
+.goods-card {
+  width: 345rpx;
+  background-color: #fff;
+  border-radius: 15rpx;
+  margin: 15rpx;
+  overflow: hidden;
+  box-shadow: 0 0 18rpx rgb(236, 236, 236);
+  transition: 200ms ease-out;
+}
+
+.goods-card-image {
+  width: 100%;
+}
+
+.goods-card-skeleton {
+  margin: 15rpx;
+  width: 100%;
+}
+
+.goods-card-right {
+  padding: 10rpx 20rpx 20rpx 20rpx;
+}
+
+.name {
+  font-size: 30rpx;
+}
+
+.price-box {
+  margin-top: 15rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.price-icon {
+  font-size: 22rpx;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 28rpx;
+  color: #f80202;
+}
+
+.campus {
+  color: #666666;
+  font-size: 24rpx;
+  align-items: center;
+  margin: 0 0 0 auto;
+}
+
+.campus-image {
+  width: 16rpx;
+  height: 20rpx;
+}
+
+.userinfo-box {
+  margin-top: 15rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.userinfo-box-image {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
+}
+
+.good-image-box {
+  min-height: 270rpx;
+  max-height: 430rpx;
+  overflow: hidden;
+  transition: 200ms ease-out;
+}
+
+.nickname {
+  margin-left: 15rpx;
+  font-size: 26rpx;
+  align-items: center;
+  color: #666666;
+}
+
+.shadow {
+  box-shadow: 0 0 18rpx rgb(226, 226, 226);
+}

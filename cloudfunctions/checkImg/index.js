@@ -1,21 +1,27 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
+const images = require("images");
 
 cloud.init()
-
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  console.log(event)
-  if ((await cloud.openapi.security.imgSecCheck({
-    media:{
+  let file = await cloud.downloadFile({
+    fileID: event.fileID,
+  });
+  let buffer = images(file.fileContent)
+    .resize(400)
+    .encode("jpg", { quality: 20 });
+  let res = await cloud.openapi.security.imgSecCheck({
+    media: {
       contentType: 'image/png',
-      value: Buffer.from(event.buffer.data)
+      value: Buffer.from(buffer)
     }
-  })).errCode == 0) {
-    return "ok"
-  }
-  else {
-    return "risky"
+  });
+  cloud.deleteFile({
+    fileList: [event.fileID]
+  });
+  return {
+    res: res
   }
 }

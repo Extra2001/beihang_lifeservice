@@ -1,0 +1,44 @@
+.container {
+  margin: 15rpx 24rpx;
+}
+
+.round {
+  border-radius: 15rpx;
+  overflow: hidden;
+}
+
+.content {
+  margin: 15rpx 30rpx;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons {
+  justify-content: flex-end;
+  display: flex;
+}
+
+.button {
+  width: 170rpx;
+  margin-left: 15rpx;
+}
+
+.delete-button {
+  margin-left: 15rpx;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #a3a3a3;
+  align-items: center;
+  display: flex;
+}
+
+.top {
+  display: flex;
+  margin: 15rpx 24rpx;
+}

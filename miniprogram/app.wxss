@@ -4,8 +4,21 @@ page {
   height: 100%;
 }
 
+view {
+  word-break: break-all;
+  word-break: break-word;
+}
+textarea {
+  word-break: break-all;
+  word-break: break-word;
+}
+
 .shadow {
-  box-shadow: 0 0 18rpx rgb(236, 236, 236);
+  box-shadow: 0 0 18rpx rgb(226, 226, 226);
+}
+
+.dark-shadow {
+  box-shadow: 0 0 18rpx rgb(126, 126, 126);
 }
 
 .text-cut {
@@ -20,19 +33,11 @@ page {
   justify-content: center;
   align-items: center;
   padding: 30rpx 0;
-  position: relative;
-  top: 90rpx;
-}
-
-.loadmore image {
-  width: 50rpx;
-  height: 50rpx;
 }
 
 .loadmore view {
   font-size: 28rpx;
   color: #b2b2b2;
-  letter-spacing: 4rpx;
 }
 
 .totop {
@@ -45,4 +50,38 @@ page {
   width: 100rpx;
   height: 100rpx;
   z-index: 9;
+}
+
+.publish {
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  right: 35rpx;
+  bottom: 35rpx;
+}
+
+.hover {
+  background-color: #CDCDCD !important;
+}
+
+.nocontent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 130rpx;
+}
+
+.nocontent image {
+  padding-left: 80rpx;
+  width: 340rpx;
+  height: 272rpx;
+}
+
+.nocontent view {
+  padding-top: 40rpx;
+  font-size: 32rpx;
+  color: #c6c6c8;
 }

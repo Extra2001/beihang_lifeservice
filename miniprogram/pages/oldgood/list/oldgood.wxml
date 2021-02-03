@@ -1,0 +1,38 @@
+<import src="/common.wxml" />
+<van-notify id="van-notify" />
+<van-search custom-class="search-box" value="{{searchKey}}" shape="round" background="#1F90FF" placeholder="请输入搜索关键词"
+    use-action-slot>
+    <view class="search-text" slot="action" hover-class="hover-text" hover-stop-propagation>搜索</view>
+</van-search>
+<!-- 首页轮播图 -->
+<swiper class="banner" indicator-dots autoplay indicator-active-color="#1F90FF" circular>
+    <block wx:for="{{banner}}" wx:key="id">
+        <swiper-item>
+            <image lazy-load src="{{item.img}}" bindtap="go" data-url="{{item.url}}" class="banner-image shadow" />
+        </swiper-item>
+    </block>
+</swiper>
+
+<view style="height:15rpx;" />
+
+<van-tabs nav-class="shadow" bind:change="onTabChange" color="#1F90FF" title-active-color="#1F90FF"
+    tab-active-class="navbar-active" sticky animated>
+    <!-- 全部二手商品 -->
+    <van-tab title="全部" name="{{-1}}">
+        <oldgood list="{{allList}}"></oldgood>
+        <template is="nocontent" wx:if="{{!allList.length}}" />
+        <template is="loadmore" wx:else data="{{nomore}}" />
+    </van-tab>
+    <!-- 二手商品分类 -->
+    <van-tab wx:for="{{kinds}}" wx:key="id" title="{{item.name}}" name="{{item.id}}">
+        <oldgood list="{{kindslist[item.id]}}"></oldgood>
+        <template is="nocontent" wx:if="{{!kindslist[item.id].length}}" />
+        <template is="loadmore" wx:else data="{{nomore}}" />
+    </van-tab>
+</van-tabs>
+
+<van-transition>
+    <image class="publish dark-shadow" lazy-load src="/images/addition.png"></image>
+    <view class="publish-hover" bindtap="goUrl" data-url="/pages/oldgood/publish/index" hover-class="publish-active">
+    </view>
+</van-transition>

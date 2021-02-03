@@ -234,32 +234,6 @@
   border-radius: 15rpx;
 }
 
-.nocontent {
-  width: 100%;
-  height: calc(100% - 400rpx);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-sizing: border-box;
-  position: relative;
-  top: 90rpx;
-  padding-top: 130rpx;
-}
-
-.nocontent image {
-  padding-left: 80rpx;
-  width: 340rpx;
-  height: 272rpx;
-}
-
-.blank_text {
-  padding-top: 40rpx;
-  font-size: 32rpx;
-
-  color: #c6c6c8;
-}
-
 .fixed {
   position: fixed;
   left: 0rpx;

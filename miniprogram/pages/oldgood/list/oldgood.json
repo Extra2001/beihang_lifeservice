@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "校园二手商品",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "oldgood": "/components/oldgood/oldgood"
+    }
+}

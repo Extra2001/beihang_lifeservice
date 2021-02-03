@@ -1,0 +1,130 @@
+<!-- 二手商品 -->
+<van-notify id="van-notify" />
+<van-transition show="{{ !showPubSuccess }}" name="fade-right" custom-class="block" duration="{{ entime }}">
+  <view class="card shadow">
+    <view class="user-box">
+      <open-data class="user-avatar" type="userAvatarUrl"></open-data>
+      <open-data class="user-nickName" type="userNickName"></open-data>
+    </view>
+    <view class="card-center">
+      <view class="thumb-box">
+        <image class="thumb" mode="widthFix" wx:if="{{grids.length}}" src="{{grids[0]}}" />
+        <image class="thumb" mode="widthFix" wx:else src="/images/no_photo.png" />
+      </view>
+      <view class="content">
+        <view class="goodinfo-box">
+          <view class="good-name text-cut"><text wx:if="{{!goodInfo.name}}">商品名称在此处预览</text>{{goodInfo.name}}</view>
+          <text class="good-campus" bindtap="changeCampus">{{campusList[goodInfo.campus]}}</text>
+        </view>
+        <view class="good-price">
+          <text class="good-rawprice">￥{{goodInfo.rawprice}}</text>
+          <text class="good-price-icon">￥</text>{{goodInfo.price}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 图片上传 -->
+  <view class="weui-grids">
+    <block wx:for="{{grids}}" wx:for-index="bindex" wx:key="*this">
+      <view url="" class="weui-grid" hover-class="weui-grid_active" bindtap="selectPhoto" data-bindex='{{bindex}}'>
+        <image class="weui-grid__icon" mode="widthFix" src="{{item}}" />
+      </view>
+    </block>
+  </view>
+  <!-- 商品详情 -->
+  <view class="b_card">
+    <view class="b_bar">
+      <view class="b_name1">商品名称</view>
+      <view wx:if="{{grids.length<3}}" class="b_addImg" bindtap="chooseImg" hover-class="b_addImg-active">
+        <text class="b_addImg1">+ 添加图片</text>
+      </view>
+    </view>
+    <view class="b_bar">
+      <view class="b_plecebox">
+        <input maxlength="100" value="{{goodInfo.name}}" placeholder="输入商品名称" bindinput="weChatInput"
+          data-prop="goodInfo.name" />
+      </view>
+    </view>
+    <view class="b_bar">
+      <view class="b_name">商品种类</view>
+      <view class="b_selector" bindtap="chooseKind">
+        <block wx:if="{{goodInfo.kind!==-1}}">{{kindList[goodInfo.kind]}}</block>
+        <block wx:if="{{goodInfo.kind==-1}}">未选择</block>
+        <image class="right" src="/images/right.png" />
+      </view>
+    </view>
+    <view class="b_bar">
+      <view class="b_name">发布校区</view>
+      <view class="b_selector" bindtap="chooseCampus">
+        <block wx:if="{{goodInfo.campus!==-1}}">{{campusList[goodInfo.campus]}}</block>
+        <block wx:if="{{goodInfo.campus==-1}}">未选择</block>
+        <image class="right" src="/images/right.png" />
+      </view>
+    </view>
+    <view class="b_border"></view>
+    <view class="b_bar">
+      <view class="b_name">出售价格（元）</view>
+      <input class="b_digitinput" type="digit" value="{{goodInfo.price}}" placeholder="出售价格" bindinput="weChatInput"
+        data-prop="goodInfo.price" />
+    </view>
+    <view class="b_bar">
+      <view class="b_name">商品原价（元）</view>
+      <input class="b_digitinput" type="digit" value="{{goodInfo.rawprice}}" placeholder="商品原价" bindinput="weChatInput"
+        data-prop="goodInfo.rawprice" />
+    </view>
+    <view class="b_border"></view>
+    <view class="b_bar">
+      <view class="b_name1">联系方式</view>
+      <view class="b_nobi">※ 至少填写一项</view>
+    </view>
+    <view class="b_bar">
+      <view class="b_plecebox">
+        <input maxlength="11" placeholder="输入手机号" value="{{goodInfo.phone}}" type="digit" bindinput="weChatInput"
+          data-prop="goodInfo.phone" />
+      </view>
+    </view>
+    <view class="b_bar">
+      <view class="b_plecebox">
+        <input maxlength="11" placeholder="输入QQ号" value="{{goodInfo.qq}}" type="digit" bindinput="weChatInput"
+          data-prop="goodInfo.qq" />
+      </view>
+    </view>
+    <view class="b_bar">
+      <view class="b_name1">闲鱼链接</view>
+    </view>
+    <view class="b_bar">
+      <view class="b_plecebox">
+        <input maxlength="200" placeholder="粘贴闲鱼链接" value="{{goodInfo.xianyulink}}" data-prop="goodInfo.xianyulink"
+          bindinput="weChatInput" />
+      </view>
+    </view>
+    <view class="b_border"></view>
+    <view class="b_bar">
+      <view class="name">详细信息</view>
+      <view class="b_nobi">※ 必填</view>
+    </view>
+    <view class="b_notes">
+      <view class="b_text">
+        <textarea value="{{goodInfo.detail}}" bindinput="noteInput" maxlength="500"
+          placeholder="详细介绍一下您的宝贝吧" cursor-spacing="150"></textarea>
+        <view class="b_less">{{note_counts}}/500</view>
+      </view>
+    </view>
+  </view>
+  <view style="padding: 30rpx;">
+    <view class="b_publish" bindtap="publishOldGood" hover-class="b_publish-active">马上发布</view>
+  </view>
+</van-transition>
+<!-- 发布成功 -->
+<van-transition show="{{ showPubSuccess }}" name="fade-right" custom-class="block" duration="{{ entime }}">
+  <view class="c_contain">
+    <image class="c_success" src="/images/success.png"></image>
+    <view class="c_title">恭喜您 发布成功</view>
+    <view class="c_des">同学们将看到您的商品</view>
+    <view class="c_see" bindtap="initialize" data-func="old">再来一件</view>
+    <view class="c_again shadow" bindtap="detail">查看详情</view>
+  </view>
+</van-transition>
+
+<van-action-sheet show="{{ showKindChooser }}" actions="{{ kindAction }}" bind:select="selectKind"
+  bind:close="closeKind" />

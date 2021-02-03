@@ -1,0 +1,34 @@
+<import src="/common.wxml" />
+<wxs src="../../common.wxs" module="morejs" />
+<block wx:if="{{messages.length}}">
+  <view class="top">
+    <van-button type="default" block size="small" style="flex: 1;" bind:click="markAll"
+      disabled="{{morejs.markAll(messages)}}">全部标记为已读</van-button>
+    <van-button type="danger" block size="small" style="margin-left:15rpx;flex: 1;" bind:click="deleteAll">删除全部
+    </van-button>
+  </view>
+  <block wx:for="{{messages}}" wx:key="id">
+    <view class="container" bindtap="detail" data-message="{{item}}">
+      <van-panel custom-class="round shadow" title="{{item.title}}" desc="{{item.subtitle}}"
+        status="{{item.read?'':'未读'}}" use-footer-slot>
+        <view class="content">{{item.detail}}</view>
+        <view class="footer" slot="footer">
+          <view class="time">{{morejs.timelog(item.stamp)}}</view>
+          <view class="buttons">
+            <van-button class="button" wx:if="{{!item.read}}" size="small" block bind:click="markRead"
+              data-message="{{item}}">标记已读</van-button>
+            <van-button class="button" size="small" type="info" block bind:click="detail" data-message="{{item}}">查看详情
+            </van-button>
+            <van-button class="delete-button" size="small" type="danger" block bind:click="deleteIt"
+              data-message="{{item}}">删除</van-button>
+          </view>
+        </view>
+      </van-panel>
+    </view>
+  </block>
+  <template is="loadmore" data="{{nomore}}" />
+</block>
+<block wx:else>
+  <view style="height: 200rpx;"></view>
+  <template is="nocontent" />
+</block>

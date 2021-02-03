@@ -413,10 +413,11 @@
   align-items: center;
 }
 
-.title image {
+.title-image {
   width: 40rpx;
   height: 40rpx;
   border-radius: 20rpx;
+  overflow: hidden;
 }
 
 .title view {

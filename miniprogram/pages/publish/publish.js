@@ -1,4 +1,3 @@
-const db = wx.cloud.database();
 const app = getApp();
 const config = require("../../config.js");
 const data = require("../../server/data.js");
@@ -28,13 +27,15 @@ Page({
             name: '拾物/寻物',
             id: 2,
         }],
-        tabid: 0
+        tabid: 0,
+        oldGoodInfo: {
+            
+        }
     },
     onLoad: function () {
         if (app.globalData.loginStatus == 0) {
             util.common.unLogin();
         }
-        this.setData({ userinfo: app.globalData.userinfo.info });
         this.initializeOldgood();
     },
     // 切换标签页
@@ -113,7 +114,6 @@ Page({
                 detail: '',
                 xianyulink: '',
                 desc: '',
-                campus: app.globalData.userinfo.campus.name
             }
         })
     },
@@ -155,10 +155,8 @@ Page({
     },
     // 通用输入处理程序
     weChatInput: function (e) {
-        console.log(e.currentTarget.dataset.prop + ": " + e.detail.value);
         let obj = {};
         obj[e.currentTarget.dataset.prop] = e.detail.value;
-        console.log(obj);
         this.setData(obj);
     },
     // 发布时长输入改变
@@ -275,7 +273,6 @@ Page({
             chooseDelivery: this.data.chooseDelivery,
             place: this.data.place,
             goodinfo: this.data.goodinfo,
-            userinfo: app.globalData.userinfo.info,
             qq: this.data.qq,
             phone: this.data.phone,
             delivery: this.data.delivery,

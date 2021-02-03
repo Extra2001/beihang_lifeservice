@@ -1,0 +1,92 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "注册",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "详情页",
+          "pathName": "pages/detail/detail",
+          "query": "scene=3c4c6d855d70f8b6124543920c2934e6",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "个人中心",
+          "pathName": "pages/my/my",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "关于我们",
+          "pathName": "pages/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 12,
+          "name": "我的发布【列表】",
+          "pathName": "pages/sell/list/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 13,
+          "name": "我的发布【详情】",
+          "pathName": "pages/sell/detail/detail",
+          "query": "id=efdeb2615d70eb6012393ac94afadcf6",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "搜索",
+          "pathName": "pages/search/search",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "首页",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "二手商品详情",
+          "pathName": "pages/oldgood/detail/detail",
+          "query": "id=2",
+          "scene": null
+        },
+        {
+          "name": "API测试页",
+          "pathName": "pages/poster/poster",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "消息",
+          "pathName": "pages/message/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

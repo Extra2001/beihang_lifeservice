@@ -1,0 +1,31 @@
+<view class="side-row">
+  <block wx:for='{{2}}' wx:key='index'>
+    <view class='side-line'>
+      <block wx:for='{{list}}' wx:for-item='items' wx:key='index' wx:for-index="indexs">
+        <navigator wx:if="{{indexs%2==index}}" url="/pages/oldgood/detail/detail?id={{items._id}}"
+          class="goods-card shadow">
+          <view class="good-image-box">
+            <van-image custom-class="goods-card-image" image-class="goods-card-image" use-loading-slot
+              src="{{items.thumb?items.thumb:'/images/no_photo.png'}}" fit='widthFix' lazy-load>
+              <van-loading slot="loading" />
+            </van-image>
+          </view>
+          <view class='goods-card-right'>
+            <view class='name'>{{items.name}}</view>
+            <view class="price-box">
+              <view class='price'><text class="price-icon">¥</text>{{items.price}}</view>
+              <view class="campus">
+                <image class="campus-image" src="/images/local_thin.png" />
+                {{campusList[items.campus]}}
+              </view>
+            </view>
+            <view class="userinfo-box">
+              <image class="userinfo-box-image" src="{{items.userInfo.avatarUrl}}" />
+              <view class="nickname">{{items.userInfo.nickName}}</view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </block>
+</view>

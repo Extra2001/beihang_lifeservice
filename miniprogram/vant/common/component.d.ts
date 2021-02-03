@@ -1,3 +1,8 @@
-import { VantComponentOptions, CombinedComponentInstance } from 'definitions/index';
-declare function VantComponent<Data, Props, Methods, Computed>(vantOptions?: VantComponentOptions<Data, Props, Methods, Computed, CombinedComponentInstance<Data, Props, Methods, Computed>>): void;
+/// <reference types="miniprogram-api-typings" />
+import { VantComponentOptions } from '../definitions/index';
+declare function VantComponent<
+  Data extends WechatMiniprogram.Component.DataOption,
+  Props extends WechatMiniprogram.Component.PropertyOption,
+  Methods extends WechatMiniprogram.Component.MethodOption
+>(vantOptions: VantComponentOptions<Data, Props, Methods>): void;
 export { VantComponent };

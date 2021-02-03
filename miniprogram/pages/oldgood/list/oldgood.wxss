@@ -1,0 +1,72 @@
+.hover-text {
+    color: #CDCDCD;
+    opacity: 0.7;
+}
+
+.hover-back {
+    background-color: #333333;
+    opacity: 0.2;
+}
+
+.search-box {
+    border-bottom-left-radius: 30rpx;
+    border-bottom-right-radius: 30rpx;
+}
+
+.search-text {
+    color: #ffffff;
+}
+
+.banner {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    height: 301rpx;
+    background-color: #f4f4f4;
+}
+
+.banner-image {
+    width: 702rpx;
+    margin: 0 13px 0.5px 13px;
+    display: flex;
+    box-sizing: border-box;
+    height: 301rpx;
+    border-bottom-left-radius: 15rpx;
+    border-bottom-right-radius: 15rpx;
+}
+
+.navbar {
+    background-color: #F4f4f4;
+}
+
+.navbar-active {
+    font-weight: 600 !important;
+}
+
+
+
+.tabcontent {
+    height: 100%;
+}
+
+.publish {
+    border-radius: 50%;
+    z-index: 90;
+}
+
+.publish-hover {
+    width: 100rpx;
+    height: 100rpx;
+    position: fixed;
+    right: 35rpx;
+    bottom: 35rpx;
+    border-radius: 50%;
+    z-index: 90;
+    opacity: 0;
+    background-color: #000000;
+}
+
+.publish-active {
+    opacity: 0.2;
+    z-index: 100;
+}

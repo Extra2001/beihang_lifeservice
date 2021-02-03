@@ -1,6 +1,7 @@
 const app = getApp();
+const config = require("../config.js");
 const db = wx.cloud.database({
-    env: 'studentinfo-0a2885'
+    env: JSON.parse(config.data).env
 });
 
 const util = {

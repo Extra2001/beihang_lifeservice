@@ -1,0 +1,51 @@
+<import src="/common.wxml" />
+<wxs src="../../../common.wxs" module="morejs" />
+<van-notify id="van-notify" />
+<view class="contain" wx:if="{{list.length!==0}}">
+  <block wx:for="{{list}}" wx:key="_id">
+    <view class="card shadow" bindtap="detail" bindlongpress="showOptions" data-id="{{item._id}}"
+      hover-class="card-active">
+      <view class="top">
+        <view class="top1">
+          <view class="title">
+            <image src="/images/onsell.png"></image>
+            <view>{{item.state==0?'出售中':(item.state==1?'已售出':'已下架')}}</view>
+          </view>
+          <view class="date">{{morejs.timelog(item.creat)}}</view>
+        </view>
+      </view>
+      <view class="center">
+        <view class="thumb-box">
+          <van-image lazy-load fit="widthFix" wx:if="{{ item.thumb }}" src="{{ item.thumb }}" use-loading-slot>
+            <van-loading slot="loading" />
+          </van-image>
+          <image lazy-load mode="widthFix" wx:else src="/images/no_photo.png"></image>
+        </view>
+        <view class="content">
+          <view class="book">
+            <view class="book_name text-cut">{{item.name}}</view>
+            <view class="book_author text-cut">{{item.detail}}</view>
+          </view>
+          <view class="price">
+            <view class="price-icon">￥</view>{{item.price}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!--无内容显示-->
+<view class="nocontent" wx:if="{{list.length===0}}">
+  <image src="/images/blank.png"></image>
+  <view class="blank_text">这里空空如也~</view>
+</view>
+
+<template is="loadmore" wx:if="{{list.length!==0}}" data="{{nomore}}" />
+
+<van-action-sheet
+  show="{{ actionSheet }}"
+  actions="{{ actions }}"
+  bind:close="hideOptions"
+  bind:select="actionHandler"
+/>

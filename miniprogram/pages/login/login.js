@@ -11,64 +11,105 @@ const util = {
 };
 Page({
     data: {
-        ids: -1,
-        studentcard: "",
-        campus: JSON.parse(config.data).campus,
+        campus: -1,
+        email: "",
+        verificationCode: "",
+        campusList: config.common.campus,
+        userInfo: {},
+        showCountDown: false,
+        countDown: 60,
+        emailLoading: false,
+        clientID: ""
     },
     choose: function (e) {
         let that = this;
-        that.setData({ ids: e.detail.value });
+        that.setData({ campus: e.detail.value });
     },
-
-    //获取校园卡号
-    xkInput(e) {
-        this.data.studentcard = e.detail.value;
+    sendEmail: function (e) {
+        if (!this.data.email) {
+            wx.showToast({ title: '请输入邮箱', icon: 'none' });
+            return;
+        }
+        this.setData({ emailLoading: true, showCountDown: true });
+        server.account.getEmailCode({ email: this.data.email + "@buaa.edu.cn" }).then(res => {
+            this.setData({
+                emailLoading: false,
+                clientID: res.clientID
+            });
+            let interval = setInterval(() => {
+                if (this.data.countDown <= 0) {
+                    clearInterval(interval);
+                    this.setData({
+                        countDown: 60,
+                        showCountDown: false
+                    });
+                }
+                else
+                    this.setData({ countDown: this.data.countDown - 1 });
+            }, 1000)
+        }).catch(e => {
+            this.setData({ showCountDown: false, countDown: 60 });
+            util.common.catchFunc(e);
+        })
+    },
+    weChatInput: function (e) {
+        console.log(e);
+        this.data[e.currentTarget.dataset.prop] = e.detail.value;
+        this.setData(this.data);
     },
     //获取用户信息
     getUserInfo: function (e) {
-        let that = this;
+        console.log({
+            campus: this.data.campus,
+            userInfo: this.data.userInfo,
+            studentcard: this.data.studentCard
+        });
+        console.log(e);
         let test = e.detail.errMsg.indexOf("ok");
         if (test == '-1') {
             wx.showToast({
-                title: '授权访问用户信息才能登录哦',
-                icon: 'none',
-                duration: 2000
+                title: '授权后才能绑定哦',
+                icon: 'none'
             });
         } else {
-            that.setData({ userInfo: e.detail.userInfo });
-            that.check();
+            this.data.userInfo = e.detail.userInfo;
+            if (this.checkRegisterInfo())
+                this.submitRegisterInfo();
         }
     },
     //校检
-    check() {
-        let that = this;
-        //校检校区
-        let ids = that.data.ids;
-        if (ids == -1) {
+    checkRegisterInfo: function () {
+        // 校检校区
+        if (this.data.campus == -1) {
             wx.showToast({
                 title: '请选择您所在的校区',
-                icon: 'none',
-                duration: 2000
-            });
-        }
-        //校检校园卡
-        /* let stucard = that.data.studentcard
-        if (stucard.length > 8 || stucard.length < 8) {
-            wx.showToast({
-                title: '请输入正确的校园卡号',
-                icon: 'none',
-                duration: 2000
+                icon: 'none'
             });
             return false;
-        } */
-        wx.showLoading({ title: '正在提交' });
-        server.account.register({
-            campus: that.data.campus[that.data.ids],
-            info: that.data.userInfo,
-            studentcard: that.data.studentcard
-        }).then(() => {
-            wx.showToast({ title: "注册成功" });
-            wx.reLaunch({ url: '/pages/index/index' });
-        }).catch(util.common.catchFunc);
+        }
+        if (!this.data.email) {
+            wx.showToast({
+                title: '请输入邮箱',
+                icon: 'none'
+            });
+            return false;
+        }
+        return true;
     },
+    submitRegisterInfo: function () {
+        wx.showLoading({ title: '正在提交信息' });
+        server.account.register({
+            campus: this.data.campus,
+            userInfo: this.data.userInfo,
+            email: this.data.email + "@buaa.edu.cn",
+            clientID: this.data.clientID,
+            verificationCode: this.data.verificationCode
+        }).then(res => {
+            app.globalData.loginStatus = 1;
+            app.globalData.user = res.user;
+            wx.hideLoading();
+            wx.showToast({ title: "注册成功" });
+            wx.reLaunch({ url: '/pages/oldgood/list/oldgood' });
+        }).catch(util.common.catchFunc);
+    }
 })
