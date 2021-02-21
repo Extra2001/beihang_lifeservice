@@ -1,0 +1,72 @@
+<wxs src="../../../common.wxs" module="morejs" />
+<van-notify id="van-notify" />
+
+<van-search custom-class="search-box" value="{{searchKey}}" shape="round" background="#1F90FF" bind:change="search"
+  bind:search="search" placeholder="搜索" use-action-slot>
+  <view slot="action" class="addimg" bindtap="addNewCourseDialog">
+    <image src="/images/add.png" />
+  </view>
+</van-search>
+
+<view class="container" wx:if="{{(!searched)&&starCourseList.length}}">
+  <van-index-bar sticky="{{false}}">
+    <view class="cell">
+      <van-index-anchor index="我关注的课程" />
+      <view class="card1 shadow">
+        <van-cell-group>
+          <block wx:for="{{starCourseList}}" wx:key="id" wx:for-item="items">
+            <van-cell title="{{items.name}}" is-link border clickable title-width="450rpx"
+              url="/pages/course/detail/index?id={{items._id}}" value="{{items.commentCount}}条评价" />
+          </block>
+        </van-cell-group>
+      </view>
+    </view>
+  </van-index-bar>
+</view>
+
+<view class="container" wx:if="{{(!searched)&&hotCourseList.length}}">
+  <van-index-bar sticky="{{false}}">
+    <view class="cell">
+      <van-index-anchor index="热门课程" />
+      <view class="card1 shadow">
+        <van-cell-group>
+          <block wx:for="{{hotCourseList}}" wx:key="id" wx:for-item="items">
+            <van-cell title="{{items.name}}" is-link border clickable title-width="450rpx"
+              url="/pages/course/detail/index?id={{items._id}}" value="{{items.commentCount}}条评价"
+              label="平均评价指数：{{items.avgStandard}}" />
+          </block>
+        </van-cell-group>
+      </view>
+    </view>
+  </van-index-bar>
+</view>
+
+<view class="loading" wx:if="{{loading}}">
+  <van-loading size="48px" vertical>加载中...</van-loading>
+</view>
+
+<view wx:else class="container" style="padding-bottom: 30rpx;">
+  <van-index-bar sticky="{{false}}">
+    <view class="cell" wx:for="{{character}}" wx:key="id">
+      <van-index-anchor index="{{item}}" wx:if="{{morejs.filter(courseList, item).length}}" />
+      <view class="card1 shadow">
+        <van-cell-group>
+          <block wx:for="{{morejs.filter(courseList, item)}}" wx:key="id" wx:for-item="items">
+            <van-cell title="{{items.name}}" is-link border clickable title-width="450rpx"
+              url="/pages/course/detail/index?id={{items._id}}" value="{{items.commentCount}}条评价"
+              label="平均评价指数：{{items.avgStandard}}" />
+          </block>
+        </van-cell-group>
+      </view>
+    </view>
+  </van-index-bar>
+</view>
+
+<van-dialog id="van-dialog" use-slot show-cancel-button bind:getuserinfo="getUserInfo">
+  <view style="margin: 15rpx 24rpx;">
+    <view style="font-size: 26rpx;">请添加列表中没有的课程。如果列表中存在该课程申请不会通过。</view>
+    <view style="font-size: 26rpx;">要发表课程评价，请进入课程详情页面。</view>
+    <van-field value="{{ newCourseName }}" required clearable label="课程名称" placeholder="请输入课程名称"
+      bind:input="courseInput" border="" />
+  </view>
+</van-dialog>

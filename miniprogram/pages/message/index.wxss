@@ -1,3 +1,4 @@
+@import "./index.skeleton.wxss";
 .container {
   margin: 15rpx 24rpx;
 }
@@ -25,10 +26,12 @@
 .button {
   width: 170rpx;
   margin-left: 15rpx;
+  border-radius: 15rpx;
 }
 
 .delete-button {
   margin-left: 15rpx;
+  border-radius: 15rpx;
 }
 
 .time {

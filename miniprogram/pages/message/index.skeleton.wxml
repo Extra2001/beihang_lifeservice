@@ -1,0 +1,157 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/2/17 下午11:57:12
+使用方法：
+在 C:\Users\jingx\Projects\beihang_lifeservice\miniprogram\pages\message\index.wxml 引入模板
+
+```
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 C:\Users\jingx\Projects\beihang_lifeservice\miniprogram\pages\message\index.wxss 中引入样式
+```
+@import "./index.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view class="top">
+      <view is="vant/button/index" style="flex: 1;">
+        <button app-parameter="true" business-id="true" class="van-button vant-button-index--van-button van-button--default vant-button-index--van-button--default van-button--small vant-button-index--van-button--small van-button--block vant-button-index--van-button--block van-button--round vant-button-index--van-button--round van-button--disabled vant-button-index--van-button--disabled van-button--unclickable vant-button-index--van-button--unclickable sk-button sk-pseudo sk-pseudo-circle"
+          data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+          <view class="van-button__text vant-button-index--van-button__text sk-transparent sk-text-20-0000-115 sk-text" style="background-position-x: 50%;">全部标记为已读</view>
+        </button>
+      </view>
+      <view is="vant/button/index" style="margin-left:7px;flex: 1;">
+        <button app-parameter="true" business-id="true" class="van-button vant-button-index--van-button van-button--danger vant-button-index--van-button--danger van-button--small vant-button-index--van-button--small van-button--block vant-button-index--van-button--block van-button--round vant-button-index--van-button--round sk-button sk-pseudo sk-pseudo-circle"
+          data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+          <view class="van-button__text vant-button-index--van-button__text sk-transparent sk-text-20-0000-254 sk-text" style="background-position-x: 50%;">删除全部
+          </view>
+        </button>
+      </view>
+    </view>
+    <view class="container" data-message="[object Object]">
+      <view is="vant/panel/index">
+        <view class="van-panel panel-index--van-panel van-hairline--top-bottom panel-index--van-hairline--top-bottom round shadow sk-pseudo sk-pseudo-circle">
+          <view is="vant/cell/index">
+            <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+              <view class="van-cell__title cell-index--van-cell__title sk-transparent" style="true">陈程澄回复了您的留言
+                <view class="van-cell__label cell-index--van-cell__label sk-transparent sk-text-16-6667-134 sk-text">发表一波</view>
+              </view>
+            </view>
+          </view>
+          <view class="van-panel__content panel-index--van-panel__content">
+            <view class="content sk-transparent sk-text-14-2857-747 sk-text">。。。。</view>
+          </view>
+          <view class="van-panel__footer panel-index--van-panel__footer van-hairline--top panel-index--van-hairline--top sk-pseudo sk-pseudo-circle">
+            <view class="footer">
+              <view class="time sk-transparent sk-text-14-2857-253 sk-text">1小时前</view>
+              <view class="buttons">
+                <view is="vant/button/index" class="button" data-message="[object Object]">
+                  <button app-parameter="true" business-id="true" class="van-button vant-button-index--van-button van-button--info vant-button-index--van-button--info van-button--small vant-button-index--van-button--small van-button--block vant-button-index--van-button--block van-button--round vant-button-index--van-button--round sk-button sk-pseudo sk-pseudo-circle"
+                    data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+                    <view class="van-button__text vant-button-index--van-button__text sk-transparent sk-text-20-0000-313 sk-text" style="background-position-x: 50%;">查看详情
+                    </view>
+                  </button>
+                </view>
+                <view is="vant/button/index" class="delete-button" data-message="[object Object]">
+                  <button app-parameter="true" business-id="true" class="van-button vant-button-index--van-button van-button--danger vant-button-index--van-button--danger van-button--small vant-button-index--van-button--small van-button--block vant-button-index--van-button--block van-button--round vant-button-index--van-button--round sk-button sk-pseudo sk-pseudo-circle"
+                    data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+                    <view class="van-button__text vant-button-index--van-button__text sk-transparent sk-text-20-0000-729 sk-text" style="background-position-x: 50%;">删除</view>
+                  </button>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="container" data-message="[object Object]">
+      <view is="vant/panel/index">
+        <view class="van-panel panel-index--van-panel van-hairline--top-bottom panel-index--van-hairline--top-bottom round shadow sk-pseudo sk-pseudo-circle">
+          <view is="vant/cell/index">
+            <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+              <view class="van-cell__title cell-index--van-cell__title sk-transparent" style="true">陈程澄回复了您的留言
+                <view class="van-cell__label cell-index--van-cell__label sk-transparent sk-text-16-6667-691 sk-text">发表一波</view>
+              </view>
+            </view>
+          </view>
+          <view class="van-panel__content panel-index--van-panel__content">
+            <view class="content sk-transparent sk-text-14-2857-846 sk-text">有毛病！</view>
+          </view>
+          <view class="van-panel__footer panel-index--van-panel__footer van-hairline--top panel-index--van-hairline--top sk-pseudo sk-pseudo-circle">
+            <view class="footer">
+              <view class="time sk-transparent sk-text-14-2857-919 sk-text">1小时前</view>
+              <view class="buttons">
+                <view is="vant/button/index" class="button" data-message="[object Object]">
+                  <button app-parameter="true" business-id="true" class="van-button vant-button-index--van-button van-button--info vant-button-index--van-button--info van-button--small vant-button-index--van-button--small van-button--block vant-button-index--van-button--block van-button--round vant-button-index--van-button--round sk-button sk-pseudo sk-pseudo-circle"
+                    data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+                    <view class="van-button__text vant-button-index--van-button__text sk-transparent sk-text-20-0000-735 sk-text" style="background-position-x: 50%;">查看详情
+                    </view>
+                  </button>
+                </view>
+                <view is="vant/button/index" class="delete-button" data-message="[object Object]">
+                  <button app-parameter="true" business-id="true" class="van-button vant-button-index--van-button van-button--danger vant-button-index--van-button--danger van-button--small vant-button-index--van-button--small van-button--block vant-button-index--van-button--block van-button--round vant-button-index--van-button--round sk-button sk-pseudo sk-pseudo-circle"
+                    data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+                    <view class="van-button__text vant-button-index--van-button__text sk-transparent sk-text-20-0000-998 sk-text" style="background-position-x: 50%;">删除</view>
+                  </button>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="container" data-message="[object Object]">
+      <view is="vant/panel/index">
+        <view class="van-panel panel-index--van-panel van-hairline--top-bottom panel-index--van-hairline--top-bottom round shadow sk-pseudo sk-pseudo-circle">
+          <view is="vant/cell/index">
+            <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+              <view class="van-cell__title cell-index--van-cell__title sk-transparent" style="true">陈程澄 想要您的商品！
+                <view class="van-cell__label cell-index--van-cell__label sk-transparent sk-text-16-6667-797 sk-text">我真服了呀</view>
+              </view>
+            </view>
+          </view>
+          <view class="van-panel__content panel-index--van-panel__content">
+            <view class="content sk-transparent sk-text-14-2857-709 sk-text">？</view>
+          </view>
+          <view class="van-panel__footer panel-index--van-panel__footer van-hairline--top panel-index--van-hairline--top sk-pseudo sk-pseudo-circle">
+            <view class="footer">
+              <view class="time sk-transparent sk-text-14-2857-26 sk-text">6小时前</view>
+              <view class="buttons">
+                <view is="vant/button/index" class="button" data-message="[object Object]">
+                  <button app-parameter="true" business-id="true" class="van-button vant-button-index--van-button van-button--info vant-button-index--van-button--info van-button--small vant-button-index--van-button--small van-button--block vant-button-index--van-button--block van-button--round vant-button-index--van-button--round sk-button sk-pseudo sk-pseudo-circle"
+                    data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+                    <view class="van-button__text vant-button-index--van-button__text sk-transparent sk-text-20-0000-699 sk-text" style="background-position-x: 50%;">查看详情
+                    </view>
+                  </button>
+                </view>
+                <view is="vant/button/index" class="delete-button" data-message="[object Object]">
+                  <button app-parameter="true" business-id="true" class="van-button vant-button-index--van-button van-button--danger vant-button-index--van-button--danger van-button--small vant-button-index--van-button--small van-button--block vant-button-index--van-button--block van-button--round vant-button-index--van-button--round sk-button sk-pseudo sk-pseudo-circle"
+                    data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+                    <view class="van-button__text vant-button-index--van-button__text sk-transparent sk-text-20-0000-686 sk-text" style="background-position-x: 50%;">删除</view>
+                  </button>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="container" data-message="[object Object]">
+      <view is="vant/panel/index">
+        <view class="van-panel panel-index--van-panel van-hairline--top-bottom panel-index--van-hairline--top-bottom round shadow sk-pseudo sk-pseudo-circle">
+          <view is="vant/cell/index">
+            <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+              <view class="van-cell__title cell-index--van-cell__title sk-transparent" style="true">陈程澄给您留言
+                <view class="van-cell__label cell-index--van-cell__label sk-transparent sk-text-16-6667-327 sk-text">我真服了呀</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

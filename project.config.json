@@ -2,7 +2,7 @@
   "miniprogramRoot": "miniprogram/",
   "cloudfunctionRoot": "cloudfunctions/",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -39,7 +39,7 @@
   },
   "appid": "wxa3f7471b6eb82d5e",
   "projectname": "beihang_lifeservice",
-  "libVersion": "2.10.1",
+  "libVersion": "2.15.0",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",

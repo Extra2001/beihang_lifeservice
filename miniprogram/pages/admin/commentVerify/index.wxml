@@ -1,0 +1,10 @@
+<block wx:for="{{list}}" wx:key="id">
+  <van-panel title="{{item.comment.teacher}}" use-footer-slot>
+    <view class="content">{{item.comment.value}}</view>
+    <view class="footer" slot="footer">
+      <view class="buttons">
+        <van-button size="small" type="info" bind:click="recoverIt" data-message="{{item}}">恢复</van-button>
+      </view>
+    </view>
+  </van-panel>
+</block>

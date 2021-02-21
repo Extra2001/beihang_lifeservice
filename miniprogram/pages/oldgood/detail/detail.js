@@ -2,13 +2,10 @@ const app = getApp();
 const config = require("../../../config.js");
 const server = {
   account: require("../../../server/account.js"),
-  data: require("../../../server/data.js"),
-  notice: require("../../../server/notice.js"),
   oldgood: require("../../../server/oldgood.js"),
   comment: require("../../../server/comment.js"),
 };
 const util = {
-  cache: require("../../../util/cache.js"),
   common: require("../../../util/common.js")
 };
 Page({
@@ -35,26 +32,21 @@ Page({
     ShowIWant: false
   },
   onLoad: function (options) {
-    util.common.checkLogin({
-      fail: () => { wx.navigateBack() }
-    });
     this.data.commentPublishOptions.autosized.minHeight = 100 / 750 * app.globalData.systeminfo.windowWidth;
     this.data.commentPublishOptions.autosized.maxHeight = 350 / 750 * app.globalData.systeminfo.windowWidth;
     this.data._id = options.id;
     this.getGoodInfo();
     this.getComments();
   },
-  onReady: function () {
-
-  },
-  onShow: function () {
-
-  },
   onPullDownRefresh: function () {
     this.getComments();
   },
   onShareAppMessage: function () {
-
+    return {
+      title: '北航二手商品：' + this.data.publish.goodInfo.name,
+      imageUrl: this.data.publish.goodInfo.img[0],
+      path: '/pages/oldgood/detail/detail?id=' + this.data._id
+    }
   },
   getGoodInfo: function () {
     server.oldgood.getOne({
@@ -84,6 +76,7 @@ Page({
   },
   // 显示卖家信息按钮
   buy: function () {
+    if (!util.common.checkLogin(null, '为保护师生信息安全，请认证后查看联系方式。')) return;
     let that = this
     let actionSheetArray = [];
     let data = [];
@@ -145,10 +138,15 @@ Page({
   // 设置轮播图高度
   setSwiperHeight: function (image) {
     let that = this;
+
     wx.getImageInfo({
       src: image,
       success: function (res) {
-        let swiperH = res.height / res.width * 650;
+        let height = res.height, width = res.width;
+        if (res.orientation == "right" || res.orientation == "left") {
+          height = res.width; width = res.height;
+        }
+        let swiperH = height / width * 650;
         that.setData({ swiperHeight: swiperH });
       }
     });
@@ -160,6 +158,7 @@ Page({
   },
   // 发表评论框
   showCommentPublish: function () {
+    if (!util.common.checkLogin(null, '需要通过校友认证才能发布留言，是否认证？')) return;
     this.data.commentPublishOptions.isReply = false;
     this.setData({ loading: false });
     this.setData({
@@ -198,16 +197,17 @@ Page({
     }
     if (this.data.commentPublishOptions.isReply) {
       data.commentId = this.data.commentPublishOptions.currentCommentId;
-      data.replyOpenid = this.data.commentPublishOptions.toUserId
+      data.replyEmail = this.data.commentPublishOptions.toUserEmail
       server.comment.reply(data).then(callBack).catch(util.common.catchFunc);
     } else
       server.comment.publish(data).then(callBack).catch(util.common.catchFunc);
   },
   // 点击回复评论
   commentTap: function (e) {
+    if (!util.common.checkLogin(null, '需要通过校友认证才能回复留言，是否认证？')) return;
     let dataset = e.currentTarget.dataset;
     this.data.commentPublishOptions.isReply = true;
-    this.data.commentPublishOptions.toUserId = dataset.comment.openid;
+    this.data.commentPublishOptions.toUserEmail = dataset.comment.email;
     if (dataset.parent)
       this.data.commentPublishOptions.currentCommentId = dataset.parent._id;
     else

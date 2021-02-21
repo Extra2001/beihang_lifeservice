@@ -1,0 +1,91 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/2/17 下午11:42:13
+使用方法：
+在 C:\Users\jingx\Projects\beihang_lifeservice\miniprogram\pages\oldgood\detail\detail.wxml 引入模板
+
+```
+<import src="detail.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 C:\Users\jingx\Projects\beihang_lifeservice\miniprogram\pages\oldgood\detail\detail.wxss 中引入样式
+```
+@import "./detail.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view is="vant/notify/index" id="van-notify">
+      <view is="vant/transition/index"></view>
+    </view>
+    <view class="card shadow">
+      <swiper circular="true" indicator-dots="true" class="swiper" indicator-active-color="#1F90FF" style="height:243px;" current="0" autoplay="false">
+        <swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);">
+          <view is="vant/image/index" data-img="https://bhlsoss.buaaer.top/oldgood/202102/161219261968549633.jpg?e=1613580126&amp;token=VynXRGjJk0mZKSiup_UOyeLWBMJFsm4eroOwP-LL:S77X1U_k0nmovlrXxQVUCnG9Sk4=">
+            <view class="swiper-image van-image image-index--van-image" style="true">
+              <image class="swiper-image van-image__img image-index--van-image__img sk-image" mode="widthFix" lazy-load="true" style="height: 240.562px;"></image>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+      <view style="height:15px;"></view>
+      <view class="title sk-transparent sk-text-14-2857-509 sk-text">我真服了呀</view>
+      <view class="price-box">
+        <view class="time sk-transparent sk-text-14-2857-178 sk-text">发布于02月01日</view>
+        <view class="price-raw sk-transparent sk-text-14-2857-413 sk-text" style="text-decoration-color: transparent;">￥20</view>
+        <view class="price sk-transparent">
+          <text class="price-icon sk-transparent sk-opacity">￥</text>15</view>
+      </view>
+    </view>
+    <view class="card shadow">
+      <view class="user-box">
+        <image lazy-load="true" class="user-avatar sk-image"></image>
+        <view class="des-box">
+          <view class="user-nickname sk-transparent sk-text-14-2857-914 sk-text">哄哄</view>
+          <view class="local-box">
+            <image class="sk-image"></image>
+            <view class="sk-transparent sk-text-14-2857-926 sk-text">学院路校区</view>
+          </view>
+        </view>
+        <image lazy-load="true" class="user-sex sk-image"></image>
+      </view>
+      <view class="notes_box">
+        <view class="notes">
+          <view class="notes_text sk-transparent sk-text-18-1818-638 sk-text">厦门大学。好看的很</view>
+        </view>
+      </view>
+    </view>
+    <view class="card shadow comment-card">
+      <view class="comment-title sk-transparent sk-text-14-2857-371 sk-text">全部留言 · 3</view>
+      <view class="border1" style="border: none;"></view>
+      <view>
+        <view class="comment-contain" data-comment="[object Object]" hover-class="center-1-active" hover-stay-time="100">
+          <view class="comment-avatar">
+            <image class="sk-image"></image>
+          </view>
+          <view class="comment-info">
+            <view class="comment-nickname text-cut sk-transparent sk-text-14-2857-409 sk-text">陈程澄</view>
+            <view class="comment-border"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="tabbar" style="border: none;">
+      <view class="t_card">
+        <image class="sk-image"></image>
+        <text class="sk-transparent sk-text-14-2857-854 sk-text" style="background-position-x: 50%;">评论</text>
+        <button class="t_button sk-button sk-pseudo sk-pseudo-circle"></button>
+      </view>
+      <view class="t_card">
+        <image class="sk-image"></image>
+        <text class="sk-transparent sk-text-14-2857-99 sk-text" style="background-position-x: 50%;">分享</text>
+        <button class="t_button sk-button sk-pseudo sk-pseudo-circle" open-type="share"></button>
+      </view>
+      <view class="buy_box">
+        <view class="buy shadow bg_blue sk-transparent sk-text-14-2857-551 sk-text">联系卖家</view>
+      </view>
+    </view>
+  </view>
+</template>

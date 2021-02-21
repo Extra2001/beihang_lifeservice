@@ -2,25 +2,25 @@ const app = getApp();
 const config = require("../../config.js");
 const server = {
     account: require("../../server/account.js"),
-    data: require("../../server/data.js"),
-    notice: require("../../server/notice.js")
 };
 const util = {
-    cache: require("../../util/cache.js"),
     common: require("../../util/common.js")
 };
 Page({
     data: {
         showShare: false,
-        poster: JSON.parse(config.data).share_poster,
-        loginStatus: 0
+        loginStatus: 0,
+        isAdmin: false
     },
     onShow: function () {
         this.setData({
             loginStatus: app.globalData.loginStatus,
             currcampus: config.common.campus[app.globalData.user.campus],
-            openid: app.globalData.user.openid
+            email: app.globalData.user.email
         });
+        server.account.isAdmin().then(() => {
+            this.setData({ isAdmin: true });
+        }).catch(() => { this.setData({ isAdmin: false }) });
     },
     //切换校区
     changeCampus: function (e) {
@@ -38,23 +38,23 @@ Page({
     },
     // 跳转页面方法
     go: function (e) {
+        if (e.currentTarget.dataset.status == 3) {
+            server.account.isAdmin().then(() => {
+                util.common.goUrl(e.currentTarget.dataset.go);
+            }).catch(util.common.catchFunc)
+            return
+        }
+        else if (e.currentTarget.dataset.status == 0) {
+            wx.navigateTo({ url: e.currentTarget.dataset.go })
+            return
+        }
         util.common.goUrl(e.currentTarget.dataset.go);
-    },
-    //展示分享弹窗
-    switchPop: function () {
-        this.setData({ showShare: !this.data.showShare });
-    },
-    //预览图片
-    preview(e) {
-        wx.previewImage({
-            urls: e.currentTarget.dataset.link.split(",")
-        });
     },
     onShareAppMessage: function () {
         return {
-            title: JSON.parse(config.data).share_title,
-            imageUrl: JSON.parse(config.data).share_img,
-            path: '/pages/start/start'
+            path: '/pages/course/list/index',
+            imageUrl: '/images/share_post.png',
+            title: "北航生活服务·通识课评价"
         }
     }
 })

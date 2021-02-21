@@ -1,39 +1,50 @@
+<van-notify id="van-notify" />
+
 <view class="contain">
-    <view class="card shadow">
-        <view class="top_box">
-            <view class="top_1">
-                <view wx:if="{{ !loginStatus }}" class="top_1_1" bindtap="go" data-go="/pages/login/login">
-                    您尚未登录
-                </view>
-                <view wx:else class="top_1_1">
-                    <open-data type="userNickName"></open-data>
-                </view>
-                <view class="top_1_2" wx:if="{{ !loginStatus }}">登录后可使用全部功能</view>
-                <view class="top_1_2" wx:else>
-                    <text class="top_1_2" bindtap="changeCampus">目前所在校区：{{currcampus}}▼</text>
-                </view>
-            </view>
-            <view class="top_2">
-                <view class="avator">
-                    <open-data wx:if="{{ loginStatus }}" type="userAvatarUrl"></open-data>
-                    <image wx:else src="/images/avator.png"></image>
-                </view>
-            </view>
+  <view class="card shadow">
+    <view class="top_box">
+      <view class="top_1" style="{{ !loginStatus?'':'padding: 0 20rpx;' }}">
+        <view wx:if="{{ !loginStatus }}" class="top_1_1" bindtap="go" data-go="/pages/login/login">
+          您尚未认证
         </view>
-        <view class="center_box">
-            <view class="center_1" hover-class="center_1-hover" bindtap="go" data-go="/pages/oldgood/mylist/index" data-status="1">
-                <image src="/images/history.png"></image>
-                <view>我的二手商品</view>
-            </view>
-            <view class="center_1" hover-class="center_1-hover" bindtap="go" data-go="/pages/help/help">
-                <image src="/images/help.png"></image>
-                <view>帮助中心</view>
-            </view>
+        <view wx:else class="top_1_1">
+          <open-data type="userNickName"></open-data>
         </view>
+        <view class="top_1_2" style="margin-top: 21rpx;" wx:if="{{ !loginStatus }}">通过认证可使用全部功能</view>
+        <view style="flex-direction: column; display: flex;" wx:else>
+          <text class="top_1_2">{{email}}</text>
+          <text class="top_1_2" bindtap="changeCampus">目前所在校区：{{currcampus}}▼</text>
+        </view>
+      </view>
+      <view class="top_2">
+        <view class="avator">
+          <open-data wx:if="{{ loginStatus }}" type="userAvatarUrl"></open-data>
+          <image wx:else src="/images/avator.png"></image>
+        </view>
+      </view>
     </view>
-    <view class="card shadow">
-        <view class="bottom_box">
-            <view class="bottom_card" hover-class="bottom_card-hover">
+    <view class="center_box">
+      <view class="center_1" hover-class="center_1-hover" data-status="2" bindtap="go"
+        data-go="/pages/oldgood/mylist/index" data-status="1">
+        <image src="/images/history.png"></image>
+        <view>我的二手商品</view>
+      </view>
+      <view class="center_1" hover-class="center_1-hover" bindtap="go" data-go="/pages/course/star/star">
+        <image src="/images/star.png"></image>
+        <view>我关注的课程</view>
+      </view>
+    </view>
+  </view>
+  <view class="card shadow">
+    <view class="bottom_box">
+      <view class="bottom_card" hover-class="bottom_card-hover" bindtap="go" data-go="/pages/changeEmail/index">
+        <view class="bottom_1">
+          <image src="/images/mail.png"></image>
+          <view>更换邮箱</view>
+        </view>
+        <image src="/images/go.png"></image>
+      </view>
+      <!-- <view class="bottom_card" hover-class="bottom_card-hover">
                 <view class="bottom_1">
                     <image src="/images/contact.png"></image>
                     <view>我发布的评论</view>
@@ -48,59 +59,41 @@
                 </view>
                 <image src="/images/go.png"></image>
                 <button open-type="feedback"></button>
-            </view>
-            <view class="border1"></view>
-            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="switchPop">
-                <view class="bottom_1">
-                    <image src="/images/share.png"></image>
-                    <view>好用分享</view>
-                </view>
-                <image src="/images/go.png"></image>
-            </view>
-            <view class="border1"></view>
-            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="go" data-go="/pages/admin/admin/admin" wx:if="{{openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}">
-                <view class="bottom_1">
-                    <image src="/images/manage.png"></image>
-                    <view>后台管理</view>
-                </view>
-                <image src="/images/go.png"></image>
-            </view>
-            <view class="border1" wx:if="{{openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c'}}"></view>
-            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="go" data-go="/pages/about/about">
-                <view class="bottom_1">
-                    <image src="/images/guanyu.png"></image>
-                    <view>关于程序</view>
-                </view>
-                <image src="/images/go.png"></image>
-            </view>
-            <view class="border1" wx:if="{{!(openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c')}}"></view>
-            <view class="bottom_card" hover-class="bottom_card-hover" bindtap="clearAcc" wx:if="{{!(openid=='oijLj5FTi2bFL11T3DF9zuFpPe6c')}}">
+            </view> -->
+      <view class="border1"></view>
+      <view class="bottom_card" hover-class="bottom_card-hover" bindtap="switchPop">
+        <view class="bottom_1">
+          <image src="/images/share.png"></image>
+          <view>分享</view>
+        </view>
+        <image src="/images/go.png"></image>
+        <button open-type="share"></button>
+      </view>
+      <view class="border1"></view>
+      <view class="bottom_card" hover-class="bottom_card-hover" bindtap="go" data-status="3"
+        data-go="/pages/admin/admin/admin" wx:if="{{isAdmin}}">
+        <view class="bottom_1">
+          <image src="/images/manage.png"></image>
+          <view>后台管理</view>
+        </view>
+        <image src="/images/go.png"></image>
+      </view>
+      <view class="border1" wx:if="{{isAdmin}}"></view>
+      <view class="bottom_card" hover-class="bottom_card-hover" bindtap="go" data-go="/pages/about/about"
+        data-status="0">
+        <view class="bottom_1">
+          <image src="/images/guanyu.png"></image>
+          <view>关于程序</view>
+        </view>
+        <image src="/images/go.png"></image>
+      </view>
+      <!-- <view class="bottom_card" hover-class="bottom_card-hover" bindtap="clearAcc">
                 <view class="bottom_1">
                     <image src="/images/trash.png"></image>
                     <view class="bg_red">注销账号</view>
                 </view>
                 <image src="/images/go.png"></image>
-            </view>
-        </view>
+            </view> -->
     </view>
+  </view>
 </view>
-<!-- 分享弹出层 -->
-<van-popup show="{{ showShare }}" bind:close="switchPop">
-    <view class="share_contain">
-        <view class="share_border"></view>
-        <view class="share_title">分享到</view>
-        <view class="share_box">
-            <view class="share_one">
-                <image src="/images/weixin.png"></image>
-                <view>微信好友</view>
-                <button class="share_button" open-type="share"></button>
-            </view>
-            <view class="share_bor"></view>
-            <view class="share_one">
-                <image src="/images/pyq.png"></image>
-                <view>朋友圈</view>
-                <button class="share_button" bindtap="preview" data-link="{{poster}}"></button>
-            </view>
-        </view>
-    </view>
-</van-popup>

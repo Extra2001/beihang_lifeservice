@@ -1,6 +1,7 @@
 <import src="/common.wxml" />
 <wxs src="../../../common.wxs" module="morejs" />
 <van-notify id="van-notify" />
+
 <view class="contain" wx:if="{{list.length!==0}}">
   <block wx:for="{{list}}" wx:key="_id">
     <view class="card shadow" bindtap="detail" bindlongpress="showOptions" data-id="{{item._id}}"

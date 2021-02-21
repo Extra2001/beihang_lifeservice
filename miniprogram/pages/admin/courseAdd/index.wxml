@@ -1,0 +1,11 @@
+<block wx:for="{{list}}" wx:key="id">
+  <van-panel title="{{item.email}}" use-footer-slot>
+    <view class="content">课程名称：{{item.course.name}}</view>
+    <view class="footer" slot="footer">
+      <view class="buttons">
+        <van-button size="small" type="info" bind:click="passIt" data-message="{{item}}">通过</van-button>
+        <van-button size="small" type="danger" bind:click="deleteIt" data-message="{{item}}">不通过</van-button>
+      </view>
+    </view>
+  </van-panel>
+</block>

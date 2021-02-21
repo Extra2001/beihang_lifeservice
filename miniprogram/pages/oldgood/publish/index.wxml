@@ -1,5 +1,6 @@
 <!-- 二手商品 -->
 <van-notify id="van-notify" />
+
 <van-transition show="{{ !showPubSuccess }}" name="fade-right" custom-class="block" duration="{{ entime }}">
   <view class="card shadow">
     <view class="user-box">

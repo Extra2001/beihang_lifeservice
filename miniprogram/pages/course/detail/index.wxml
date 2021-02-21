@@ -1,0 +1,119 @@
+<wxs src="../../../common.wxs" module="morejs" />
+<van-notify id="van-notify" />
+<import src="/common.wxml" />
+<!-- <template is="nocontent" wx:if="{{!courseDetail.name}}" /> -->
+<import src="index.skeleton.wxml" />
+<template is="skeleton" wx:if="{{!courseDetail.name}}" />
+<block wx:else>
+  <!-- 商品基本信息 -->
+  <view class="card shadow">
+    <view class="title">{{courseDetail.name}}</view>
+    <view class="price-box">
+      <view class="time">共 {{courseDetail.number}} 条评价</view>
+    </view>
+  </view>
+  <view class="button-box">
+    <van-button class="star-button" disabled="{{star==0}}" round block type="warning" bind:click="starCourse">
+      {{star==2?'取消': ''}}关注课程</van-button>
+    <van-button class="addcomment-button" round block type="info" bind:click="goPublish">添加评价</van-button>
+  </view>
+  <view class="card shadow">
+    <view class="title">考核情况</view>
+    <view class="placehold">
+      <view class="test-box">
+        <view class="testtext">
+          <view class="testperson" style="{{(!courseDetail.test)?'color:#BDBDBD;':''}}">{{courseDetail.test}}</view>名同学反应该课程有
+          <view class="testway" style="background-color: #E91E63;">闭卷考试</view>
+        </view>
+        <view class="testtext">
+          <view class="testperson" style="{{(!courseDetail.opentest)?'color:#BDBDBD;':''}}">{{courseDetail.opentest}}</view>名同学反应该课程有
+          <view class="testway" style="background-color: #2196F3;">开卷考试</view>
+        </view>
+        <view class="testtext">
+          <view class="testperson" style="{{(!courseDetail.paper)?'color:#BDBDBD;':''}}">{{courseDetail.paper}}</view>名同学反应该课程有
+          <view class="testway" style="background-color: #FF5722;">论文</view>
+        </view>
+        <view class="testtext">
+          <view class="testperson" style="{{(!courseDetail.show)?'color:#BDBDBD;':''}}">{{courseDetail.show}}</view>名同学反应该课程有
+          <view class="testway" style="background-color: #9C27B0;">课堂展示</view>
+        </view>
+        <view class="testtext">
+          <view class="testperson" style="{{(!courseDetail.no)?'color:#BDBDBD;':''}}">{{courseDetail.no}}</view>名同学反应该课程为
+          <view class="testway" style="background-color: #009688;">无考核</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--详细信息-->
+  <view class="card shadow">
+    <view class="title">平均评价指标</view>
+    <view class="placehold">
+      <view class="circle-box">
+        <view class="circle">
+          <van-circle value="{{ avgs.w }}" stroke-width="6" text="{{ morejs.fixed(courseDetail.avgRecordOfw) }}"
+            size="80" />
+          <view class="index-text">课程水度</view>
+        </view>
+        <view class="circle">
+          <van-circle value="{{ avgs.i }}" stroke-width="6" text="{{ morejs.fixed(courseDetail.avgRecordOfi) }}"
+            size="80" />
+          <view class="index-text">课程兴趣度</view>
+        </view>
+      </view>
+      <view class="circle-box">
+        <view class="circle">
+          <van-circle value="{{ avgs.s }}" stroke-width="6" text="{{ morejs.fixed(courseDetail.avgRecordOfs) }}"
+            size="80" />
+          <view class="index-text">课程给分情况</view>
+        </view>
+        <view class="circle">
+          <van-circle value="{{ avgs.hw }}" stroke-width="6" text="{{ morejs.fixed(courseDetail.avgRecordOfhw) }}"
+            size="80" />
+          <view class="index-text">课程作业情况</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <van-collapse accordion value="{{ activeName }}" bind:change="expandIntroduction">
+    <view class="shadow" style="border-radius:15rpx;overflow:hidden;margin:0 24rpx;">
+      <van-collapse-item title="评价指标说明" name="1">
+        <view><text style="color: #000">课程水度</text>：越高这门课越水</view>
+        <view><text style="color: #000">课程兴趣度</text>：越高这门课越能提起兴趣</view>
+        <view><text style="color: #000">课程给分情况</text>：越高给分越高</view>
+        <view><text style="color: #000">课程作业情况</text>：越高作业越少/越容易做</view>
+      </van-collapse-item>
+      <van-collapse-item title="关注课程说明" name="2">
+        <view>关注课程后将在课程列表页置顶课程。</view>
+        <view>有新的评价评论发表将在小程序的消息页面通知您。</view>
+        <view>要使用关注课程的功能，您首先必须登录。</view>
+      </van-collapse-item>
+    </view>
+  </van-collapse>
+  <!-- 评论 -->
+  <view wx:if="{{courseDetail.comment}}" class="card shadow comment-card">
+    <view class="comment-title">全部评论 · {{courseDetail.comment.length}}</view>
+    <view class="border1"></view>
+    <block wx:for="{{courseDetail.comment}}" wx:key="_id" wx:for-index="comment_index">
+      <view>
+        <view class="comment-contain" hover-class="center-1-active" hover-stay-time="100" bindtap="commentTap"
+          data-comment="{{item}}">
+          <view class="comment-avatar">
+            <image src="{{item.userInfo.avatarUrl}}" wx:if="{{item.userInfo.language}}"></image>
+            <view class="recommand {{item.bgc?'bg-green':'bg-red'}}">{{item.bgc?'推荐':'不推荐'}}</view>
+          </view>
+          <view class="comment-info">
+            <view class="comment-nickname text-cut" wx:if="{{item.userInfo.language}}">{{item.userInfo.nickName}}</view>
+            <view class="comment-border"></view>
+            <view class="comment-value">{{item.value}}</view>
+            <view class="comment-border"></view>
+            <view class="comment-time">
+              <text>{{morejs.timelog(item.stamp)}}</text>
+              <text>教师：{{item.teacher}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="border1" wx:if="{{comment_index != comments.length-1}}"></view>
+    </block>
+  </view>
+</block>

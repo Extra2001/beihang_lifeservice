@@ -1,6 +1,8 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-cloud.init()
+cloud.init({
+  env: 'bhls-product-8g4rg3z19bb9cc1e'
+})
 const db = cloud.database().collection('message')
 
 // 云函数入口函数

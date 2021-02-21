@@ -1,0 +1,170 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/2/17 下午11:44:47
+使用方法：
+在 C:\Users\jingx\Projects\beihang_lifeservice\miniprogram\pages\oldgood\list\oldgood.wxml 引入模板
+
+```
+<import src="oldgood.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 C:\Users\jingx\Projects\beihang_lifeservice\miniprogram\pages\oldgood\list\oldgood.wxss 中引入样式
+```
+@import "./oldgood.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view is="vant/notify/index" id="van-notify">
+      <view is="vant/transition/index"></view>
+    </view>
+    <view is="vant/search/index">
+      <view class="van-search search-index--van-search van-search--withaction search-index--van-search--withaction search-box" style="background: #1F90FF">
+        <view class="van-search__content search-index--van-search__content van-search__content--round search-index--van-search__content--round">
+          <view is="vant/field/index" class="van-search__field search-index--van-search__field ">
+            <view is="vant/cell/index">
+              <view class="field-index--van-field van-cell cell-index--van-cell van-cell--borderless cell-index--van-cell--borderless sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="padding: 5px 10px 5px 0; background-color: transparent;">
+                <view is="vant/icon/index" class="van-cell__left-icon-wrap cell-index--van-cell__left-icon-wrap">
+                  <view class="cell-index--van-cell__left-icon van-icon icon-index--van-icon van-icon-search icon-index--van-icon-search sk-pseudo sk-pseudo-circle" style="true"></view>
+                </view>
+                <view class="van-cell__value cell-index--van-cell__value ">
+                  <view class="van-field__body field-index--van-field__body van-field__body--search field-index--van-field__body--search">
+                    <view class="van-field__control field-index--van-field__control sk-image" cursor="-1" maxlength="-1" placeholder="请输入搜索关键词" placeholder-class="van-field__placeholder" placeholder-style="true" selection-end="-1" selection-start="-1" type="search"
+                      value="true"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="van-search__action search-index--van-search__action" hover-class="van-search__action--hover" hover-stay-time="70">
+          <view hover-stop-propagation="true" class="search-text sk-transparent sk-text-29-4118-233 sk-text" hover-class="hover-text">搜索</view>
+        </view>
+      </view>
+    </view>
+    <swiper autoplay="false" circular="true" indicator-dots="true" class="banner" indicator-active-color="#1F90FF" current="0">
+      <swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);">
+        <image lazy-load="true" class="banner-image shadow sk-image" data-url="/pages/publish/publish"></image>
+      </swiper-item>
+    </swiper>
+    <view style="height:7px;"></view>
+    <view is="vant/tabs/index">
+      <view class=" van-tabs tabs-index--van-tabs van-tabs--line tabs-index--van-tabs--line">
+        <view is="vant/sticky/index">
+          <view class=" van-sticky sticky-index--van-sticky" style="z-index:1">
+            <view class="van-sticky-wrap sticky-index--van-sticky-wrap" style="z-index:1">
+              <view class="van-tabs__wrap tabs-index--van-tabs__wrap van-tabs__wrap--scrollable tabs-index--van-tabs__wrap--scrollable">
+                <scroll-view scroll-with-animation="true" class="van-tabs__scroll tabs-index--van-tabs__scroll van-tabs__scroll--line tabs-index--van-tabs__scroll--line" scroll-left="-154.64062881469727" style="border-color: #1F90FF" scroll-x="true">
+                  <view class="van-tabs__nav tabs-index--van-tabs__nav van-tabs__nav--line tabs-index--van-tabs__nav--line shadow" style="true">
+                    <view class="van-tabs__line tabs-index--van-tabs__line" style="width:40px;transform:translateX(13.026042938232422px);-webkit-transform:translateX(13.026042938232422px);background-color:#1F90FF"></view>
+                    <view class=" navbar-active van-ellipsis tabs-index--van-ellipsis van-tab tabs-index--van-tab van-tab--active tabs-index--van-tab--active" data-index="0" style="color:#1F90FF;flex-basis:17.6%">
+                      <view class="van-ellipsis tabs-index--van-ellipsis sk-transparent sk-text-34-0909-403 sk-text" style="background-position-x: 50%;">
+                        全部
+                      </view>
+                    </view>
+                    <view class=" van-ellipsis tabs-index--van-ellipsis van-tab tabs-index--van-tab" data-index="1" style="flex-basis:17.6%">
+                      <view class="van-ellipsis tabs-index--van-ellipsis sk-transparent sk-text-34-0909-692 sk-text" style="background-position-x: 50%;">
+                        数码设备
+                      </view>
+                    </view>
+                    <view class=" van-ellipsis tabs-index--van-ellipsis van-tab tabs-index--van-tab" data-index="2" style="flex-basis:17.6%">
+                      <view class="van-ellipsis tabs-index--van-ellipsis sk-transparent sk-text-34-0909-726 sk-text" style="background-position-x: 50%;">
+                        宿舍用品
+                      </view>
+                    </view>
+                    <view class=" van-ellipsis tabs-index--van-ellipsis van-tab tabs-index--van-tab" data-index="3" style="flex-basis:17.6%">
+                      <view class="van-ellipsis tabs-index--van-ellipsis sk-transparent sk-text-34-0909-987 sk-text" style="background-position-x: 50%;">
+                        生活百货
+                      </view>
+                    </view>
+                    <view class=" van-ellipsis tabs-index--van-ellipsis van-tab tabs-index--van-tab" data-index="4" style="flex-basis:17.6%">
+                      <view class="van-ellipsis tabs-index--van-ellipsis sk-transparent sk-text-34-0909-591 sk-text" style="background-position-x: 50%;">
+                        运动健身
+                      </view>
+                    </view>
+                    <view class=" van-ellipsis tabs-index--van-ellipsis van-tab tabs-index--van-tab" data-index="5" style="flex-basis:17.6%">
+                      <view class="van-ellipsis tabs-index--van-ellipsis sk-transparent sk-text-34-0909-296 sk-text" style="background-position-x: 50%;">
+                        家用电器
+                      </view>
+                    </view>
+                  </view>
+                </scroll-view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="van-tabs__content tabs-index--van-tabs__content">
+          <view class="van-tabs__track tabs-index--van-tabs__track van-tabs__track--animated tabs-index--van-tabs__track--animated van-tabs__track tabs-index--van-tabs__track" style="left:0%;transition-duration:0.3s;-webkit-transition-duration:0.3s">
+            <view is="vant/tab/index">
+              <view class=" van-tab__pane tab-index--van-tab__pane van-tab__pane--active tab-index--van-tab__pane--active" style="true">
+                <view is="components/oldgood/oldgood">
+                  <view class="oldgood-oldgood--side-row">
+                    <view class="oldgood-oldgood--side-line">
+                      <navigator class="oldgood-oldgood--goods-card oldgood-oldgood--shadow">
+                        <view class="oldgood-oldgood--good-image-box">
+                          <view is="vant/image/index">
+                            <view class="oldgood-oldgood--goods-card-image van-image image-index--van-image" style="true">
+                              <image class="oldgood-oldgood--goods-card-image van-image__img image-index--van-image__img sk-image" mode="widthFix" lazy-load="true" style="height: 229.333px;"></image>
+                            </view>
+                          </view>
+                        </view>
+                        <view class="oldgood-oldgood--goods-card-right">
+                          <view class="oldgood-oldgood--name sk-transparent sk-text-14-2857-774 sk-text">发表一波</view>
+                          <view class="oldgood-oldgood--price-box">
+                            <view class="oldgood-oldgood--price sk-transparent">
+                              <text class="oldgood-oldgood--price-icon sk-transparent sk-opacity">¥</text>15</view>
+                            <view class="oldgood-oldgood--campus sk-transparent">
+                              <image class="oldgood-oldgood--campus-image sk-image"></image>
+                              学院路校区
+                            </view>
+                          </view>
+                          <view class="oldgood-oldgood--userinfo-box">
+                            <image class="oldgood-oldgood--userinfo-box-image sk-image"></image>
+                            <view class="oldgood-oldgood--nickname sk-transparent sk-text-14-2857-851 sk-text">陈程澄</view>
+                          </view>
+                        </view>
+                      </navigator>
+                    </view>
+                    <view class="oldgood-oldgood--side-line">
+                      <navigator class="oldgood-oldgood--goods-card oldgood-oldgood--shadow">
+                        <view class="oldgood-oldgood--good-image-box">
+                          <view is="vant/image/index">
+                            <view class="oldgood-oldgood--goods-card-image van-image image-index--van-image" style="true">
+                              <image class="oldgood-oldgood--goods-card-image van-image__img image-index--van-image__img sk-image" mode="widthFix" lazy-load="true" style="height: 128.899px;"></image>
+                            </view>
+                          </view>
+                        </view>
+                        <view class="oldgood-oldgood--goods-card-right">
+                          <view class="oldgood-oldgood--name sk-transparent sk-text-14-2857-29 sk-text">我真服了呀</view>
+                          <view class="oldgood-oldgood--price-box">
+                            <view class="oldgood-oldgood--price sk-transparent">
+                              <text class="oldgood-oldgood--price-icon sk-transparent sk-opacity">¥</text>15</view>
+                            <view class="oldgood-oldgood--campus sk-transparent">
+                              <image class="oldgood-oldgood--campus-image sk-image"></image>
+                              学院路校区
+                            </view>
+                          </view>
+                          <view class="oldgood-oldgood--userinfo-box">
+                            <image class="oldgood-oldgood--userinfo-box-image sk-image"></image>
+                            <view class="oldgood-oldgood--nickname sk-transparent sk-text-14-2857-352 sk-text">哄哄</view>
+                          </view>
+                        </view>
+                      </navigator>
+                      <navigator class="oldgood-oldgood--goods-card oldgood-oldgood--shadow">
+                        <view class="oldgood-oldgood--good-image-box">
+                          <view is="vant/image/index"></view>
+                        </view>
+                      </navigator>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,7 +1,0 @@
-{
-"navigationBarTitleText": "内容详情",
-"enablePullDownRefresh": true,
-"usingComponents": {
-  "van-popup": "../../vant/popup/index"
-}
-}

@@ -11,7 +11,7 @@ function goUrl(url) {
         return;
     wx.navigateTo({
         url: url,
-        fail: () => {
+        fail: (e) => {
             wx.switchTab({
                 url: url,
             });
@@ -19,7 +19,7 @@ function goUrl(url) {
     });
 }
 
-function checkLogin(options) {
+function checkLogin(options, msg) {
     if (app.globalData.loginStatus === 1) {
         if (options)
             if (options.success)
@@ -27,14 +27,13 @@ function checkLogin(options) {
         return true;
     }
     else {
-        unLogin(options);
+        unLogin(options, msg);
         return false;
     }
 }
 
-function unLogin(options) {
+function unLogin(options, msg) {
     wx.showLoading({ title: "正在登录", mask: true });
-    console.log(account)
     account.login().then(res => {
         wx.hideLoading();
         app.globalData.loginStatus = 1;
@@ -43,10 +42,10 @@ function unLogin(options) {
             if (options.success)
                 options.success();
     }).catch(e => {
-        console.log("catch哪去了？？？")
         wx.hideLoading();
+        if(!msg) msg = "此功能需要认证后使用"
         wx.showModal({
-            title: "此功能需要认证后使用",
+            title: msg,
             confirmText: "去认证",
             cancelText: "取消",
             success: res => {

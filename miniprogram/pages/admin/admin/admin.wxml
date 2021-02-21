@@ -1,67 +1,36 @@
-<wxs src="../../../common.wxs" module="morejs" />
-<view class="tab_contain">
-  <block wx:for="{{tab}}" wx:key="id">
-    <view class="tab_one" bindtap="changeTab" data-id="{{index}}">
-      <view class="{{tabid==item.id?'tab_on':''}}">
-        <text>{{item.name}}</text>
+<view class="contain">
+  <view class="card shadow">
+    <view class="bottom_box">
+      <view class="bottom_card" hover-class="bottom_card-hover">
+        <view class="bottom_1">
+          <image src="/images/manage.png"></image>
+          <view>课程添加审核</view>
+        </view>
+        <image src="/images/go.png"></image>
+        <button bindtap="go" data-go="/pages/admin/courseAdd/index"></button>
       </view>
     </view>
-  </block>
-</view>
-<view class="contain" wx:if="{{list.length!==0}}">
-  <block wx:for="{{list}}" wx:key="_id">
-    <view class="card shadow" bindtap="godetail" data-id="{{item._id}}">
-      <view class="top">
-        <view class="top1">
-          <view class="title">
-            <image src="{{item.userinfo.avatarUrl}}"></image>
-            <view>{{item.userinfo.nickName}}</view>
-          </view>
-          <view class="date">{{morejs.timelog(item.creat)}}</view>
+    <view class="border1"></view>
+    <view class="bottom_box">
+      <view class="bottom_card" hover-class="bottom_card-hover">
+        <view class="bottom_1">
+          <image src="/images/manage.png"></image>
+          <view>已举报的评论</view>
         </view>
-      </view>
-      <view class="center">
-        <image lazy-load wx:if="{{item.img.length!=0&&showImg}}" src="{{item.thumb}}"></image>
-        <image lazy-load wx:if="{{item.img.length==0&&showImg}}" src="/images/no_photo.png"></image>
-        <view class="{{showImg?'content':'content_full'}}">
-          <view class="book">
-            <view class="book_name text-cut">
-              {{item.goodinfo.name}}{{item.lostinfo.name}}{{item.cinfo.name}}
-            </view>
-            <view class="book_author text-cut">
-              {{item.goodinfo.desc}}{{item.lostinfo.place}}{{item.cinfo.detail}}
-            </view>
-          </view>
-          <view wx:if="{{showPrice}}" class="price">
-            <text class="list_rawprice">￥{{item.goodinfo.rawprice}}</text>
-            ￥{{item.goodinfo.price}}
-          </view>
-        </view>
-      </view>
-      <view class="bottom">
-        <view wx:if="{{showPrice&&(showImg&&(item.status==2||item.status==0))}}" class="c3 bg-yellow" catchtap="refresh" data-ord="{{item}}">
-          擦亮
-        </view>
-        <view wx:if="{{showPrice&&(showImg&&item.status==0)}}" class="c1 bg-grey" catchtap="soldout" data-ord="{{item}}">
-          设置为已售出
-        </view>
-        <view wx:if="{{showPrice==false&&(showImg&&item.status==0)}}" class="c1 bg-grey" catchtap="foundit" data-ord="{{item}}">
-          设置为已找到
-        </view>
-        <view wx:if="{{showPrice==false&&(showImg&&item.status==1)}}" class="c1 bg-grey" catchtap="nofoundit" data-ord="{{item}}">
-          设置为未找到
-        </view>
-        <view class="c3 bg-red" catchtap="deleteit" data-ord="{{item}}">删除</view>
+        <image src="/images/go.png"></image>
+        <button bindtap="go" data-go="/pages/admin/commentVerify/index"></button>
       </view>
     </view>
-  </block>
+    <view class="border1"></view>
+    <view class="bottom_box">
+      <view class="bottom_card" hover-class="bottom_card-hover">
+        <view class="bottom_1">
+          <image src="/images/manage.png"></image>
+          <view>用户管理</view>
+        </view>
+        <image src="/images/go.png"></image>
+        <button bindtap="go" data-go="/pages/admin/user/user"></button>
+      </view>
+    </view>
+  </view>
 </view>
-<!-- 无内容显示 -->
-<view class="nocontent" wx:if="{{list.length==0}}">
-  <image src="/images/blank.png"></image>
-  <view class="blank_text">这里空空如也~</view>
-</view>
-<block wx:if="{{list.length>0}}">
-  <import src="/common.wxml" />
-  <template is="loadmore" data="{{nomore}}" />
-</block>

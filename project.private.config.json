@@ -20,13 +20,6 @@
           "scene": null
         },
         {
-          "id": 3,
-          "name": "详情页",
-          "pathName": "pages/detail/detail",
-          "query": "scene=3c4c6d855d70f8b6124543920c2934e6",
-          "scene": null
-        },
-        {
           "id": -1,
           "name": "个人中心",
           "pathName": "pages/my/my",
@@ -38,20 +31,6 @@
           "name": "关于我们",
           "pathName": "pages/about/about",
           "query": "",
-          "scene": null
-        },
-        {
-          "id": 12,
-          "name": "我的发布【列表】",
-          "pathName": "pages/sell/list/list",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 13,
-          "name": "我的发布【详情】",
-          "pathName": "pages/sell/detail/detail",
-          "query": "id=efdeb2615d70eb6012393ac94afadcf6",
           "scene": null
         },
         {
@@ -75,14 +54,44 @@
           "scene": null
         },
         {
-          "name": "API测试页",
-          "pathName": "pages/poster/poster",
+          "name": "消息",
+          "pathName": "pages/message/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "消息",
-          "pathName": "pages/message/index",
+          "name": "课程列表",
+          "pathName": "pages/course/list/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "课程详情",
+          "pathName": "pages/course/detail/index",
+          "query": "id=5d49a432c04eeb1094e1f16b",
+          "scene": null
+        },
+        {
+          "name": "课程评价发布",
+          "pathName": "pages/course/publish/index",
+          "query": "id=5d49a432c04eeb1094e1f16b",
+          "scene": null
+        },
+        {
+          "name": "关注的课程",
+          "pathName": "pages/course/star/star",
+          "query": "id=5d49a432c04eeb1094e1f16b",
+          "scene": null
+        },
+        {
+          "name": "后台管理",
+          "pathName": "pages/admin/admin/admin",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "更改邮箱",
+          "pathName": "pages/changeEmail/index",
           "query": "",
           "scene": null
         }

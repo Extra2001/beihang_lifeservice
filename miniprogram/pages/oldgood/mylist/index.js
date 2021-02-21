@@ -2,12 +2,9 @@ const app = getApp();
 const config = require("../../../config.js");
 const server = {
   account: require("../../../server/account.js"),
-  data: require("../../../server/data.js"),
-  notice: require("../../../server/notice.js"),
   oldgood: require("../../../server/oldgood.js")
 };
 const util = {
-  cache: require("../../../util/cache.js"),
   common: require("../../../util/common.js")
 };
 Page({

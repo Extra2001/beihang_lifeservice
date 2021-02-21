@@ -1,33 +1,33 @@
-<view class="top_contain">
-      <view class="des_contain">
-            <view class="name">荆某某</view>
-            <view class="sign">好好学习，天天向上</view>
+<view class="page">
+  <view class="top_contain">
+    <view class="logo-contain">
+      <image src="/images/bhls.png"></image>
+    </view>
+    <view class="prog-name text-1">北航生活服务</view>
+    <view class="prog-ver text-2">版本：1.0.0</view>
+  </view>
+  <view class="contain back-1">
+    <view class="top">
+      <view class="title text-1">声明</view>
+    </view>
+    <view class="description back-2">
+      <text class="text-2" space="emsp" decode="{{ true }}">{{mianze}}</text>
+    </view>
+    <!-- <view class="top">
+      <view class="title text-1">程序简介</view>
+    </view>
+    <view class="description back-2">
+      <text class="text-2" space="emsp" decode="{{ true }}">{{des}}</text>
+    </view> -->
+    <view class="top">
+      <view class="title text-1">开发者联系方式</view>
+    </view>
+    <view class="description back-2 shadow">
+      <text class="text-2" space="emsp" decode="{{ true }}">请备注是从小程序找到的，谢谢。</text>
+      <view class="tip text-2" bindtap="copy" data-copy="782776342" data-name="QQ">
+        <view>QQ</view>:
+        <text>782776342</text>
       </view>
-      <view class="avator_box">
-            <image class="avator" src="/images/ava.jpg"></image>
-      </view>
-</view>
-<view class="contain">
-      <view class="title">程序简介</view>
-      <view class="description">
-            <text space="emsp" decode="{{ true }}">{{des}}</text>
-      </view>
-      <view>
-        <image class="yuanzuo" src="/images/yuanzuo.jpg" />
-      </view>
-      <view class="title">联系方式</view>
-      <view class="description">
-            <view class="tip" bindtap="copy" data-copy="https://github.com/xuhuai66" data-name="链接">
-                  <view>原作Github</view>:
-                  <text>https://github.com/xuhuai66</text>
-            </view>
-            <view class="tip" bindtap="copy" data-copy="jxtmailweixin" data-name="微信">
-                  <view>Wechat</view>:
-                  <text>jxtmailweixin</text>
-            </view>
-            <view class="tip" bindtap="copy" data-copy="782776342" data-name="QQ">
-                  <view>QQ</view>:
-                  <text>782776342</text>
-            </view>
-      </view>
+    </view>
+  </view>
 </view>

@@ -2,12 +2,10 @@ const app = getApp();
 const config = require("../../../config.js");
 const server = {
   account: require("../../../server/account.js"),
-  data: require("../../../server/data.js"),
   notice: require("../../../server/notice.js"),
   oldgood: require("../../../server/oldgood.js")
 };
 const util = {
-  cache: require("../../../util/cache.js"),
   common: require("../../../util/common.js")
 };
 Page({
@@ -19,7 +17,8 @@ Page({
     nomore: false,
     allListPage: 0,
     curKind: -1,
-    kindslistPage: new Array(config.common.kinds.length).fill(0)
+    kindslistPage: new Array(config.common.kinds.length).fill(0),
+    loading: true
   },
 
   onLoad: function (options) {
@@ -29,7 +28,14 @@ Page({
   onShow: function () {
     if (app.globalData.refresh.oldgood) {
       app.globalData.refresh.oldgood = false;
-      wx.startPullDownRefresh();
+      if (this.data.curKind === -1) {
+        this.data.allListPage = 0;
+        this.getAllList();
+      }
+      else {
+        this.data.kindslistPage[this.data.curKind] = 0;
+        this.getKindList(this.data.curKind);
+      }
     }
   },
   onPullDownRefresh: function () {
@@ -55,9 +61,15 @@ Page({
       this.getKindList(this.data.curKind);
     }
   },
-
+  go: function (e) {
+    util.common.goUrl(e.currentTarget.dataset.url);
+},
   onShareAppMessage: function () {
-
+    return {
+      path: '/pages/oldgood/list/oldgood',
+      imageUrl: '/images/share_post.png',
+      title: "北航生活服务·校园二手商品"
+    }
   },
   onTabChange: function (e) {
     this.setData({
@@ -87,6 +99,7 @@ Page({
         this.setData({ nomore: false });
       if (res.oldgoodLists.length === 0)
         this.data.allListPage--;
+      this.setData({ loading: false })
     }).catch(util.common.catchFunc);
   },
   getKindList: function (kind) {

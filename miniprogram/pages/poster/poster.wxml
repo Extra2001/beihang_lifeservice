@@ -1,7 +1,0 @@
-<canvas canvas-id="photo_canvas" ></canvas>
-<button bindtap="test2">测试2</button>
-<button bindtap="test3">测试3</button>
-<input bindinput="input" value="{{input}}" />
-<block wx:for="{{img}}">
-  <image style="width: 750rpx;" mode="widthFix" src="{{item}}"></image>
-</block>

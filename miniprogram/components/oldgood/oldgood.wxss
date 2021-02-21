@@ -1,6 +1,7 @@
 .side-row {
   display: flex;
   flex-direction: row;
+  width: 750rpx;
 }
 
 .side-line {

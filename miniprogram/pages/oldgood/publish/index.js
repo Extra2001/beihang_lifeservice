@@ -2,12 +2,9 @@ const app = getApp();
 const config = require("../../../config.js");
 const server = {
   account: require("../../../server/account.js"),
-  data: require("../../../server/data.js"),
-  notice: require("../../../server/notice.js"),
   oldgood: require("../../../server/oldgood.js")
 };
 const util = {
-  cache: require("../../../util/cache.js"),
   common: require("../../../util/common.js")
 };
 Page({
@@ -120,6 +117,14 @@ Page({
     let toast = function (item) { wx.showToast({ title: '请输入' + item, icon: 'none' }) };
     if (!data.name) {
       toast("商品标题");
+      return false;
+    }
+    if (!data.rawprice) {
+      toast("商品原价");
+      return false;
+    }
+    if (!data.price) {
+      toast("商品价格");
       return false;
     }
     if (!data.detail) {

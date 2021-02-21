@@ -1,3 +1,4 @@
+@import "./oldgood.skeleton.wxss";
 .hover-text {
     color: #CDCDCD;
     opacity: 0.7;

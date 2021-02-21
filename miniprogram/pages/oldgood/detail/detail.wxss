@@ -1,3 +1,4 @@
+@import "./detail.skeleton.wxss";
 .card {
   margin: 24rpx;
   padding: 30rpx;

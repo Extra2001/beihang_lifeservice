@@ -1,13 +1,13 @@
 <template name="loadmore">
-      <view class="loadmore">
-            <view wx:if="{{nomore}}">没有更多了</view>
-            <van-loading size="48rpx" wx:else >加载中...</van-loading>
-      </view>
+  <view class="loadmore">
+    <view wx:if="{{nomore}}">没有更多了</view>
+    <van-loading size="48rpx" wx:else>加载中...</van-loading>
+  </view>
 </template>
 
 <template name="nocontent">
-      <view class="nocontent">
-            <image lazy-load src="/images/blank.png"></image>
-            <view>这里空空如也~</view>
-      </view>
+  <view class="nocontent" style="width: 750rpx;">
+    <image lazy-load src="/images/blank.png"></image>
+    <view>这里空空如也~</view>
+  </view>
 </template>

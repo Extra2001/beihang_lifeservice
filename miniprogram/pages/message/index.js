@@ -1,14 +1,14 @@
 const app = getApp();
 const config = require("../../config.js");
 const util = {
-  cache: require("../../util/cache.js"),
   common: require("../../util/common.js")
 };
 Page({
   data: {
     messages: [],
     page: 0,
-    nomore: false
+    nomore: false,
+    loading: true
   },
 
   onLoad: function (options) {
@@ -20,7 +20,8 @@ Page({
     this.checkList();
     if (app.globalData.refresh.message) {
       app.globalData.refresh.message = false
-      wx.startPullDownRefresh()
+      this.data.page = 0;
+      this.getList();
     }
   },
 
@@ -37,19 +38,33 @@ Page({
   },
 
   onShareAppMessage: function () {
-
+    return {
+      path: '/pages/course/list/index',
+      imageUrl: '/images/share_post.png',
+      title: "北航生活服务"
+    }
   },
   getList: function () {
     wx.showNavigationBarLoading();
+    wx.getStorage({
+      key: 'messageCache',
+      success: res => {
+        this.setData({ messages: res.data, loading: false });
+      }
+    })
     wx.cloud.callFunction({
       name: "getMessages",
       data: { page: this.data.page },
       success: res => {
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
-        console.log(this.data.page, res.result.data);
-        if (this.data.page === 0)
+        if (this.data.page === 0) {
           this.setData({ messages: res.result.data })
+          wx.setStorage({
+            data: res.result.data,
+            key: 'messageCache',
+          })
+        }
         else
           this.setData({ messages: this.data.messages.concat(res.result.data) })
         if (res.result.data.length < 100)
@@ -57,6 +72,7 @@ Page({
         if (this.data.page !== 0 && res.result.data.length === 0)
           this.data.page--;
         this.checkList();
+        this.setData({ loading: false })
       },
       fail: util.common.catchFunc
     })
@@ -64,15 +80,17 @@ Page({
   checkList: function () {
     let list = this.data.messages;
     if (list.findIndex(x => x.read == false) == -1)
-      wx.hideTabBarRedDot({ index: 1 })
+      wx.hideTabBarRedDot({ index: 2 })
     else
-      wx.showTabBarRedDot({ index: 1 })
+      wx.showTabBarRedDot({ index: 2 })
   },
   detail: function (e) {
     this.markRead(e);
     let message = e.currentTarget.dataset.message
     if (message.serviceKind === 0)
       wx.navigateTo({ url: '/pages/oldgood/detail/detail?id=' + message.dbId })
+    else if (message.serviceKind === 2)
+      wx.navigateTo({ url: '/pages/course/detail/index?id=' + message.dbId })
   },
   markRead: function (e) {
     let message = e.currentTarget.dataset.message
@@ -88,17 +106,22 @@ Page({
     let message = e.currentTarget.dataset.message
     wx.cloud.callFunction({
       name: "markRead",
-      data: { _id: message._id, op: 1 }
+      data: { _id: message._id, op: 1 },
+      success: () => {
+        this.checkList();
+      }
     });
     let index = this.data.messages.findIndex(x => x._id == message._id);
     this.data.messages.splice(index, 1);
     this.setData({ messages: this.data.messages })
-    this.checkList();
   },
   markAll: function (e) {
     wx.cloud.callFunction({
       name: "markRead",
-      data: { op: 0 }
+      data: { op: 0 },
+      success: () => {
+        this.checkList();
+      }
     });
     this.setData({
       messages: this.data.messages.map(item => {
@@ -106,7 +129,6 @@ Page({
         return item
       })
     });
-    this.checkList();
   },
   deleteAll: function (e) {
     wx.showModal({

@@ -3,7 +3,7 @@
 </view>
 <view class="contain">
   <view class="card">
-    <view class="title">认证学生/教师身份</view>
+    <view class="title">认证北航师生身份</view>
     <picker bindchange="choose" value="{{campus}}" range="{{campusList}}">
       <view class="campus">
         <block wx:if="{{campus!==-1}}">当前选择：{{campusList[campus]}}</block>
@@ -31,11 +31,12 @@
   </view>
   <!--底部确认-->
   <button class="confirm" open-type='getUserInfo' bindgetuserinfo="getUserInfo">认证&绑定微信号</button>
-  <view class="shen_title">
-    <image class="about" src="/images/about.png" />使用说明
-  </view>
-  <view class="des">1. 为保证师生信息安全，请确保您的信息真实有效，虚假信息一经发现将删除账号。</view>
-  <view class="des">2. 在未经您同意及确认之前，本程序不会将您的注册信息用于任何其它商业目的。</view>
-  <view class="des">3. 微信和QQ小程序账号数据不通用，同一校卡在同一客户端仅可绑定一个微信号。</view>
-  <view class="des">4. 本程序仅公开您的微信公开信息和您发布的信息，绝不会泄露您的其它信息。</view>
+  <view class="des">点击上方按钮即代表您同意以下协议</view>
+  <!-- <view class="shen_title">
+    <image class="about" src="/images/about.png" />用户协议
+  </view> -->
+  <view class="des">1. 获取您的电子邮件是为了验证您的北航师生身份，保护敏感信息。本程序不会将您的注册信息用于任何其它商业目的。</view>
+  <view class="des">2. 账户信息将跟随您的电子邮件，更换微信后请使用相同电子邮件绑定微信账号。</view>
+  <view class="des">3. 本平台目前提供二手商品信息服务和通识课评价信息服务。平台本身不提供任何信息，所有信息均来自用户上传。请对平台上的信息仔细甄别。</view>
+  <view class="des">4. “通识课评价”板块中，严禁侮辱谩骂、造谣诋毁等行为，后台会一直对评价内容进行审核。平台内容仅供学习交流使用，不得擅自转载、引用，进行再加工、再创造。</view>
 </view>

@@ -1,9 +1,9 @@
 <import src="/common.wxml" />
 <van-notify id="van-notify" />
-<van-search custom-class="search-box" value="{{searchKey}}" shape="round" background="#1F90FF" placeholder="请输入搜索关键词"
-    use-action-slot>
-    <view class="search-text" slot="action" hover-class="hover-text" hover-stop-propagation>搜索</view>
-</van-search>
+<import src="oldgood.skeleton.wxml" />
+<template is="skeleton" wx-if="{{loading}}" />
+
+<van-search custom-class="search-box" value="{{searchKey}}" shape="round" background="#1F90FF" placeholder="请输入搜索关键词"></van-search>
 <!-- 首页轮播图 -->
 <swiper class="banner" indicator-dots autoplay indicator-active-color="#1F90FF" circular>
     <block wx:for="{{banner}}" wx:key="id">
@@ -20,8 +20,8 @@
     <!-- 全部二手商品 -->
     <van-tab title="全部" name="{{-1}}">
         <oldgood list="{{allList}}"></oldgood>
-        <template is="nocontent" wx:if="{{!allList.length}}" />
-        <template is="loadmore" wx:else data="{{nomore}}" />
+        <template is="nocontent" wx:if="{{(!allList.length) && (!loading)}}" />
+        <template is="loadmore" wx:elif="{{!loading}}" data="{{nomore}}" />
     </van-tab>
     <!-- 二手商品分类 -->
     <van-tab wx:for="{{kinds}}" wx:key="id" title="{{item.name}}" name="{{item.id}}">

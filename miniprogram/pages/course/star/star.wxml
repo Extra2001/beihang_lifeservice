@@ -1,0 +1,20 @@
+<wxs src="../../../common.wxs" module="morejs" />
+<import src="/common.wxml" />
+<van-notify id="van-notify" />
+<view style="height: 15rpx;"></view>
+
+<view class="loading" wx:if="{{loading}}">
+  <van-loading size="48px" vertical>加载中...</van-loading>
+</view>
+
+<view wx:else class="container">
+  <view wx:if="{{courseList.length>0}}" class="card1 shadow">
+    <van-cell-group>
+      <block wx:for="{{morejs.filter(courseList, item)}}" wx:key="id" wx:for-item="items">
+        <van-cell title="{{items.name}}" is-link border clickable title-width="450rpx"
+          url="/pages/course/detail/index?id={{items._id}}" value="{{items.commentCount}}条评价" />
+      </block>
+    </van-cell-group>
+  </view>
+  <template is="nocontent" wx:else />
+</view>
